@@ -1,0 +1,11 @@
+.select {
+    border-radius: 7px;
+    font-size: 1rem;
+    padding: 10px;
+    border-right: -15px;
+    outline: none;
+    
+    &:hover {
+        cursor: pointer;
+    }
+}

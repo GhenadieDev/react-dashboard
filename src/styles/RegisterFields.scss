@@ -1,0 +1,21 @@
+.register-fields {
+    display: flex;
+    flex-direction: column;
+
+    .select-wrapper {
+        padding-bottom: 20px;
+    }
+
+    .checkbox-wrapper {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+
+        #data {
+            margin-right: 10px;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

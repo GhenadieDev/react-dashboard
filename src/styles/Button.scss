@@ -1,0 +1,20 @@
+.btn {
+    font-size: 1rem;
+    padding: 10px 0;
+    border-radius: 7px;
+    background-color: rgb(38, 105, 212);
+    border: none;
+    color: white;
+    font-weight: bolder;
+    width: 100%;
+
+    &:hover {
+        background-color: rgb(29, 85, 173);
+        transition: 0.2s ease-out;
+    }
+}
+
+.btn:disabled {
+    background-color: rgba(0, 0, 0, .3);
+    cursor: default;
+}
