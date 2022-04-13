@@ -53,10 +53,6 @@ export const Register = () => {
         passwordIsTheSame: errorObject.passwordIsTheSame,
       });
     }
-
-    if (Object.keys(errorObject).length > 0) {
-      //Object.values(refsObject).forEach(target => target.current.value = "")
-    }
   };
 
   const formObject: FormProps = {

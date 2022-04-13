@@ -1,3 +1,6 @@
+import React from "react";
+import { dateTime } from "./date";
+
 export interface FormProps {
   formHeader?: {
     title?: string;
@@ -22,6 +25,17 @@ export interface UserProperties {
   gender?: string;
   password?: string;
   confirmedPassword?: string;
+}
+
+export interface Post {
+  title: string;
+  description: string;
+  image: string;
+  createdDate: typeof dateTime;
+  user: {
+    name: string;
+    surname: string;
+  };
 }
 
 export interface UserRegError {

@@ -8,6 +8,7 @@ import { Button } from "./Button";
 import { FormHeader } from "./FormHeader";
 
 import "../styles/Form.scss";
+import { createUser } from "../api/users";
 
 export const Form: React.FC<FormProps> = ({ children, ...props }) => {
   const userContext = useContext<UserProperties | null>(UserContext);
@@ -28,6 +29,10 @@ export const Form: React.FC<FormProps> = ({ children, ...props }) => {
     const errors = Object.values(result).filter(
       (el) => el !== "" && el.length !== 0 && el !== true
     );
+
+    if (errors.length === 0) {
+      createUser(userContext, props?.inputs);
+    }
   };
 
   return (
