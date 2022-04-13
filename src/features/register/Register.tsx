@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   FormProps,
@@ -9,12 +9,19 @@ import {
 
 import { UserContext } from "../../types/contexts";
 import { ErrorContext } from "../../types/contexts";
-import { Form } from "../../components/Form";
-import { RegisterFields } from "../../components/RegisterFields";
-import { InputError } from "../../components/InputError";
-import { ErrorList } from "../../components/ErrorList";
+import {
+  Form,
+  RegisterFields,
+  InputError,
+  ErrorList,
+  Button,
+  FormHeader,
+} from "../../components/index";
 
 import styles from "../../styles/RootPages.module.scss";
+import { createUser } from "api/users";
+import { checkRegisterFields } from "utils/checkRegisterFields";
+
 import "../../styles/RegisterPage.scss";
 
 export const Register = () => {
@@ -26,6 +33,9 @@ export const Register = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
+  const [errors, setErrors] = useState<UserRegError>({});
+  const [submitBtnIsDisabled, setSubmitBtn] = useState<boolean>(true);
+  const [fieldErrorIsDisplay, setFieldError] = useState(false);
 
   const refsObject: InputRefs = {
     nameRef,
@@ -34,10 +44,6 @@ export const Register = () => {
     passwordRef,
     confirmPasswordRef,
   };
-
-  const [errors, setErrors] = useState<UserRegError>({});
-  const [submitBtnIsDisabled, setSubmitBtn] = useState<boolean>(true);
-  const [fieldErrorIsDisplay, setFieldError] = useState(false);
 
   const setError = (error: UserRegError | null) => {
     const errorObject = { ...error };
@@ -69,20 +75,14 @@ export const Register = () => {
   };
 
   useEffect(() => {
-    if (selectRef.current?.value && !formData?.gender) {
-      setFormData({
-        ...formData,
-        gender: selectRef.current.value,
-      });
-    }
-  }, [formData]);
+    setFormData((prevState) => ({
+      ...prevState,
+      gender: selectRef.current?.value,
+    }));
+  }, []);
 
   useEffect(() => {
-    if (checkboxIsChecked) {
-      setSubmitBtn(false);
-    } else {
-      setSubmitBtn(true);
-    }
+    setSubmitBtn(!checkboxIsChecked);
   }, [checkboxIsChecked]);
 
   useEffect(() => {
@@ -94,21 +94,49 @@ export const Register = () => {
     }, 7000);
   }, [errors.inputs]);
 
+  const submitHandler: React.MouseEventHandler = (e) => {
+    e.preventDefault();
+    const result = checkRegisterFields(formData, refsObject);
+    setErrors(result);
+
+    const errors = Object.values(result).filter(
+      (el) => el !== "" && el.length !== 0 && el !== true
+    );
+
+    if (errors.length === 0) {
+      createUser(formData).then((res) => {
+        if (res?.status === 201) {
+          Object.values(refsObject).forEach(
+            (input) => (input.current.value = "")
+          );
+        }
+      });
+    }
+  };
+
   return (
     <div className={`${styles.page} _register`}>
       <UserContext.Provider value={formData}>
         <ErrorContext.Provider value={errors}>
           {errors?.password?.length ? <ErrorList /> : null}
           {fieldErrorIsDisplay ? <InputError /> : null}
-          <Form {...formObject}>
+          <Form>
+            <FormHeader {...formObject.formHeader} />
             <RegisterFields
               reference={selectRef}
-              formData={formData}
               setFormData={setFormData}
               setCheckboxIsChecked={setCheckboxIsChecked}
               checkboxIsChecked={checkboxIsChecked}
               refsObject={refsObject}
             />
+            <div className="button-wrapper">
+              <Button
+                disabled={formObject.formBottom?.disabledBtn}
+                onClick={submitHandler}
+              >
+                {formObject.formBottom?.submitBtnText}
+              </Button>
+            </div>
           </Form>
         </ErrorContext.Provider>
       </UserContext.Provider>

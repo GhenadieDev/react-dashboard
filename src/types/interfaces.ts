@@ -32,10 +32,7 @@ export interface Post {
   description: string;
   image: string;
   createdDate: typeof dateTime;
-  user: {
-    name: string;
-    surname: string;
-  };
+  user: Pick<UserProperties, "name" | "surname">;
 }
 
 export interface UserRegError {
@@ -56,9 +53,9 @@ export interface InputRefs {
 }
 
 export interface PasswordValidation {
-  length?: [] | null;
-  uppercase?: [] | null;
-  lowercase?: [] | null;
-  numbers?: [] | null;
-  special?: [] | null;
+  length?: string[];
+  uppercase?: string[];
+  lowercase?: string[];
+  numbers?: string[];
+  special?: string[];
 }

@@ -16,7 +16,6 @@ interface IProps {
 }
 
 export const RegisterFields: React.FC<IProps> = ({
-  formData,
   setFormData,
   setCheckboxIsChecked,
   checkboxIsChecked,
@@ -24,11 +23,12 @@ export const RegisterFields: React.FC<IProps> = ({
   refsObject,
 }) => {
   const context = useContext(ErrorContext);
+
   const onChangeHandler = (e: any): void => {
-    setFormData({
-      ...formData,
+    setFormData((prevState) => ({
+      ...prevState,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
   const onClickHandler = (e: any) => {

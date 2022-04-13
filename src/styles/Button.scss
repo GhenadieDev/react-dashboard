@@ -12,9 +12,9 @@
         background-color: rgb(29, 85, 173);
         transition: 0.2s ease-out;
     }
-}
 
-.btn:disabled {
-    background-color: rgba(0, 0, 0, .3);
-    cursor: default;
+    &:disabled {
+        background-color: rgba(0, 0, 0, .3);
+        cursor: default;
+    }
 }
