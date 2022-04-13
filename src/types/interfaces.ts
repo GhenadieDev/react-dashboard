@@ -6,10 +6,14 @@ export interface FormProps {
     linkText?: string;
   };
 
-  formBottom: {
+  formBottom?: {
     submitBtnText?: string;
     disabledBtn?: boolean;
   };
+  inputs?: InputRefs;
+  errors?: UserRegError;
+  setError?: (error: UserRegError | null) => void;
+  isValidForm?: boolean;
 }
 
 export interface UserProperties {
@@ -18,4 +22,30 @@ export interface UserProperties {
   email?: string;
   gender?: string;
   password?: string;
+  confirmedPassword?: string;
+}
+
+export interface UserRegError {
+  inputs?: string | null;
+  name?: string | null;
+  surname?: string | null;
+  email?: string | null;
+  password?: string[] | null;
+  passwordIsTheSame?: boolean;
+}
+
+export interface InputRefs {
+  nameRef?: React.Ref<HTMLInputElement> | null;
+  surnameRef?: React.Ref<HTMLInputElement> | null;
+  emailRef?: React.Ref<HTMLInputElement> | null;
+  passwordRef?: React.Ref<HTMLInputElement> | null;
+  confirmPasswordRef?: React.Ref<HTMLInputElement> | null;
+}
+
+export interface PasswordValidation {
+  length?: [] | null;
+  uppercase?: [] | null;
+  lowercase?: [] | null;
+  numbers?: [] | null;
+  special?: [] | null;
 }

@@ -1,0 +1,14 @@
+.error {
+  width: 100%;
+  height: fit-content;
+  background-color: #e60000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+}

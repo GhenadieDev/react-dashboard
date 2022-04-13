@@ -18,4 +18,22 @@
             }
         }
     }
+
+    .field-wrapper {
+        width: 100%;
+        display: flex;
+        .empty-field {
+            position: absolute;
+            margin-left: 430px;
+            z-index: 1000;
+            background-color: bisque;
+            padding: 10px;
+            border-radius: 7px;
+            transition: 0.2s ease-out;
+        }
+    }
+    .confirm-pass {
+        margin-top: -13px;
+        color: red;
+    }
 }
