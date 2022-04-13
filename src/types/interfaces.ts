@@ -13,7 +13,6 @@ export interface FormProps {
   inputs?: InputRefs;
   errors?: UserRegError;
   setError?: (error: UserRegError | null) => void;
-  isValidForm?: boolean;
 }
 
 export interface UserProperties {

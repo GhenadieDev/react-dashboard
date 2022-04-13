@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { FormProps, UserProperties, UserRegError } from "../types/interfaces";
-import { ErrorContext, UserContext } from "../types/contexts";
+import { UserContext } from "../types/contexts";
 import { checkRegisterFields } from "../utils/checkRegisterFields";
 
 import { Button } from "./Button";
@@ -11,7 +11,6 @@ import "../styles/Form.scss";
 
 export const Form: React.FC<FormProps> = ({ children, ...props }) => {
   const userContext = useContext<UserProperties | null>(UserContext);
-  const errors = { ...props.errors };
 
   const setErrorsCall = (error: UserRegError | null) => {
     if (props.setError) {
@@ -26,10 +25,9 @@ export const Form: React.FC<FormProps> = ({ children, ...props }) => {
     const result = checkRegisterFields(userContext, props.inputs);
     setErrorsCall(result);
 
-    if (props.isValidForm) {
-      const fields = { ...props.inputs };
-      const inputsList = Object.values(fields);
-    }
+    const errors = Object.values(result).filter(
+      (el) => el !== "" && el.length !== 0 && el !== true
+    );
   };
 
   return (

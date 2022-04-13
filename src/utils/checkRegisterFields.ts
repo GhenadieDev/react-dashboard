@@ -34,7 +34,7 @@ export const checkRegisterFields = (
 
     const inputsList = Object.values(inputs);
 
-    inputsList.forEach((target: any, idx: number) => {
+    inputsList.forEach((target: any) => {
       if (target.current.value === "" && target.current.value !== " ") {
         tempErrorsObject.inputs = "Fields can not be empty";
         target.current.style.border = "1px solid red";
@@ -110,11 +110,5 @@ export const checkRegisterFields = (
       pushError[target.current.name]();
     });
   }
-
-  /*Object.values(tempErrorsObject).forEach((el) => {
-    if (el === "" && el === [] && el === true) {
-      console.log("form is valid");
-    }
-  });*/
   return tempErrorsObject;
 };

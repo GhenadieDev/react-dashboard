@@ -37,13 +37,11 @@ export const Register = () => {
 
   const [errors, setErrors] = useState<UserRegError>({});
   const [submitBtnIsDisabled, setSubmitBtn] = useState<boolean>(true);
-  const [isValidForm, setIsValidForm] = useState<boolean>(false);
   const [fieldErrorIsDisplay, setFieldError] = useState(false);
 
   const setError = (error: UserRegError | null) => {
     const errorObject = { ...error };
     const errorsList = Object.keys(errorObject);
-    console.log(errorObject);
     if (errorsList.length > 0) {
       setErrors({
         ...errors,
@@ -56,8 +54,8 @@ export const Register = () => {
       });
     }
 
-    if (Object.keys(errors).length > 0) {
-      setIsValidForm(true);
+    if (Object.keys(errorObject).length > 0) {
+      //Object.values(refsObject).forEach(target => target.current.value = "")
     }
   };
 
@@ -72,7 +70,6 @@ export const Register = () => {
     inputs: refsObject,
     errors,
     setError,
-    isValidForm,
   };
 
   useEffect(() => {
