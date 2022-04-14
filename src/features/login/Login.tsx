@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, LoginFields, FormHeader, Button } from "../../components/index";
 import { FormProps, UserProperties } from "../../types/interfaces";
 import { logUser } from "api/users";
@@ -61,7 +61,11 @@ export const Login = () => {
           {formObject.formBottom?.submitBtnText}
         </Button>
       </Form>
-      <p>{logError}</p>
+      {logError ? (
+        <p>
+          {logError} <Link to="/register">Sign up</Link>
+        </p>
+      ) : null}
     </div>
   );
 };
