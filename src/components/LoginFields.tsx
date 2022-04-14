@@ -6,9 +6,10 @@ import React, { Dispatch, SetStateAction } from "react";
 
 interface LoginProps {
   setUserData: Dispatch<SetStateAction<UserProperties>>;
+  userData: Pick<UserProperties, "email" | "password">;
 }
 
-export const LoginFields = ({ setUserData }: LoginProps) => {
+export const LoginFields = ({ setUserData, userData }: LoginProps) => {
   const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setUserData((prevState) => ({
       ...prevState,
@@ -23,12 +24,14 @@ export const LoginFields = ({ setUserData }: LoginProps) => {
         placeholder="Email"
         name="email"
         onChange={onChangeHandler}
+        value={userData?.email}
       />
       <Input
         type="password"
         placeholder="Password"
         name="password"
         onChange={onChangeHandler}
+        value={userData?.password}
       />
     </div>
   );

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 import {
   FormProps,
@@ -36,6 +37,7 @@ export const Register = () => {
   const [errors, setErrors] = useState<UserRegError>({});
   const [submitBtnIsDisabled, setSubmitBtn] = useState<boolean>(true);
   const [fieldErrorIsDisplay, setFieldError] = useState(false);
+  const [regIsSucced, setIsSucced] = useState<boolean>(false);
 
   const refsObject: InputRefs = {
     nameRef,
@@ -109,6 +111,9 @@ export const Register = () => {
           Object.values(refsObject).forEach(
             (input) => (input.current.value = "")
           );
+          setIsSucced(true);
+        } else {
+          setIsSucced(false);
         }
       });
     }
@@ -138,6 +143,11 @@ export const Register = () => {
               </Button>
             </div>
           </Form>
+          {regIsSucced ? (
+            <p>
+              Succes, you can <Link to="/login">login</Link> now
+            </p>
+          ) : null}
         </ErrorContext.Provider>
       </UserContext.Provider>
     </div>

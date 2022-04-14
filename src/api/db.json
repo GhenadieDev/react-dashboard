@@ -1,6 +1,21 @@
 {
   "users": [
-    
+    {
+      "gender": "Masculin",
+      "name": "eoigjerj",
+      "surname": "pgkoekpok",
+      "email": "opegkpokgo@mail.ru",
+      "password": "Ghena1994!",
+      "confirmedPassword": "Ghena1994!",
+      "id": 1
+    }, 
+    {"gender": "Feminin",
+      "name": "wpopof",
+      "surname": "qpqpqpqp",
+      "email": "mjajdkd@mail.ru",
+      "password": "Ghena1993!",
+      "confirmedPassword": "Ghena1993!",
+      "id": 2}
   ],
   "posts": []
 }
