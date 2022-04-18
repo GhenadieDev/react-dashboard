@@ -1,14 +1,16 @@
 import React from "react";
 import "../styles/Select.scss";
 
-interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {}
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  name?: string;
+  ref?: React.Ref<HTMLSelectElement>;
+}
 
-export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
-  (props, ref) => (
-    <select {...props} className="select" ref={ref}>
-      <option value="Masculin">Masculin</option>
-      <option value="Feminin">Feminin</option>
-      <option value="Other">Ma abtin</option>
-    </select>
-  )
-);
+export const Select: React.FC<SelectProps> = React.forwardRef<
+  HTMLSelectElement,
+  SelectProps
+>(({ children, ...props }, ref) => (
+  <select {...props} className="select" ref={ref}>
+    {children}
+  </select>
+));

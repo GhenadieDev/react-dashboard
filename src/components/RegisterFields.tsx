@@ -76,7 +76,11 @@ export const RegisterFields: React.FC<IProps> = ({
         ) : null}
       </div>
       <div className="select-wrapper">
-        <Select name="gender" ref={reference} onChange={onChangeHandler} />
+        <Select name="gender" ref={reference} onChange={onChangeHandler}>
+          <option value="Masculin">Masculin</option>
+          <option value="Feminin">Feminin</option>
+          <option value="Ma abtin">Ma abtin</option>
+        </Select>
       </div>
       <div className="field-wrapper">
         <Input

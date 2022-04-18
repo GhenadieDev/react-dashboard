@@ -8,14 +8,31 @@
       "password": "Ghena1994!",
       "confirmedPassword": "Ghena1994!",
       "id": 1
-    }, 
-    {"gender": "Feminin",
-      "name": "wpopof",
-      "surname": "qpqpqpqp",
-      "email": "mjajdkd@mail.ru",
-      "password": "Ghena1993!",
-      "confirmedPassword": "Ghena1993!",
-      "id": 2}
+    },
+    {
+      "gender": "Feminin",
+      "role": "Admin",
+      "name": "oewijfoi",
+      "surname": "ogjwio",
+      "email": "ojwijofiw@gmail.com",
+      "id": 2
+    },
+    {
+      "gender": "Ma abtin",
+      "role": "Admin",
+      "name": "aba",
+      "surname": "blala",
+      "email": "woijoiwe@mail.ru",
+      "id": 3
+    },
+    {
+      "gender": "Masculin",
+      "role": "Operator",
+      "name": "john",
+      "surname": "doe",
+      "email": "johndoe@gmail.com",
+      "id": 4
+    }
   ],
   "posts": []
 }

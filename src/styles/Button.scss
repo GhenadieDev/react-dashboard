@@ -1,20 +1,34 @@
 .btn {
     font-size: 1rem;
-    padding: 10px 0;
+    padding: 10px 10px 10px 10px;
     border-radius: 7px;
-    background-color: rgb(38, 105, 212);
     border: none;
     color: white;
     font-weight: bolder;
     width: 100%;
+    text-align: center;
 
-    &:hover {
-        background-color: rgb(29, 85, 173);
-        transition: 0.2s ease-out;
+    &--primary {
+        background-color: rgb(38, 105, 212);
+        
+        &:hover {
+            background-color: rgb(29, 85, 173);
+            transition: 0.2s ease-out;
+        }
+        
+        &:disabled {
+            background-color: rgba(0, 0, 0, .3);
+            cursor: default;
+        }
     }
 
-    &:disabled {
-        background-color: rgba(0, 0, 0, .3);
-        cursor: default;
+    &--danger {
+        background-color: red;
+
+        &:hover {
+            background-color: rgb(179, 0, 0);
+            transition: 0.2s ease-out;
+        }
     }
+
 }

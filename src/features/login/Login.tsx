@@ -8,7 +8,10 @@ import styles from "../../styles/RootPages.module.scss";
 import "../../styles/LoginPage.scss";
 
 export const Login = () => {
-  const [userData, setUserData] = useState<UserProperties>({});
+  const [userData, setUserData] = useState<UserProperties>({
+    email: "",
+    password: "",
+  });
   const [logError, setLogError] = useState<string>("");
   const navigate = useNavigate();
   const formObject: FormProps = {
@@ -33,13 +36,13 @@ export const Login = () => {
             setLogError("");
             const user = res.data.find((element: any) => element.id);
             if (user) {
-              window.localStorage.setItem("userId", user.id);
+              window.localStorage.setItem("userId", JSON.stringify(user.id));
               setUserData((prevState) => ({
                 ...prevState,
                 email: "",
                 password: "",
               }));
-              navigate("/dashboard");
+              navigate("/home");
             }
           } else {
             setLogError("Email or password is invalid");
@@ -55,6 +58,7 @@ export const Login = () => {
         <FormHeader {...formObject.formHeader} />
         <LoginFields setUserData={setUserData} userData={userData} />
         <Button
+          btntype="primary"
           disabled={formObject.formBottom?.disabledBtn}
           onClick={clickHandler}
         >

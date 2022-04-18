@@ -59,3 +59,12 @@ export interface PasswordValidation {
   numbers?: string[];
   special?: string[];
 }
+
+export interface Profile {
+  name?: string;
+  surname?: string;
+  email?: string;
+  gender?: string;
+  id?: string | number;
+  role?: string;
+}

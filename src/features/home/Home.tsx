@@ -1,0 +1,33 @@
+import { getUserById } from "api/users";
+import { Layout } from "components";
+import { useState, useEffect } from "react";
+import { UserProfileContext } from "types/contexts";
+import { Profile } from "types/interfaces";
+import styles from "../../styles/RootPages.module.scss";
+
+export const Home = () => {
+  const [profile, setProfile] = useState<Profile>({});
+
+  useEffect(() => {
+    getUserById(localStorage.getItem("userId")).then((res: any) => {
+      if (res.status === 200) {
+        setProfile((prevState) => ({
+          ...prevState,
+          name: res.data.name,
+          surname: res.data.surname,
+          email: res.data.email,
+          gender: res.data.gender,
+          id: res.data.id,
+        }));
+      }
+    });
+  }, []);
+
+  return (
+    <div className={styles.page}>
+      <UserProfileContext.Provider value={profile}>
+        <Layout />
+      </UserProfileContext.Provider>
+    </div>
+  );
+};

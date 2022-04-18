@@ -1,0 +1,61 @@
+.modal-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .3);
+  z-index: 10000;
+
+  .modal {
+    display: flex;
+    flex-direction: column;
+    width: 423px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px 20px;
+    border-radius: 7px;
+
+    .btns-wrapper {
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
+      padding: 20px 10px 10px 0;
+
+      button {
+        width: fit-content;
+      }
+
+      #confirm-btn {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.modal-wrapper {
+  .modal{
+    .role-select-wrapper {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      label {
+        flex: 1;
+      }
+
+      #role {
+        flex: 2;
+      }
+    }
+  }
+
+  .title-container {
+    padding-bottom: 20px;
+  }
+}

@@ -1,9 +1,8 @@
-import '../styles/Table.scss';
+import { Profile } from "types/interfaces";
+import "../styles/Table.scss";
 
-export const Table = () => {
-    return(
-        <table>
-            
-        </table>
-    )
-}
+interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> {}
+
+export const Table: React.FC<TableProps> = ({ children }) => {
+  return <table className="table">{children}</table>;
+};

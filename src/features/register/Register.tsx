@@ -136,6 +136,7 @@ export const Register = () => {
             />
             <div className="button-wrapper">
               <Button
+                btntype="primary"
                 disabled={formObject.formBottom?.disabledBtn}
                 onClick={submitHandler}
               >

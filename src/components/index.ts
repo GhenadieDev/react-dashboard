@@ -12,3 +12,6 @@ export * from "./Modal";
 export * from "./RegisterFields";
 export * from "./Select";
 export * from "./Table";
+export * from "./TopBar";
+export * from "./LeftMenu";
+export * from "./Main";
