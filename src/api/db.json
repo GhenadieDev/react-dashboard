@@ -12,12 +12,12 @@
     },
     {
       "gender": "Masculin",
-      "name": "pspsppsp",
-      "surname": "wqoijjqwoiw",
-      "email": "ssssssss@gmail.com",
-      "password": "JaredB1981@",
-      "confirmedPassword": "JaredB1981@",
-      "id": 1
+      "name": "John",
+      "surname": "Doe",
+      "email": "jhondoe@gmail.com",
+      "password": "JhonDoe1220@",
+      "confirmedPassword": "JohnDoe1220@",
+      "id": 3
     }
   ],
   "posts": []

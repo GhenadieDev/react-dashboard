@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Users } from "features/users/pages/Users";
-import { UserProperties } from "../types/interfaces";
+import { Profile, UserProperties } from "../types/interfaces";
 
 export const createUser = async (user: UserProperties | null) => {
   try {
@@ -50,5 +50,17 @@ export const deleteUser = async (userId: any) => {
     return result;
   } catch (error) {
     console.log("delete erorr: ", error);
+  }
+};
+
+export const editUser = async (user: Profile) => {
+  try {
+    const result = await axios.put(
+      `http://localhost:4000/users/${user.id}`,
+      user
+    );
+    console.log(result);
+  } catch (error) {
+    console.log("edit error: ", error);
   }
 };

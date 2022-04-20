@@ -15,3 +15,6 @@ export * from "./Table";
 export * from "./TopBar";
 export * from "./LeftMenu";
 export * from "./Main";
+export * from "./ModalHeader";
+export * from "./ModalContent";
+export * from "./ModalFooter";

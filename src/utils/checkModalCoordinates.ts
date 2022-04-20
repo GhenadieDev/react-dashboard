@@ -1,6 +1,6 @@
-import React, { MouseEvent } from "react";
+import { MouseEvent } from "react";
 
-export const checkConfirmModalCoordinates = (
+export const checkModalCoordinates = (
   modal: any,
   clickTarget: MouseEvent<HTMLButtonElement | HTMLDivElement>
 ): boolean => {

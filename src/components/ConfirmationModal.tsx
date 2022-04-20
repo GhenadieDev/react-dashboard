@@ -1,10 +1,10 @@
 import { useRef, MouseEvent } from "react";
-import { checkConfirmModalCoordinates } from "utils/checkConfirmModalCoordinates";
+import { checkModalCoordinates } from "utils/checkModalCoordinates";
 import { Button } from "../components/index";
 
 import "../styles/ConfirmationModal.scss";
 
-interface ConfirmationModalProps {
+export interface ConfirmationModalProps {
   visible: string;
   setVisible: (visibility: string) => void;
   clickHandler?: () => void;
@@ -17,7 +17,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const handleClose = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
-    const result = checkConfirmModalCoordinates(modalRef, e);
+    const result = checkModalCoordinates(modalRef, e);
     if (result) {
       props.setVisible("hide");
     }

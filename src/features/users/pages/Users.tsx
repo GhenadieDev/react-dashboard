@@ -1,6 +1,5 @@
 import { deleteUser, getAllUsers } from "api/users";
 import { ConfirmationModalTitle } from "components/ConfirmationModalTitle";
-import { usePrevious } from "hooks/usePrevious";
 import { useContext, useEffect, useState } from "react";
 import { UserProfileContext } from "types/contexts";
 import { Profile } from "types/interfaces";
@@ -8,12 +7,14 @@ import { Button, ConfirmationModal, Table } from "../../../components/index";
 
 import styles from "../../../styles/RootPages.module.scss";
 import "../../../styles/UsersPage.scss";
+import { UserModalForm } from "../components/UserModalForm";
 
 export const Users = () => {
   const [users, setUsers] = useState<Profile[]>([]);
   const [isConfirmationModalVisible, setConfirmationModalVisible] =
     useState<string>("hide");
-  const [choosenUser, setChoosenUser] = useState<any>(null);
+  const [isUserModalVisible, setUserModalVisible] = useState<string>("hide");
+  const [choosenUser, setChoosenUser] = useState<Profile>({});
   const currentUser = useContext<Profile | null>(UserProfileContext);
 
   useEffect(() => {
@@ -41,12 +42,16 @@ export const Users = () => {
     }
   };
 
-  const showConfirmationModal = () => {
+  const showModal = () => {
     setConfirmationModalVisible("show");
   };
 
-  const selectUser = (userId: any) => {
-    setChoosenUser(userId);
+  const selectUser = (user: Profile) => {
+    setChoosenUser(user);
+  };
+
+  const showUserModal = () => {
+    setUserModalVisible("show");
   };
 
   return (
@@ -60,6 +65,12 @@ export const Users = () => {
           You're gonna delete this user. Are you sure?
         </ConfirmationModalTitle>
       </ConfirmationModal>
+      <UserModalForm
+        visible={isUserModalVisible}
+        setVisible={setUserModalVisible}
+        clickHandler={clickHandler}
+        data={choosenUser}
+      />
       <div className="btn-wrapper">
         <Button btntype="primary">Add new User</Button>
       </div>
@@ -79,14 +90,14 @@ export const Users = () => {
                 .filter((user) => user.id !== currentUser?.id)
                 .map((user: Profile) => {
                   return (
-                    <tr key={user.id} onClick={() => selectUser(user.id)}>
+                    <tr key={user.id} onClick={() => selectUser(user)}>
                       <td>{user.name}</td>
                       <td>{user.surname}</td>
                       <td>{user.email}</td>
                       <td>{user.gender}</td>
                       <td>
-                        <button>Edit</button>
-                        <button onClick={showConfirmationModal}>Delete</button>
+                        <button onClick={showUserModal}>Edit</button>
+                        <button onClick={showModal}>Delete</button>
                       </td>
                     </tr>
                   );
