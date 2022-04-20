@@ -1,56 +1,67 @@
-import { addNewUser, getAllUsers } from "api/users";
-import { useEffect, useRef, useState } from "react";
+import { deleteUser, getAllUsers } from "api/users";
+import { ConfirmationModalTitle } from "components/ConfirmationModalTitle";
+import { usePrevious } from "hooks/usePrevious";
+import { useContext, useEffect, useState } from "react";
+import { UserProfileContext } from "types/contexts";
 import { Profile } from "types/interfaces";
-import { checkAddedUser } from "utils/checkAddedUser";
-import { Button, Modal, Table } from "../../../components/index";
+import { Button, ConfirmationModal, Table } from "../../../components/index";
 
 import styles from "../../../styles/RootPages.module.scss";
 import "../../../styles/UsersPage.scss";
 
 export const Users = () => {
   const [users, setUsers] = useState<Profile[]>([]);
-  const [modalIsDisplay, setModalIsDisplay] = useState<boolean>(false);
+  const [isConfirmationModalVisible, setConfirmationModalVisible] =
+    useState<string>("hide");
+  const [choosenUser, setChoosenUser] = useState<any>(null);
+  const currentUser = useContext<Profile | null>(UserProfileContext);
 
   useEffect(() => {
-    getAllUsers().then((res: any) => {
-      if (res.status === 200) {
-        res.data.forEach((profile: Profile) => {
-          setUsers((prevState) => [...prevState, profile]);
-        });
-      }
+    //se executa numai o data
+    getAllUsers().then((res) => {
+      res?.data.forEach((user: any) => {
+        setUsers((prevState) => [...prevState, user]);
+      });
     });
   }, []);
 
-  const clickHandler: React.MouseEventHandler = (e) => {
-    e.preventDefault();
-    setModalIsDisplay(true);
-  };
-
-  const changeHandler = (e: Profile) => {
-    const result = checkAddedUser(e);
-    if (result === true) {
-      addNewUser(e).then((res) => {
-        if (res?.status === 201) {
-          getAllUsers().then((res: any) => {
-            setUsers((prevState) => [
-              ...prevState,
-              res.data[res.data.length - 1],
-            ]);
+  const clickHandler = () => {
+    if (choosenUser !== null) {
+      const result = users.filter((user) => user.id !== choosenUser.id); //exclud utilizatorul ales din state
+      setUsers(result); //setez state-ul cu toti utilizatorii in afara de cel ales
+      deleteUser(choosenUser).then((res) => {
+        //se face un request de delete dupa id-ul utilizatorului
+        if (res?.status === 200) {
+          getAllUsers().then((res) => {
+            setUsers(res?.data);
           });
+          setConfirmationModalVisible("hide");
         }
       });
     }
   };
 
+  const showConfirmationModal = () => {
+    setConfirmationModalVisible("show");
+  };
+
+  const selectUser = (userId: any) => {
+    setChoosenUser(userId);
+  };
+
   return (
     <div className={`${styles.page} _users-page`}>
-      {modalIsDisplay ? (
-        <Modal setOpen={setModalIsDisplay} changeHandler={changeHandler} />
-      ) : null}
+      <ConfirmationModal
+        visible={isConfirmationModalVisible}
+        setVisible={setConfirmationModalVisible}
+        clickHandler={clickHandler}
+      >
+        <ConfirmationModalTitle>
+          You're gonna delete this user. Are you sure?
+        </ConfirmationModalTitle>
+      </ConfirmationModal>
       <div className="btn-wrapper">
-        <Button btntype="primary" onClick={clickHandler}>
-          Add new User
-        </Button>
+        <Button btntype="primary">Add new User</Button>
       </div>
       <Table>
         <thead>
@@ -64,22 +75,22 @@ export const Users = () => {
         </thead>
         <tbody>
           {users.length > 0
-            ? users.map((user: Profile) => {
-                return (
-                  <tr key={user.id}>
-                    <td>{user.name}</td>
-                    <td>{user.surname}</td>
-                    <td>{user.email}</td>
-                    <td>{user.gender}</td>
-                    <td>
-                      <button onClick={() => setModalIsDisplay(true)}>
-                        Edit
-                      </button>
-                      <button>Delete</button>
-                    </td>
-                  </tr>
-                );
-              })
+            ? users
+                .filter((user) => user.id !== currentUser?.id)
+                .map((user: Profile) => {
+                  return (
+                    <tr key={user.id} onClick={() => selectUser(user.id)}>
+                      <td>{user.name}</td>
+                      <td>{user.surname}</td>
+                      <td>{user.email}</td>
+                      <td>{user.gender}</td>
+                      <td>
+                        <button>Edit</button>
+                        <button onClick={showConfirmationModal}>Delete</button>
+                      </td>
+                    </tr>
+                  );
+                })
             : null}
         </tbody>
       </Table>

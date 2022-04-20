@@ -2,36 +2,22 @@
   "users": [
     {
       "gender": "Masculin",
-      "name": "eoigjerj",
-      "surname": "pgkoekpok",
-      "email": "opegkpokgo@mail.ru",
-      "password": "Ghena1994!",
-      "confirmedPassword": "Ghena1994!",
-      "id": 1
-    },
-    {
-      "gender": "Feminin",
-      "role": "Admin",
-      "name": "oewijfoi",
-      "surname": "ogjwio",
-      "email": "ojwijofiw@gmail.com",
-      "id": 2
-    },
-    {
-      "gender": "Ma abtin",
-      "role": "Admin",
-      "name": "aba",
-      "surname": "blala",
-      "email": "woijoiwe@mail.ru",
-      "id": 3
+      "name": "Jared",
+      "surname": "Bottler",
+      "email": "jared@gmail.com",
+      "password": "JaredB1980@",
+      "confirmedPassword": "JaredB1980@",
+      "role": "admin",
+      "id": 4
     },
     {
       "gender": "Masculin",
-      "role": "Operator",
-      "name": "john",
-      "surname": "doe",
-      "email": "johndoe@gmail.com",
-      "id": 4
+      "name": "pspsppsp",
+      "surname": "wqoijjqwoiw",
+      "email": "ssssssss@gmail.com",
+      "password": "JaredB1981@",
+      "confirmedPassword": "JaredB1981@",
+      "id": 1
     }
   ],
   "posts": []

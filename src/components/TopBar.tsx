@@ -8,10 +8,8 @@ export const TopBar = () => {
 
   const clickHandler: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
-    if (localStorage.getItem("userId")) {
-      window.localStorage.removeItem("userId");
-      window.location.assign("/");
-    }
+    window.localStorage.removeItem("userId");
+    window.location.assign("/");
   };
 
   return (

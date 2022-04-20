@@ -1,5 +1,6 @@
 import axios from "axios";
-import { Profile, UserProperties } from "../types/interfaces";
+import { Users } from "features/users/pages/Users";
+import { UserProperties } from "../types/interfaces";
 
 export const createUser = async (user: UserProperties | null) => {
   try {
@@ -29,7 +30,7 @@ export const getUserById = async (userId: any) => {
       const result = await axios.get(`http://localhost:4000/users/${userId}`);
       return result;
     } catch (error) {
-      console.log("error: ", error);
+      return Promise.reject(error);
     }
   }
 };
@@ -43,11 +44,11 @@ export const getAllUsers = async () => {
   }
 };
 
-export const addNewUser = async (user: Profile) => {
+export const deleteUser = async (userId: any) => {
   try {
-    const result = await axios.post("http://localhost:4000/users", user);
+    const result = await axios.delete(`http://localhost:4000/users/${userId}`);
     return result;
   } catch (error) {
-    console.log("error: ", error);
+    console.log("delete erorr: ", error);
   }
 };
