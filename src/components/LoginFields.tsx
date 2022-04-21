@@ -1,12 +1,12 @@
 import { Input } from "./Input";
 
 import "../styles/LoginFields.scss";
-import { UserProperties } from "types/interfaces";
+import { User } from "types/interfaces";
 import React, { Dispatch, SetStateAction } from "react";
 
 interface LoginProps {
-  setUserData: Dispatch<SetStateAction<UserProperties>>;
-  userData: Pick<UserProperties, "email" | "password">;
+  setUserData: Dispatch<SetStateAction<User>>;
+  userData: Pick<User, "email" | "password">;
 }
 
 export const LoginFields = ({ setUserData, userData }: LoginProps) => {

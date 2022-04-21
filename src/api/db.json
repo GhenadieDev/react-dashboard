@@ -11,13 +11,14 @@
       "id": 4
     },
     {
+      "name": "Fredie",
+      "surname": "Adams",
+      "email": "adam@gmail.com",
       "gender": "Masculin",
-      "name": "John",
-      "surname": "Doe",
-      "email": "jhondoe@gmail.com",
-      "password": "JhonDoe1220@",
-      "confirmedPassword": "JohnDoe1220@",
-      "id": 3
+      "role": "admin",
+      "password": "JaredB1981@",
+      "confirmedPassword": "JaredB1981@",
+      "id": 9
     }
   ],
   "posts": []

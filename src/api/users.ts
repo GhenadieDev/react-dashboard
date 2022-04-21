@@ -1,8 +1,8 @@
 import axios from "axios";
 import { Users } from "features/users/pages/Users";
-import { Profile, UserProperties } from "../types/interfaces";
+import { User } from "../types/interfaces";
 
-export const createUser = async (user: UserProperties | null) => {
+export const createUser = async (user: User | null) => {
   try {
     const result = await axios.post("http://localhost:4000/users", user);
     return result;
@@ -11,9 +11,7 @@ export const createUser = async (user: UserProperties | null) => {
   }
 };
 
-export const logUser = async (
-  user: Pick<UserProperties, "email" | "password">
-) => {
+export const logUser = async (user: Pick<User, "email" | "password">) => {
   try {
     const result = await axios.get(
       `http://localhost:4000/users?email=${user.email}&password=${user.password}`
@@ -53,13 +51,13 @@ export const deleteUser = async (userId: any) => {
   }
 };
 
-export const editUser = async (user: Profile) => {
+export const editUser = async (user: User) => {
   try {
     const result = await axios.put(
       `http://localhost:4000/users/${user.id}`,
       user
     );
-    console.log(result);
+    return result;
   } catch (error) {
     console.log("edit error: ", error);
   }

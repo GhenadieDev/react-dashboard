@@ -1,13 +1,13 @@
 import {
   InputRefs,
   PasswordValidation,
-  UserProperties,
+  User,
   UserRegError,
 } from "../types/interfaces";
 import { emailRegex, passwordRegex } from "../types/regex";
 
 export const checkRegisterFields = (
-  dataFromInputs: UserProperties | null,
+  dataFromInputs: User | null,
   fields?: InputRefs
 ): UserRegError => {
   const tempErrorsObject: UserRegError = {

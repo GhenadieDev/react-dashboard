@@ -2,7 +2,7 @@ import { deleteUser, getAllUsers } from "api/users";
 import { ConfirmationModalTitle } from "components/ConfirmationModalTitle";
 import { useContext, useEffect, useState } from "react";
 import { UserProfileContext } from "types/contexts";
-import { Profile } from "types/interfaces";
+import { User } from "types/interfaces";
 import { Button, ConfirmationModal, Table } from "../../../components/index";
 
 import styles from "../../../styles/RootPages.module.scss";
@@ -10,12 +10,12 @@ import "../../../styles/UsersPage.scss";
 import { UserModalForm } from "../components/UserModalForm";
 
 export const Users = () => {
-  const [users, setUsers] = useState<Profile[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [isConfirmationModalVisible, setConfirmationModalVisible] =
     useState<string>("hide");
   const [isUserModalVisible, setUserModalVisible] = useState<string>("hide");
-  const [choosenUser, setChoosenUser] = useState<Profile>({});
-  const currentUser = useContext<Profile | null>(UserProfileContext);
+  const [choosenUser, setChoosenUser] = useState<User>({});
+  const currentUser = useContext<User | null>(UserProfileContext);
 
   useEffect(() => {
     //se executa numai o data
@@ -26,7 +26,7 @@ export const Users = () => {
     });
   }, []);
 
-  const clickHandler = () => {
+  const clickHandlerDelete = () => {
     if (choosenUser !== null) {
       const result = users.filter((user) => user.id !== choosenUser.id); //exclud utilizatorul ales din state
       setUsers(result); //setez state-ul cu toti utilizatorii in afara de cel ales
@@ -46,7 +46,7 @@ export const Users = () => {
     setConfirmationModalVisible("show");
   };
 
-  const selectUser = (user: Profile) => {
+  const selectUser = (user: User) => {
     setChoosenUser(user);
   };
 
@@ -54,12 +54,18 @@ export const Users = () => {
     setUserModalVisible("show");
   };
 
+  const setEditedUsers = () => {
+    getAllUsers().then((res) => {
+      setUsers(res?.data);
+    });
+  };
+
   return (
     <div className={`${styles.page} _users-page`}>
       <ConfirmationModal
         visible={isConfirmationModalVisible}
         setVisible={setConfirmationModalVisible}
-        clickHandler={clickHandler}
+        clickHandler={clickHandlerDelete}
       >
         <ConfirmationModalTitle>
           You're gonna delete this user. Are you sure?
@@ -68,8 +74,8 @@ export const Users = () => {
       <UserModalForm
         visible={isUserModalVisible}
         setVisible={setUserModalVisible}
-        clickHandler={clickHandler}
         data={choosenUser}
+        clickHandler={setEditedUsers}
       />
       <div className="btn-wrapper">
         <Button btntype="primary">Add new User</Button>
@@ -87,8 +93,8 @@ export const Users = () => {
         <tbody>
           {users.length > 0
             ? users
-                .filter((user) => user.id !== currentUser?.id)
-                .map((user: Profile) => {
+                .filter((user: User) => user.id !== currentUser?.id)
+                .map((user: User) => {
                   return (
                     <tr key={user.id} onClick={() => selectUser(user)}>
                       <td>{user.name}</td>

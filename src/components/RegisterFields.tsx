@@ -3,12 +3,12 @@ import { Input } from "./Input";
 import { Select } from "./Select";
 
 import "../styles/RegisterFields.scss";
-import { InputRefs, UserProperties } from "../types/interfaces";
+import { InputRefs, User } from "../types/interfaces";
 import { ErrorContext } from "../types/contexts";
 
 interface IProps {
-  formData?: UserProperties | null;
-  setFormData: Dispatch<SetStateAction<UserProperties | null>>;
+  formData?: User | null;
+  setFormData: Dispatch<SetStateAction<User | null>>;
   setCheckboxIsChecked: Dispatch<SetStateAction<boolean>>;
   checkboxIsChecked: boolean;
   reference?: React.Ref<HTMLSelectElement>;

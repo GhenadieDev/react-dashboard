@@ -1,7 +1,7 @@
-import { Profile } from "types/interfaces";
+import { User } from "types/interfaces";
 import { emailRegex } from "types/regex";
 
-export const checkAddedUser = (addedUser: Profile): boolean => {
+export const checkAddedUser = (addedUser: User): boolean => {
   const errorsObject = {
     fields: "",
   };

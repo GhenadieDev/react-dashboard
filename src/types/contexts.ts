@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import { Profile, UserProperties, UserRegError } from "./interfaces";
+import { User, UserRegError } from "./interfaces";
 
-export const UserContext = createContext<UserProperties | null>(null);
+export const UserContext = createContext<User | null>(null);
 export const ErrorContext = createContext<UserRegError | null>(null);
-export const UserProfileContext = createContext<Profile | null>(null);
+export const UserProfileContext = createContext<User | null>(null);

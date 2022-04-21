@@ -1,4 +1,4 @@
-import { Profile } from "types/interfaces";
+import { User } from "types/interfaces";
 import "../styles/Table.scss";
 
 interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> {}

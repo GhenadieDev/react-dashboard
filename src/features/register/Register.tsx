@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {
   FormProps,
   InputRefs,
-  UserProperties,
+  User,
   UserRegError,
 } from "../../types/interfaces";
 
@@ -26,7 +26,7 @@ import { checkRegisterFields } from "utils/checkRegisterFields";
 import "../../styles/RegisterPage.scss";
 
 export const Register = () => {
-  const [formData, setFormData] = useState<UserProperties | null>({});
+  const [formData, setFormData] = useState<User | null>({});
   const [checkboxIsChecked, setCheckboxIsChecked] = useState<boolean>(false);
   const selectRef = useRef<HTMLSelectElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);

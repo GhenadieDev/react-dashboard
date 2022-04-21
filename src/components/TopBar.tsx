@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { UserProfileContext } from "types/contexts";
-import { Profile } from "types/interfaces";
+import { User } from "types/interfaces";
 import "../styles/TopBar.scss";
 
 export const TopBar = () => {
-  const profile = useContext<Profile | null>(UserProfileContext);
+  const profile = useContext<User | null>(UserProfileContext);
 
   const clickHandler: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();

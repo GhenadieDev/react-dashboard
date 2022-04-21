@@ -3,11 +3,11 @@ import { Layout } from "components";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserProfileContext } from "types/contexts";
-import { Profile } from "types/interfaces";
+import { User } from "types/interfaces";
 import styles from "../../styles/RootPages.module.scss";
 
 export const Home = () => {
-  const [profile, setProfile] = useState<Profile>({});
+  const [profile, setProfile] = useState<User>({});
   const navigate = useNavigate();
 
   useEffect(() => {

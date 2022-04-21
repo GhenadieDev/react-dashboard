@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, LoginFields, FormHeader, Button } from "../../components/index";
-import { FormProps, UserProperties } from "../../types/interfaces";
+import { FormProps, User } from "../../types/interfaces";
 import { logUser } from "api/users";
 
 import styles from "../../styles/RootPages.module.scss";
 import "../../styles/LoginPage.scss";
 
 export const Login = () => {
-  const [userData, setUserData] = useState<UserProperties>({
+  const [userData, setUserData] = useState<User>({
     email: "",
     password: "",
   });

@@ -18,13 +18,15 @@ export interface FormProps {
   setError?: (error: UserRegError | null) => void;
 }
 
-export interface UserProperties {
+export interface User {
   name?: string;
   surname?: string;
   email?: string;
   gender?: string;
   password?: string;
   confirmedPassword?: string;
+  role?: string;
+  id?: string | number;
 }
 
 export interface Post {
@@ -32,7 +34,7 @@ export interface Post {
   description: string;
   image: string;
   createdDate: typeof dateTime;
-  user: Pick<UserProperties, "name" | "surname">;
+  user: Pick<User, "name" | "surname">;
 }
 
 export interface UserRegError {
@@ -58,13 +60,4 @@ export interface PasswordValidation {
   lowercase?: string[];
   numbers?: string[];
   special?: string[];
-}
-
-export interface Profile {
-  name?: string;
-  surname?: string;
-  email?: string;
-  gender?: string;
-  id?: string | number;
-  role?: string;
 }
