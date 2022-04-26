@@ -1,3 +1,4 @@
+import { Button } from "components/index";
 import { useContext } from "react";
 import { UserProfileContext } from "types/contexts";
 import { User } from "types/interfaces";
@@ -14,11 +15,11 @@ export const TopBar = () => {
 
   return (
     <header className="topbar">
-      <div className="profile-wrapper">
-        <p className="user">{profile?.name + " " + profile?.surname}</p>
-        <button className="log-out" onClick={clickHandler}>
-          Log out
-        </button>
+      <p className="user">{profile?.name + " " + profile?.surname}</p>
+      <div className="btn-wrapper">
+        <Button className="log-out" onClick={clickHandler} variant="primary">
+          <span>&#10140;</span>
+        </Button>
       </div>
     </header>
   );

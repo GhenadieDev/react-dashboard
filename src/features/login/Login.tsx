@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, LoginFields, FormHeader, Button } from "../../components/index";
-import { FormProps, User } from "../../types/interfaces";
+import { User } from "../../types/interfaces";
 import { logUser } from "api/users";
 
 import styles from "../../styles/RootPages.module.scss";
 import "../../styles/LoginPage.scss";
+
+const formObject = {
+  submitBtnText: "Log In",
+  disabledBtn: false,
+};
 
 export const Login = () => {
   const [userData, setUserData] = useState<User>({
@@ -14,18 +19,6 @@ export const Login = () => {
   });
   const [logError, setLogError] = useState<string>("");
   const navigate = useNavigate();
-  const formObject: FormProps = {
-    formHeader: {
-      title: "Log In",
-      question: "Don't have an account?",
-      location: "/register",
-      linkText: "Sign Up",
-    },
-    formBottom: {
-      submitBtnText: "Log In",
-      disabledBtn: false,
-    },
-  };
 
   const clickHandler: React.MouseEventHandler = (e) => {
     e.preventDefault();
@@ -55,14 +48,19 @@ export const Login = () => {
   return (
     <div className={`${styles.page} _login`}>
       <Form {...formObject}>
-        <FormHeader {...formObject.formHeader} />
+        <FormHeader
+          title="Log In"
+          question="Don't have an account?"
+          location="/register"
+          linkText="Sign Up"
+        />
         <LoginFields setUserData={setUserData} userData={userData} />
         <Button
-          btntype="primary"
-          disabled={formObject.formBottom?.disabledBtn}
+          variant="primary"
+          disabled={formObject.disabledBtn}
           onClick={clickHandler}
         >
-          {formObject.formBottom?.submitBtnText}
+          {formObject.submitBtnText}
         </Button>
       </Form>
       {logError ? (

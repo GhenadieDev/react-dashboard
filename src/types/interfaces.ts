@@ -1,23 +1,6 @@
 import React from "react";
 import { dateTime } from "./date";
 
-export interface FormProps {
-  formHeader?: {
-    title?: string;
-    question?: string;
-    location?: string;
-    linkText?: string;
-  };
-
-  formBottom?: {
-    submitBtnText?: string;
-    disabledBtn?: boolean;
-  };
-  inputs?: InputRefs;
-  errors?: UserRegError;
-  setError?: (error: UserRegError | null) => void;
-}
-
 export interface User {
   name?: string;
   surname?: string;

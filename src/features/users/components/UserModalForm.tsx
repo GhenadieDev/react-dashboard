@@ -1,7 +1,5 @@
-import { editUser, getAllUsers } from "api/users";
-import { useRef, MouseEvent, useState, useEffect } from "react";
+import { useRef, MouseEvent, useState } from "react";
 import { User } from "types/interfaces";
-import { checkModalCoordinates } from "utils/checkModalCoordinates";
 import {
   Button,
   Input,
@@ -10,31 +8,28 @@ import {
   ModalFooter,
   ModalHeader,
   Select,
-} from "../../../components/index";
+} from "components/index";
 
-import "../../../styles/UserModalForm.scss";
+import "styles/UserModalForm.scss";
 
 interface UserModalFormProps {
-  visible: string;
-  setVisible: (visibility: string) => void;
-  clickHandler?: () => void;
+  submitHandler?: (obj: User) => void;
   data?: User;
+  handleClose: () => void;
 }
 
 export const UserModalForm = ({
-  visible,
-  setVisible,
-  clickHandler,
+  submitHandler,
   data,
+  handleClose,
 }: UserModalFormProps) => {
-  const modalRef = useRef<HTMLDivElement | null>(null);
   const [currentUser, setCurrentUser] = useState<User>({});
   const roleRef = useRef<HTMLSelectElement>(null);
+  const genderRef = useRef<HTMLSelectElement>(null);
 
-  const handleClose = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
-    const result = checkModalCoordinates(modalRef, e);
-    if (result) {
-      setVisible("hide");
+  const handleCloseCall = (e: MouseEvent<HTMLElement>) => {
+    if ((e.target as Element).classList[0] === "user-modal-wrapper") {
+      handleClose();
     }
   };
 
@@ -47,54 +42,58 @@ export const UserModalForm = ({
     }));
   };
 
-  const submitHandler = () => {
+  const submitHandlerCall = () => {
     const obj: User = {
       name: currentUser.name ? currentUser.name : data?.name,
       surname: currentUser.surname ? currentUser.surname : data?.surname,
       email: currentUser.email ? currentUser.email : data?.email,
-      gender: currentUser.gender ? currentUser.gender : data?.gender,
+      gender: currentUser.gender
+        ? currentUser.gender
+        : genderRef.current?.value,
       role: currentUser.role ? currentUser.role : roleRef.current?.value,
       password: data?.password,
       confirmedPassword: data?.confirmedPassword,
       id: data?.id,
     };
 
-    editUser(obj).then((res) => {
-      if (res?.status === 200) {
-        if (clickHandler !== undefined) {
-          clickHandler();
-        }
-      }
-    });
+    if (submitHandler) {
+      submitHandler(obj);
+    }
+
+    setCurrentUser({});
   };
 
   return (
-    <div
-      className={`user-modal-wrapper user-modal-wrapper--${visible}`}
-      onClick={handleClose}
-    >
-      <Modal ref={modalRef}>
+    <div className={`user-modal-wrapper`} onClick={handleCloseCall}>
+      <Modal id="modal">
         <ModalHeader title="Edit user" />
         <ModalContent>
           <Input
-            defaultValue={data?.name}
+            {...(data?.name !== undefined
+              ? { defaultValue: data?.name }
+              : { placeholder: "Name" })}
             onChange={onChangeHandler}
             name="name"
           />
           <Input
-            defaultValue={data?.surname}
+            {...(data?.surname !== undefined
+              ? { defaultValue: data?.surname }
+              : { placeholder: "Surname" })}
             onChange={onChangeHandler}
             name="surname"
           />
           <Input
-            defaultValue={data?.email}
+            {...(data?.email !== undefined
+              ? { defaultValue: data?.email }
+              : { placeholder: "Email" })}
             onChange={onChangeHandler}
             name="email"
           />
           <Select
-            defaultValue={data?.gender}
+            defaultValue={data?.gender ? data.gender : "Masculin"}
             onChange={onChangeHandler}
             name="gender"
+            ref={genderRef}
           >
             <option value="Masculin">Masculin</option>
             <option value="Feminin">Feminin</option>
@@ -115,10 +114,10 @@ export const UserModalForm = ({
           </div>
         </ModalContent>
         <ModalFooter>
-          <Button btntype="primary" onClick={submitHandler}>
+          <Button variant="primary" onClick={submitHandlerCall}>
             Submit
           </Button>
-          <Button btntype="danger" onClick={() => setVisible("hide")}>
+          <Button variant="danger" onClick={handleClose} className="cancel">
             Cancel
           </Button>
         </ModalFooter>

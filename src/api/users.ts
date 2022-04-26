@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Users } from "features/users/pages/Users";
 import { User } from "../types/interfaces";
 
 export const createUser = async (user: User | null) => {
@@ -36,13 +35,15 @@ export const getUserById = async (userId: any) => {
 export const getAllUsers = async () => {
   try {
     const result = await axios.get("http://localhost:4000/users");
-    return result;
+    if (result.status === 200) {
+      return result;
+    }
   } catch (error) {
     console.log("get all users error: ", error);
   }
 };
 
-export const deleteUser = async (userId: any) => {
+export const deleteUser = async (userId: number | string | undefined) => {
   try {
     const result = await axios.delete(`http://localhost:4000/users/${userId}`);
     return result;
@@ -57,7 +58,10 @@ export const editUser = async (user: User) => {
       `http://localhost:4000/users/${user.id}`,
       user
     );
-    return result;
+
+    if (result.status === 201) {
+      return result;
+    }
   } catch (error) {
     console.log("edit error: ", error);
   }

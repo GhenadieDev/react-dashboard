@@ -3,15 +3,16 @@
   height: 100%;
   padding: 20px;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
-  background-color: rgb(234, 221, 221);
+  background-color: whitesmoke;
 
-  .profile-wrapper {
-    display: flex;
-    margin-right: 30px;
+  .user {
+    margin-right: 10px;
+    width: fit-content;
+  }
 
-    .user {
-      margin-right: 10px;
-    }
+  .log-out {
+    width: fit-content;
   }
 }

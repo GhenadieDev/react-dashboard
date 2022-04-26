@@ -1,12 +1,10 @@
-import { useRef, MouseEvent } from "react";
-import { checkModalCoordinates } from "utils/checkModalCoordinates";
+import { useRef, MouseEvent, SetStateAction, Dispatch } from "react";
 import { Button } from "../components/index";
 
 import "../styles/ConfirmationModal.scss";
 
 export interface ConfirmationModalProps {
-  visible: string;
-  setVisible: (visibility: string) => void;
+  setOpen: Dispatch<SetStateAction<boolean>>;
   clickHandler?: () => void;
 }
 
@@ -16,25 +14,21 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
 }) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  const handleClose = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
-    const result = checkModalCoordinates(modalRef, e);
-    if (result) {
-      props.setVisible("hide");
+  const handleClose = (e: MouseEvent<HTMLElement>) => {
+    if ((e.target as Element).classList[0] === "confirmation-modal-wrapper") {
+      props.setOpen(false);
     }
   };
 
   return (
-    <div
-      onClick={handleClose}
-      className={`confirmation-modal-wrapper confirmation-modal-wrapper--${props.visible}`}
-    >
+    <div onClick={handleClose} className={`confirmation-modal-wrapper`}>
       <div className="confirmation-modal" ref={modalRef}>
         {children}
         <div className="btns-wrapper">
-          <Button btntype="primary" onClick={props.clickHandler}>
+          <Button variant="primary" onClick={props.clickHandler}>
             Confirm
           </Button>
-          <Button btntype="danger" onClick={() => props.setVisible("hide")}>
+          <Button variant="danger" onClick={() => props.setOpen(false)}>
             Cancel
           </Button>
         </div>

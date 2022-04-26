@@ -1,12 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-import {
-  FormProps,
-  InputRefs,
-  User,
-  UserRegError,
-} from "../../types/interfaces";
+import { InputRefs, User, UserRegError } from "../../types/interfaces";
 
 import { UserContext } from "../../types/contexts";
 import { ErrorContext } from "../../types/contexts";
@@ -63,10 +58,7 @@ export const Register = () => {
     }
   };
 
-  const formObject: FormProps = {
-    formHeader: {
-      title: "Sign Up",
-    },
+  const formObject = {
     formBottom: {
       submitBtnText: "Sign Up",
       disabledBtn: submitBtnIsDisabled,
@@ -126,7 +118,7 @@ export const Register = () => {
           {errors?.password?.length ? <ErrorList /> : null}
           {fieldErrorIsDisplay ? <InputError /> : null}
           <Form>
-            <FormHeader {...formObject.formHeader} />
+            <FormHeader title="Sign Up" />
             <RegisterFields
               reference={selectRef}
               setFormData={setFormData}
@@ -136,7 +128,7 @@ export const Register = () => {
             />
             <div className="button-wrapper">
               <Button
-                btntype="primary"
+                variant="primary"
                 disabled={formObject.formBottom?.disabledBtn}
                 onClick={submitHandler}
               >

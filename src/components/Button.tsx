@@ -1,12 +1,12 @@
 import "../styles/Button.scss";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  btntype?: string;
+  variant?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
   return (
-    <button {...props} className={`btn btn--${props.btntype}`}>
+    <button {...props} className={`btn btn--${props.variant}`}>
       {children}
     </button>
   );
