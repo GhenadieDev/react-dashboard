@@ -16,12 +16,14 @@ interface UserModalFormProps {
   submitHandler?: (obj: User) => void;
   data?: User;
   handleClose: () => void;
+  title?: string;
 }
 
 export const UserModalForm = ({
   submitHandler,
   data,
   handleClose,
+  title,
 }: UserModalFormProps) => {
   const [currentUser, setCurrentUser] = useState<User>({});
   const roleRef = useRef<HTMLSelectElement>(null);
@@ -66,7 +68,7 @@ export const UserModalForm = ({
   return (
     <div className={`user-modal-wrapper`} onClick={handleCloseCall}>
       <Modal id="modal">
-        <ModalHeader title="Edit user" />
+        <ModalHeader title={title} />
         <ModalContent>
           <Input
             {...(data?.name !== undefined

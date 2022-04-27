@@ -14,11 +14,11 @@ import {
   FormHeader,
 } from "../../components/index";
 
-import styles from "../../styles/RootPages.module.scss";
 import { createUser } from "api/users";
 import { checkRegisterFields } from "utils/checkRegisterFields";
 
 import "../../styles/RegisterPage.scss";
+import styles from "../../styles/RootPages.module.scss";
 
 export const Register = () => {
   const [formData, setFormData] = useState<User | null>({});

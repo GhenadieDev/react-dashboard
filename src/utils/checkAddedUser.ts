@@ -1,28 +1,41 @@
 import { User } from "types/interfaces";
 import { emailRegex } from "types/regex";
 
-export const checkAddedUser = (addedUser: User): boolean => {
-  const errorsObject = {
-    fields: "",
-  };
+interface ErrorsObject {
+  fields: string;
+  email: RegExpMatchArray | null | undefined;
+}
 
-  let validatedEmail: any;
+export const checkAddedUser = (
+  addedUser: Pick<User, "name" | "surname" | "email">
+): boolean => {
+  const errorsObject: ErrorsObject = {
+    fields: "",
+    email: [],
+  };
 
   Object.values(addedUser).forEach((value: string) => {
     if (value === " ") {
       errorsObject.fields = "Fields can not be empty";
+    } else {
+      errorsObject.fields = "";
     }
   });
 
-  validatedEmail = addedUser.email?.match(emailRegex);
+  errorsObject.email = addedUser.email?.match(emailRegex);
 
   if (!addedUser.name || !addedUser.surname || !addedUser.email) {
     errorsObject.fields = "Fields is required";
+  } else {
+    errorsObject.fields = "";
   }
 
-  if (!errorsObject.fields && validatedEmail?.length > 0) {
+  console.log("errors object: ", errorsObject);
+  console.log("validatedEmail: ", errorsObject.email?.length);
+
+  if (!errorsObject.fields && errorsObject?.email) {
+    console.log("true");
     return true;
   }
-
   return false;
 };

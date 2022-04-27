@@ -13,11 +13,12 @@ export interface User {
 }
 
 export interface Post {
-  title: string;
-  description: string;
-  image: string;
-  createdDate: typeof dateTime;
-  user: Pick<User, "name" | "surname">;
+  title?: string;
+  description?: string;
+  image_url?: string;
+  date?: typeof dateTime;
+  authorId?: string | number;
+  id?: number | string;
 }
 
 export interface UserRegError {

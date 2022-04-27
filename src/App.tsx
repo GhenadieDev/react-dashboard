@@ -9,6 +9,8 @@ import { Dashboard } from "features/dashboard/Dashboard";
 import { Users } from "features/users/pages/Users";
 import { Posts } from "features/posts/pages/Posts";
 import { Home } from "features/home/Home";
+import { Post } from "features/posts/pages/Post";
+import { CreatePost } from "features/posts/pages/CreatePost";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="users" element={<Users />} />
           <Route path="posts" element={<Posts />} />
+          <Route path="/home/posts/:postID" element={<Post />} />
+          <Route path="/home/posts/create" element={<CreatePost />} />
         </Route>
         <Route path="*" element={<NullPage />} />
       </Routes>

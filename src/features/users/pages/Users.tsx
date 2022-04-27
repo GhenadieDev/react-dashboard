@@ -5,9 +5,10 @@ import { UserProfileContext } from "types/contexts";
 import { User } from "types/interfaces";
 import { Button, ConfirmationModal, Table } from "components/index";
 
+import { UserModalForm } from "../components/UserModalForm";
+
 import styles from "styles/RootPages.module.scss";
 import "styles/UsersPage.scss";
-import { UserModalForm } from "../components/UserModalForm";
 
 export const Users = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -97,12 +98,17 @@ export const Users = () => {
       )}
       {editButtonIsClicked ? (
         <UserModalForm
+          title="Edit User"
           data={choosenUser}
           submitHandler={editUsers}
           handleClose={handleCloseUser}
         />
       ) : addButtonIsClicked ? (
-        <UserModalForm handleClose={handleCloseUser} submitHandler={addUsers} />
+        <UserModalForm
+          handleClose={handleCloseUser}
+          submitHandler={addUsers}
+          title="Add User"
+        />
       ) : null}
       <div className="btn-wrapper">
         <Button variant="primary" onClick={showUserModal} name="add-button">
