@@ -43,6 +43,28 @@
       },
       "date": "2022-04-28T14:22:32.729Z",
       "id": 2
+    },
+    {
+      "title": "Third post",
+      "image_url": "https://images.unsplash.com/photo-1612525736240-3cb22fd26a32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "description": "just a random post",
+      "author": {
+        "id": 9,
+        "fullName": "Bradli kend"
+      },
+      "date": "2022-04-28T15:13:01.057Z",
+      "id": 3
+    },
+    {
+      "title": "pewokpoewkgopkop",
+      "image_url": "https://images.unsplash.com/photo-1609763531868-2ecde328f07c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+      "description": "Public inquiries in Britain and the United States led to major improvements in maritime safety. One of the most important results of the inquiries was the establishment in 1914 of the International Convention for the Safety of Life at Sea (SOLAS)",
+      "author": {
+        "id": 9,
+        "fullName": "Bradli kend"
+      },
+      "date": "2022-04-28T15:51:05.104Z",
+      "id": 4
     }
   ]
 }

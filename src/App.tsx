@@ -9,7 +9,7 @@ import { Dashboard } from "features/dashboard/Dashboard";
 import { Users } from "features/users/pages/Users";
 import { Posts } from "features/posts/pages/Posts";
 import { Home } from "features/home/Home";
-import { Post } from "features/posts/pages/Post";
+import { PostPage } from "features/posts/pages/Post";
 import { CreatePost } from "features/posts/pages/CreatePost";
 import { EditPost } from "features/posts/pages/EditPost";
 
@@ -25,7 +25,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="users" element={<Users />} />
           <Route path="posts" element={<Posts />} />
-          <Route path="/home/posts/:postID" element={<Post />} />
+          <Route path="/home/posts/:postID" element={<PostPage />} />
           <Route path="/home/posts/:postID/edit" element={<EditPost />} />
           <Route path="/home/posts/create" element={<CreatePost />} />
         </Route>
