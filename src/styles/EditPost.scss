@@ -1,0 +1,16 @@
+.edit-post {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .form-wrapper {
+    width: 70%;
+  }
+  
+  .desc-wrapper {
+    height: 250px;
+    padding-bottom: 20px;
+  }
+}

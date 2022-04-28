@@ -9,7 +9,11 @@ import { Post } from "types/interfaces";
 
 export const CreatePost = () => {
   const currentUser = useContext(UserProfileContext);
-  const [post, setPost] = useState<Post>({});
+  const [post, setPost] = useState<Post>({
+    title: "",
+    image_url: "",
+    description: "",
+  });
 
   useEffect(() => {
     setPost((prevState) => ({
@@ -30,7 +34,16 @@ export const CreatePost = () => {
 
   const submitHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    createPost(post);
+    createPost(post).then((res) => {
+      if (res?.status === 201) {
+        setPost((prevState) => ({
+          ...prevState,
+          title: "",
+          description: "",
+          image_url: "",
+        }));
+      }
+    });
   };
 
   return (
@@ -39,6 +52,7 @@ export const CreatePost = () => {
         <Form>
           <FormHeader title="Add Post" />
           <Input
+            value={post.title}
             placeholder="Title"
             type="text"
             onChange={onChangeHandler}
@@ -46,12 +60,14 @@ export const CreatePost = () => {
           />
           <div className="desc-wrapper">
             <TextArea
+              value={post.description}
               placeholder="Description"
               onChange={onChangeHandler}
               name="description"
             />
           </div>
           <Input
+            value={post.image_url}
             type="text"
             placeholder="Image URL"
             onChange={onChangeHandler}

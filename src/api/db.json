@@ -23,11 +23,20 @@
   ],
   "posts": [
     {
-      "authorId": 9,
-      "title": "powkfpoewkpofkewpo",
-      "description": "pokfewopkfopwkfpokewpofkwe",
-      "image_url": "https://images.unsplash.com/photo-1650913542157-100a9aaed0c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "id": 3
+      "date": "2022-04-27T17:01:31.292Z",
+      "title": "Titanic History edited post",
+      "description": "Titanic was built by the Harland and Wolff shipyard in Belfast. Titanic was under the command of Captain Edward Smith, who went down with the ship. The ocean liner carried some of the wealthiest people in the world, as well as hundreds of emigrants from Great Britain and Ireland, Scandinavia and elsewhere throughout Europe, who were seeking a new life in the United States and Canada.",
+      "image_url": "https://images.unsplash.com/photo-1561554250-0086e85c2042?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=430&q=80",
+      "id": 1,
+      "authorId": 9
+    },
+    {
+      "date": "2022-04-28T10:31:09.682Z",
+      "title": "Third Post",
+      "description": "England was first inhabited by modern humans during the Upper Paleolithic period, but takes its name from the Angles, a Germanic tribe deriving its name from the Anglia peninsula, who settled during the 5th and 6th centuries.",
+      "image_url": "https://images.unsplash.com/photo-1598481732567-901732cd829f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80",
+      "id": 2,
+      "authorId": 9
     }
   ]
 }

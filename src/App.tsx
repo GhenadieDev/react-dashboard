@@ -11,6 +11,7 @@ import { Posts } from "features/posts/pages/Posts";
 import { Home } from "features/home/Home";
 import { Post } from "features/posts/pages/Post";
 import { CreatePost } from "features/posts/pages/CreatePost";
+import { EditPost } from "features/posts/pages/EditPost";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="users" element={<Users />} />
           <Route path="posts" element={<Posts />} />
           <Route path="/home/posts/:postID" element={<Post />} />
+          <Route path="/home/posts/:postID/edit" element={<EditPost />} />
           <Route path="/home/posts/create" element={<CreatePost />} />
         </Route>
         <Route path="*" element={<NullPage />} />

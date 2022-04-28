@@ -13,7 +13,9 @@ export const PostCard: React.FC<Post> = ({ children, ...props }) => {
       </p>
 
       <Link to={`/home/posts/${props.id}`}>
-        <img src={props.image_url} alt="post-img" />
+        <div className="image-wrapper">
+          <img src={props.image_url} alt="post-img" />
+        </div>
         <h4>{props.title}</h4>
         <p className="desc">{props.description}</p>
       </Link>

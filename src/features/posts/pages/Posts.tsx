@@ -30,6 +30,7 @@ export const Posts = () => {
         });
       }
     });
+    setConfirmationModalVisible(false);
   };
 
   useEffect(() => {
@@ -71,7 +72,9 @@ export const Posts = () => {
                   date={post.date}
                   id={post.id}
                 >
-                  <Button variant="primary">Edit</Button>
+                  <Link to={`/home/posts/${post.id}/edit`} state={post}>
+                    <Button variant="primary">Edit</Button>
+                  </Link>
                   <Button
                     variant="danger"
                     onClick={() => showConfirmationModal(post)}
