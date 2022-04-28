@@ -35,4 +35,9 @@
       grid-template-columns: 1fr;
     }
   }
+
+  .actions-btns-wrapper {
+    display: flex;
+    column-gap: 10px;
+  }
 }

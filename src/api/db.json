@@ -23,20 +23,26 @@
   ],
   "posts": [
     {
-      "date": "2022-04-27T17:01:31.292Z",
-      "title": "Titanic History edited post",
-      "description": "Titanic was built by the Harland and Wolff shipyard in Belfast. Titanic was under the command of Captain Edward Smith, who went down with the ship. The ocean liner carried some of the wealthiest people in the world, as well as hundreds of emigrants from Great Britain and Ireland, Scandinavia and elsewhere throughout Europe, who were seeking a new life in the United States and Canada.",
-      "image_url": "https://images.unsplash.com/photo-1561554250-0086e85c2042?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=430&q=80",
-      "id": 1,
-      "authorId": 9
+      "title": "Mountain",
+      "image_url": "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80",
+      "description": "While not posing substantial technical climbing challenges on the standard route, Everest presents dangers such as altitude sickness, weather, and wind, as well as hazards from avalanches and the Khumbu Icefall. As of 2019, over 300 people have died on Everest,many of whose bodies remain on the mountain.",
+      "author": {
+        "id": 9,
+        "fullName": "Bradli kend"
+      },
+      "date": "2022-04-28T14:15:44.869Z",
+      "id": 1
     },
     {
-      "date": "2022-04-28T10:31:09.682Z",
-      "title": "Third Post",
-      "description": "England was first inhabited by modern humans during the Upper Paleolithic period, but takes its name from the Angles, a Germanic tribe deriving its name from the Anglia peninsula, who settled during the 5th and 6th centuries.",
-      "image_url": "https://images.unsplash.com/photo-1598481732567-901732cd829f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80",
-      "id": 2,
-      "authorId": 9
+      "title": "Titanic",
+      "image_url": "https://images.unsplash.com/photo-1558431571-4a9f128e135f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80",
+      "description": "Titanic had departed from Southampton on 10 April 1912, then stopped at Cherbourg, France, and Queenstown (now Cobh), Ireland, before heading west towards New York.[9] On 14 April, four days into the crossing and about 375 miles (600 km) south of Newfoundland, she hit an iceberg at 11:40 pm ship's time. The collision caused the hull plates to buckle inwards along her starboard (right) side and laid five of her sixteen watertight compartments open to the sea; she had been designed to survive the flooding of up to four compartments. Some passengers and crew members were evacuated in lifeboats.",
+      "author": {
+        "id": 9,
+        "fullName": "Bradli kend"
+      },
+      "date": "2022-04-28T14:22:32.729Z",
+      "id": 2
     }
   ]
 }

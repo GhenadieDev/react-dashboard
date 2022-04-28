@@ -50,3 +50,12 @@ export const deletePost = async (post: Post) => {
     console.log("delete post error: ", error);
   }
 };
+
+export const getAllPosts = async () => {
+  try {
+    const result = await axios.get("http://localhost:4000/posts/");
+    return result;
+  } catch (error) {
+    console.log("get all posts error: ", error);
+  }
+};

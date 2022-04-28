@@ -18,10 +18,14 @@ export const CreatePost = () => {
   useEffect(() => {
     setPost((prevState) => ({
       ...prevState,
-      authorId: currentUser?.id,
+      author: {
+        ...prevState.author,
+        id: currentUser?.id,
+        fullName: currentUser?.name + " " + currentUser?.surname,
+      },
       date: dateTime,
     }));
-  }, [currentUser?.id]);
+  }, [currentUser?.id, currentUser?.name, currentUser?.surname]);
 
   const onChangeHandler: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement

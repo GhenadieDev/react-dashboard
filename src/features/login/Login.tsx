@@ -47,22 +47,24 @@ export const Login = () => {
 
   return (
     <div className={`${styles.page} _login`}>
-      <Form {...formObject}>
-        <FormHeader
-          title="Log In"
-          question="Don't have an account?"
-          location="/register"
-          linkText="Sign Up"
-        />
-        <LoginFields setUserData={setUserData} userData={userData} />
-        <Button
-          variant="primary"
-          disabled={formObject.disabledBtn}
-          onClick={clickHandler}
-        >
-          {formObject.submitBtnText}
-        </Button>
-      </Form>
+      <div className="form-wrapper">
+        <Form {...formObject}>
+          <FormHeader
+            title="Log In"
+            question="Don't have an account?"
+            location="/register"
+            linkText="Sign Up"
+          />
+          <LoginFields setUserData={setUserData} userData={userData} />
+          <Button
+            variant="primary"
+            disabled={formObject.disabledBtn}
+            onClick={clickHandler}
+          >
+            {formObject.submitBtnText}
+          </Button>
+        </Form>
+      </div>
       {logError ? (
         <p>
           {logError} <Link to="/register">Sign up</Link>

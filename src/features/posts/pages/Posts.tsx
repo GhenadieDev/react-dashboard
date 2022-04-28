@@ -1,8 +1,8 @@
 import { PostCard } from "../components/PostCard";
-import { Button, ConfirmationModal } from "components/index";
+import { Button, ConfirmationModal, Table } from "components/index";
 import { Post, User } from "types/interfaces";
 import { useContext, useEffect, useState } from "react";
-import { deletePost, getPersonalPosts } from "api/posts";
+import { deletePost, getAllPosts, getPersonalPosts } from "api/posts";
 import { UserProfileContext } from "types/contexts";
 import { Link } from "react-router-dom";
 
@@ -34,14 +34,20 @@ export const Posts = () => {
   };
 
   useEffect(() => {
-    getPersonalPosts(currentUser?.id).then((res: Post[]) => {
-      if (res.length > 0) {
-        res.forEach((post) => {
-          setPosts((prevState) => [...prevState, post]);
-        });
-      }
-    });
-  }, [currentUser?.id]);
+    if (currentUser?.role && currentUser.role === "operator") {
+      getPersonalPosts(currentUser?.id).then((res: Post[]) => {
+        if (res.length > 0) {
+          setPosts(res);
+        }
+      });
+    } else {
+      getAllPosts().then((res) => {
+        if (res?.status === 200) {
+          setPosts(res.data);
+        }
+      });
+    }
+  }, [currentUser?.id, currentUser?.role]);
 
   return (
     <div className={`${styles.page} posts`}>
@@ -60,32 +66,66 @@ export const Posts = () => {
           <Button variant="primary">Add Post</Button>
         </Link>
       </div>
-      <div className="postscards-wrapper">
-        {posts.length > 0
-          ? posts.map((post) => {
-              return (
-                <PostCard
-                  key={post.id}
-                  image_url={post.image_url}
-                  title={post.title}
-                  description={post.description}
-                  date={post.date}
-                  id={post.id}
-                >
-                  <Link to={`/home/posts/${post.id}/edit`} state={post}>
-                    <Button variant="primary">Edit</Button>
-                  </Link>
-                  <Button
-                    variant="danger"
-                    onClick={() => showConfirmationModal(post)}
+      {currentUser?.role && currentUser.role === "operator" ? (
+        <div className="postscards-wrapper">
+          {posts.length > 0
+            ? posts.map((post) => {
+                return (
+                  <PostCard
+                    key={post.id}
+                    image_url={post.image_url}
+                    title={post.title}
+                    description={post.description}
+                    date={post.date}
+                    id={post.id}
                   >
-                    Delete
-                  </Button>
-                </PostCard>
-              );
-            })
-          : null}
-      </div>
+                    <Link to={`/home/posts/${post.id}/edit`} state={post}>
+                      <Button variant="primary">Edit</Button>
+                    </Link>
+                    <Button
+                      variant="danger"
+                      onClick={() => showConfirmationModal(post)}
+                    >
+                      Delete
+                    </Button>
+                  </PostCard>
+                );
+              })
+            : null}
+        </div>
+      ) : (
+        <Table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Image URL</th>
+              <th>Created At</th>
+              <th>Author</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {posts.length > 0
+              ? posts.map((post) => {
+                  return (
+                    <tr key={post.id}>
+                      <td>{post.title}</td>
+                      <td>{post.image_url}</td>
+                      <td>{post.date}</td>
+                      <td>{post.author?.fullName}</td>
+                      <td>
+                        <div className="actions-btns-wrapper">
+                          <Button variant="primary">Edit</Button>
+                          <Button variant="danger">Delete</Button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
+              : null}
+          </tbody>
+        </Table>
+      )}
     </div>
   );
 };

@@ -3,4 +3,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    .form-wrapper {
+        width: 30%;
+    }
+
+    @media(max-width: 1090px) {
+        .form-wrapper {
+            width: 40%;
+        }
+    }
+
+    @media(max-width: 590px) {
+        .form-wrapper {
+            width: 70%;
+        }
+    }
 }

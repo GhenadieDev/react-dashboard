@@ -17,7 +17,10 @@ export interface Post {
   description?: string;
   image_url?: string;
   date?: typeof dateTime;
-  authorId?: string | number;
+  author?: {
+    id?: string | number;
+    fullName?: string;
+  };
   id?: number | string;
 }
 
