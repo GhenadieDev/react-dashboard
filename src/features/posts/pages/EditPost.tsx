@@ -21,7 +21,11 @@ export const EditPost = () => {
             description: res.data.description,
             image_url: res.data.image_url,
             id: res.data.id,
-            authorId: res.data.authorId,
+            author: {
+              ...prevState.author,
+              id: res.data.author.id,
+              fullName: res.data.author.fullName,
+            },
           }));
         }
       });

@@ -61,11 +61,13 @@ export const Posts = () => {
           </ConfirmationModalTitle>
         </ConfirmationModal>
       ) : null}
-      <div className="btn-wrapper">
-        <Link to="/home/posts/create">
-          <Button variant="primary">Add Post</Button>
-        </Link>
-      </div>
+      {currentUser?.role && currentUser.role === "operator" ? (
+        <div className="btn-wrapper">
+          <Link to="/home/posts/create">
+            <Button variant="primary">Add Post</Button>
+          </Link>
+        </div>
+      ) : null}
       {currentUser?.role && currentUser.role === "operator" ? (
         <div className="postscards-wrapper">
           {posts.length > 0
@@ -115,8 +117,15 @@ export const Posts = () => {
                       <td>{post.author?.fullName}</td>
                       <td>
                         <div className="actions-btns-wrapper">
-                          <Button variant="primary">Edit</Button>
-                          <Button variant="danger">Delete</Button>
+                          <Link to={`/home/posts/${post.id}/edit`} state={post}>
+                            <Button variant="primary">Edit</Button>
+                          </Link>
+                          <Button
+                            variant="danger"
+                            onClick={() => showConfirmationModal(post)}
+                          >
+                            Delete
+                          </Button>
                         </div>
                       </td>
                     </tr>

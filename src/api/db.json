@@ -34,37 +34,15 @@
       "id": 1
     },
     {
-      "title": "Titanic",
-      "image_url": "https://images.unsplash.com/photo-1558431571-4a9f128e135f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80",
-      "description": "Titanic had departed from Southampton on 10 April 1912, then stopped at Cherbourg, France, and Queenstown (now Cobh), Ireland, before heading west towards New York.[9] On 14 April, four days into the crossing and about 375 miles (600 km) south of Newfoundland, she hit an iceberg at 11:40 pm ship's time. The collision caused the hull plates to buckle inwards along her starboard (right) side and laid five of her sixteen watertight compartments open to the sea; she had been designed to survive the flooding of up to four compartments. Some passengers and crew members were evacuated in lifeboats.",
-      "author": {
-        "id": 9,
-        "fullName": "Bradli kend"
-      },
-      "date": "2022-04-28T14:22:32.729Z",
-      "id": 2
-    },
-    {
-      "title": "Third post",
-      "image_url": "https://images.unsplash.com/photo-1612525736240-3cb22fd26a32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "description": "just a random post",
-      "author": {
-        "id": 9,
-        "fullName": "Bradli kend"
-      },
       "date": "2022-04-28T15:13:01.057Z",
-      "id": 3
-    },
-    {
-      "title": "pewokpoewkgopkop",
-      "image_url": "https://images.unsplash.com/photo-1609763531868-2ecde328f07c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-      "description": "Public inquiries in Britain and the United States led to major improvements in maritime safety. One of the most important results of the inquiries was the establishment in 1914 of the International Convention for the Safety of Life at Sea (SOLAS)",
+      "title": "Third post",
+      "description": "just a random post. Late this post will be delete",
+      "image_url": "https://images.unsplash.com/photo-1612525736240-3cb22fd26a32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "id": 3,
       "author": {
         "id": 9,
         "fullName": "Bradli kend"
-      },
-      "date": "2022-04-28T15:51:05.104Z",
-      "id": 4
+      }
     }
   ]
 }
