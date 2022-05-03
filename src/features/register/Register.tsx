@@ -19,6 +19,7 @@ import { checkRegisterFields } from "utils/checkRegisterFields";
 
 import "../../styles/RegisterPage.scss";
 import styles from "../../styles/RootPages.module.scss";
+import { dateTime } from "types/date";
 
 export const Register = () => {
   const [formData, setFormData] = useState<User | null>({});
@@ -72,6 +73,8 @@ export const Register = () => {
     setFormData((prevState) => ({
       ...prevState,
       gender: selectRef.current?.value,
+      role: "operator",
+      createdAt: dateTime,
     }));
   }, []);
 

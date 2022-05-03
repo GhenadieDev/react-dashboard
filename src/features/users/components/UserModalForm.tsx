@@ -11,6 +11,7 @@ import {
 } from "components/index";
 
 import "styles/UserModalForm.scss";
+import { dateTime } from "types/date";
 
 interface UserModalFormProps {
   submitHandler?: (obj: User) => void;
@@ -55,6 +56,7 @@ export const UserModalForm = ({
       role: currentUser.role ? currentUser.role : roleRef.current?.value,
       password: data?.password,
       confirmedPassword: data?.confirmedPassword,
+      createdAt: dateTime,
       id: data?.id,
     };
 

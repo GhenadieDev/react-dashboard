@@ -10,6 +10,7 @@ export interface User {
   confirmedPassword?: string;
   role?: string;
   id?: string | number;
+  createdAt?: typeof dateTime;
 }
 
 export interface Post {
@@ -47,4 +48,14 @@ export interface PasswordValidation {
   lowercase?: string[];
   numbers?: string[];
   special?: string[];
+}
+
+export interface Month {
+  name?: string;
+  number?: string;
+}
+
+export interface ChartData {
+  name?: string;
+  users?: number;
 }

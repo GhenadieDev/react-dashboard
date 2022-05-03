@@ -41,3 +41,16 @@
     column-gap: 10px;
   }
 }
+
+.posts {
+    tbody {
+      tr {
+        &:hover {
+          cursor: pointer;
+          background-color: bisque;
+          transition: 0.3s ease-out;
+        }
+      }
+    }
+
+}

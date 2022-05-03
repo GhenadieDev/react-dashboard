@@ -2,47 +2,48 @@
   "users": [
     {
       "gender": "Masculin",
-      "name": "Jared",
-      "surname": "Bottler",
-      "email": "jared@gmail.com",
-      "password": "JaredB1980@",
-      "confirmedPassword": "JaredB1980@",
-      "role": "admin",
-      "id": 4
-    },
-    {
-      "name": "Bradli",
-      "surname": "kend",
-      "email": "adam@gmail.com",
-      "gender": "Masculin",
       "role": "operator",
-      "password": "JaredB1981@",
-      "confirmedPassword": "JaredB1981@",
-      "id": 9
-    }
-  ],
-  "posts": [
-    {
-      "title": "Mountain",
-      "image_url": "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80",
-      "description": "While not posing substantial technical climbing challenges on the standard route, Everest presents dangers such as altitude sickness, weather, and wind, as well as hazards from avalanches and the Khumbu Icefall. As of 2019, over 300 people have died on Everest,many of whose bodies remain on the mountain.",
-      "author": {
-        "id": 9,
-        "fullName": "Bradli kend"
-      },
-      "date": "2022-04-28T14:15:44.869Z",
+      "createdAt": "2022-05-03T10:59:16.167Z",
+      "name": "Vlad",
+      "surname": "Tipes",
+      "email": "vladimir@gmail.com",
+      "password": "UhvSlQsH$zKa",
+      "confirmedPassword": "UhvSlQsH$zKa",
       "id": 1
     },
     {
-      "date": "2022-04-28T15:13:01.057Z",
-      "title": "Third post",
-      "description": "just a random post. Late this post will be delete",
-      "image_url": "https://images.unsplash.com/photo-1612525736240-3cb22fd26a32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "id": 3,
-      "author": {
-        "id": 9,
-        "fullName": "Bradli kend"
-      }
+      "gender": "Masculin",
+      "role": "operator",
+      "createdAt": "2022-05-03T10:59:16.167Z",
+      "name": "Grisa",
+      "surname": "Boreanu",
+      "email": "grisa@mail.ru",
+      "password": "MrsQz5*KL0ya",
+      "confirmedPassword": "MrsQz5*KL0ya",
+      "id": 2
+    },
+    {
+      "gender": "Feminin",
+      "role": "operator",
+      "createdAt": "2022-05-03T10:59:16.167Z",
+      "name": "opoefkwpoekf",
+      "surname": "oeirjgoirj",
+      "email": "jora@mail.ru",
+      "password": "2ING?YJvoSH4",
+      "confirmedPassword": "2ING?YJvoSH4",
+      "id": 3
+    },
+    {
+      "gender": "Masculin",
+      "role": "operator",
+      "createdAt": "2022-06-03T10:59:16.167Z",
+      "name": "Dimitri",
+      "surname": "Andro",
+      "email": "vladimir22@gmail.com",
+      "password": "UhvSlQsH$zKs",
+      "confirmedPassword": "UhvSlQsH$zKs",
+      "id": 4
     }
-  ]
+  ],
+  "posts": []
 }

@@ -4,7 +4,7 @@ import { Post, User } from "types/interfaces";
 import { useContext, useEffect, useState } from "react";
 import { deletePost, getAllPosts, getPersonalPosts } from "api/posts";
 import { UserProfileContext } from "types/contexts";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "../../../styles/RootPages.module.scss";
 import "styles/Posts.scss";
@@ -16,6 +16,7 @@ export const Posts = () => {
   const [isConfirmationModalVisible, setConfirmationModalVisible] =
     useState(false);
   const [choosenPost, setChoosenPost] = useState<Post>({});
+  const navigate = useNavigate();
 
   const showConfirmationModal = (post: Post) => {
     setConfirmationModalVisible(true);
@@ -96,7 +97,7 @@ export const Posts = () => {
             : null}
         </div>
       ) : (
-        <Table>
+        <Table className="user-posts">
           <thead>
             <tr>
               <th>Title</th>
@@ -111,7 +112,12 @@ export const Posts = () => {
               ? posts.map((post) => {
                   return (
                     <tr key={post.id}>
-                      <td>{post.title}</td>
+                      <td
+                        onClick={() => navigate(`/home/posts/${post.id}`)}
+                        className="post-link"
+                      >
+                        {post.title}
+                      </td>
                       <td>{post.image_url}</td>
                       <td>{post.date}</td>
                       <td>{post.author?.fullName}</td>

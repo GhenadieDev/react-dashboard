@@ -1,1 +1,1 @@
-export let dateTime = new Date();
+export const dateTime: Date = new Date();
