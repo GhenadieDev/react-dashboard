@@ -23,11 +23,11 @@ export const Chart = ({ users, posts }: ChartProps) => {
   const [data, setData] = useState<ChartData[]>([]);
 
   const setDataCall = (obj: ChartData) => {
-    console.log("chart data: ", obj);
     setData((prevState) => [...prevState, obj]);
   };
 
   useEffect(() => {
+    //console.log("users: ", users);
     if (users && listOfMonths) {
       groupUsersByMonth(users, listOfMonths, setDataCall);
     }
@@ -64,7 +64,7 @@ export const Chart = ({ users, posts }: ChartProps) => {
               scale="point"
               padding={{ left: 10, right: 10 }}
             />
-            <YAxis />
+            <YAxis type="number" domain={[0, "dataMax + 10"]} />
             <Tooltip />
             <Legend />
             <CartesianGrid strokeDasharray="3 3" />
