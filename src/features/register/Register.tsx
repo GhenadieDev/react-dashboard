@@ -20,6 +20,7 @@ import { checkRegisterFields } from "utils/checkRegisterFields";
 import "../../styles/RegisterPage.scss";
 import styles from "../../styles/RootPages.module.scss";
 import { dateTime } from "types/date";
+import { AufContainer } from "features/auf_container/AufContainer";
 
 export const Register = () => {
   const [formData, setFormData] = useState<User | null>({});
@@ -115,7 +116,7 @@ export const Register = () => {
   };
 
   return (
-    <div className={`${styles.page} _register`}>
+    <AufContainer className="register">
       <UserContext.Provider value={formData}>
         <ErrorContext.Provider value={errors}>
           {errors?.password?.length ? <ErrorList /> : null}
@@ -146,6 +147,6 @@ export const Register = () => {
           ) : null}
         </ErrorContext.Provider>
       </UserContext.Provider>
-    </div>
+    </AufContainer>
   );
 };

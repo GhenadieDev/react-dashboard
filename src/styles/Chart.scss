@@ -50,11 +50,10 @@ $box-style: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
   }
 
   .statistics {
-    .user-chart {
-      overflow-X: auto;
-      overflow-y: hidden;
-      width: fit-content;
-    }
+    margin-top: 50px;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
   }
 }
 
@@ -62,5 +61,11 @@ $box-style: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
   .totals {
     flex-direction: column;
     row-gap: 20px;
+  }
+}
+
+@media(max-width: 956px) {
+  .statistics {
+    flex-direction: column;
   }
 }

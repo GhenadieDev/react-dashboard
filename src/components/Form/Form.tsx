@@ -1,5 +1,5 @@
-import { InputRefs, UserRegError } from "../types/interfaces";
-import "../styles/Form.scss";
+import { InputRefs, UserRegError } from "../../types/interfaces";
+import "styles/Form.scss";
 import React from "react";
 
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {

@@ -55,7 +55,12 @@ export interface Month {
   number?: string;
 }
 
-export interface ChartData {
+export interface ChartUserData {
   name?: string;
   users?: number;
+}
+
+export interface ChartPostData {
+  name?: string;
+  posts?: number;
 }

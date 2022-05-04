@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../styles/FormHeader.scss";
+import "styles/FormHeader.scss";
 
 interface FormHeaderProps {
   title?: string;

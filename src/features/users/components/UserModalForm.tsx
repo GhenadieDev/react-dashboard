@@ -73,23 +73,20 @@ export const UserModalForm = ({
         <ModalHeader title={title} />
         <ModalContent>
           <Input
-            {...(data?.name !== undefined
-              ? { defaultValue: data?.name }
-              : { placeholder: "Name" })}
+            placeholder="Name"
+            defaultValue={data?.name}
             onChange={onChangeHandler}
             name="name"
           />
           <Input
-            {...(data?.surname !== undefined
-              ? { defaultValue: data?.surname }
-              : { placeholder: "Surname" })}
+            placeholder="Surname"
+            defaultValue={data?.surname}
             onChange={onChangeHandler}
             name="surname"
           />
           <Input
-            {...(data?.email !== undefined
-              ? { defaultValue: data?.email }
-              : { placeholder: "Email" })}
+            placeholder="Email"
+            defaultValue={data?.email}
             onChange={onChangeHandler}
             name="email"
           />

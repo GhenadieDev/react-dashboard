@@ -1,7 +1,7 @@
 import { useRef, MouseEvent, SetStateAction, Dispatch } from "react";
-import { Button } from "../components/index";
+import { Button } from "../index";
 
-import "../styles/ConfirmationModal.scss";
+import "styles/ConfirmationModal.scss";
 
 export interface ConfirmationModalProps {
   setOpen: Dispatch<SetStateAction<boolean>>;

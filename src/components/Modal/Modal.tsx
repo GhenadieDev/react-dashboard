@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../styles/Modal.scss";
+import "styles/Modal.scss";
 
 interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   ref?: React.Ref<HTMLDivElement>;

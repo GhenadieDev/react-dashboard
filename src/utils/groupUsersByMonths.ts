@@ -1,12 +1,13 @@
-import { ChartData, Month, User } from "types/interfaces";
+import React, { SetStateAction } from "react";
+import { ChartUserData, Month, User } from "types/interfaces";
 
 export const groupUsersByMonth = (
   users: User[],
   listOfMonths: Month[],
-  setDataCall: (obj: ChartData) => void
+  setData: React.Dispatch<SetStateAction<ChartUserData[]>>
 ) => {
-  listOfMonths.forEach((month) => {
-    const newObj: ChartData = {
+  listOfMonths.forEach((month, idx) => {
+    const newObj = {
       name: month.name,
       users: users.filter(
         (user) =>
@@ -19,6 +20,6 @@ export const groupUsersByMonth = (
       ).length,
     };
 
-    setDataCall(newObj);
+    setData((prevState) => [...prevState, newObj]);
   });
 };

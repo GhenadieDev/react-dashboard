@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import styles from "../../../styles/RootPages.module.scss";
 import "styles/Posts.scss";
-import { ConfirmationModalTitle } from "components/ConfirmationModalTitle";
+import { ConfirmationModalTitle } from "components/ConfirmationModal/ConfirmationModalTitle";
 
 export const Posts = () => {
   const currentUser = useContext<User | null>(UserProfileContext);

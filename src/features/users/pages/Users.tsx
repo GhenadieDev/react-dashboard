@@ -1,5 +1,5 @@
 import { createUser, deleteUser, editUser, getAllUsers } from "api/users";
-import { ConfirmationModalTitle } from "components/ConfirmationModalTitle";
+import { ConfirmationModalTitle } from "components/ConfirmationModal/ConfirmationModalTitle";
 import { useContext, useEffect, useState } from "react";
 import { UserProfileContext } from "types/contexts";
 import { User } from "types/interfaces";
