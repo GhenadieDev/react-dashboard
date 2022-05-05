@@ -64,3 +64,9 @@ export interface ChartPostData {
   name?: string;
   posts?: number;
 }
+
+export interface AddUserError {
+  nameField?: string | null;
+  surnameField?: string | null;
+  email?: RegExpMatchArray | null | undefined;
+}

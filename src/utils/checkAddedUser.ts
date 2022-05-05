@@ -1,41 +1,37 @@
-import { User } from "types/interfaces";
+import { AddUserError, User } from "types/interfaces";
 import { emailRegex } from "types/regex";
 
-interface ErrorsObject {
-  fields: string;
-  email: RegExpMatchArray | null | undefined;
-}
-
-export const checkAddedUser = (
-  addedUser: Pick<User, "name" | "surname" | "email">
-): boolean => {
-  const errorsObject: ErrorsObject = {
-    fields: "",
-    email: [],
-  };
-
-  Object.values(addedUser).forEach((value: string) => {
-    if (value === " ") {
-      errorsObject.fields = "Fields can not be empty";
-    } else {
-      errorsObject.fields = "";
-    }
-  });
-
-  errorsObject.email = addedUser.email?.match(emailRegex);
+export const checkAddedUser = (addedUser: User): AddUserError | null => {
+  let nameField: string = "";
+  let surnameField: string = "";
+  const email: RegExpMatchArray | null | undefined =
+    addedUser.email?.match(emailRegex);
 
   if (!addedUser.name || !addedUser.surname || !addedUser.email) {
-    errorsObject.fields = "Fields is required";
-  } else {
-    errorsObject.fields = "";
+    if (!addedUser.name) {
+      nameField = "Fields is required";
+    }
+    if (!addedUser.surname) {
+      surnameField = "Fields is required";
+    }
   }
 
-  console.log("errors object: ", errorsObject);
-  console.log("validatedEmail: ", errorsObject.email?.length);
-
-  if (!errorsObject.fields && errorsObject?.email) {
-    console.log("true");
-    return true;
+  if (addedUser.name === " " || addedUser.surname === " ") {
+    if (addedUser.name === " ") {
+      nameField = "Fields can not be empty";
+    }
+    if (addedUser.surname === " ") {
+      surnameField = "Fields can not be empty";
+    }
   }
-  return false;
+
+  if (nameField.length === 0 && surnameField.length === 0 && email !== null) {
+    return null;
+  }
+
+  return {
+    nameField,
+    surnameField,
+    email,
+  };
 };

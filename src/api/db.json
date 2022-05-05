@@ -12,26 +12,15 @@
       "id": 1
     },
     {
-      "gender": "Masculin",
-      "role": "operator",
-      "createdAt": "2022-05-03T10:59:16.167Z",
-      "name": "Grisa",
+      "name": "Vadim",
       "surname": "Boreanu",
       "email": "grisa@mail.ru",
+      "gender": "Masculin",
+      "role": "operator",
       "password": "MrsQz5*KL0ya",
       "confirmedPassword": "MrsQz5*KL0ya",
-      "id": 2
-    },
-    {
-      "gender": "Feminin",
-      "role": "operator",
       "createdAt": "2022-05-03T10:59:16.167Z",
-      "name": "opoefkwpoekf",
-      "surname": "oeirjgoirj",
-      "email": "jora@mail.ru",
-      "password": "2ING?YJvoSH4",
-      "confirmedPassword": "2ING?YJvoSH4",
-      "id": 3
+      "id": 2
     },
     {
       "gender": "Masculin",
@@ -43,6 +32,15 @@
       "password": "UhvSlQsH$zKs",
       "confirmedPassword": "UhvSlQsH$zKs",
       "id": 4
+    },
+    {
+      "name": "peookrgpk",
+      "surname": "pkepokpoerk",
+      "email": "koerrkgpoeok@mail.ru",
+      "gender": "Masculin",
+      "role": "operator",
+      "createdAt": "2022-05-05T13:44:04.814Z",
+      "id": 6
     }
   ],
   "posts": [
@@ -67,6 +65,17 @@
       },
       "date": "2022-05-04T10:00:06.247Z",
       "id": 2
+    },
+    {
+      "title": "Mathematics",
+      "image_url": "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+      "description": "Most of mathematical activity consists of discovering and proving (by pure reasoning) properties of abstract objects. These objects are either abstractions from nature (such as natural numbers or lines), or (in modern mathematics) abstract entities of which certain properties, called axioms, are stipulated. A proof consists of a succession of applications of some deductive rules to already known results, including previously proved theorems, axioms and (in case of abstraction from nature) some basic properties that are considered as true starting points of the theory under consideration. The result of a proof is called a theorem.",
+      "author": {
+        "id": 1,
+        "fullName": "Vlad Tipes"
+      },
+      "date": "2022-05-05T11:06:46.627Z",
+      "id": 3
     }
   ]
 }

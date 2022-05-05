@@ -1,4 +1,4 @@
-import { createUser, deleteUser, getAllUsers } from "api/users";
+import { createUser, deleteUser, editUser, getAllUsers } from "api/users";
 import { useContext, useEffect, useState } from "react";
 import { UserProfileContext } from "types/contexts";
 import { User } from "types/interfaces";
@@ -7,10 +7,6 @@ import {
   ConfirmationModal,
   Table,
   ConfirmationModalTitle,
-  Modal,
-  ModalTitle,
-  ModalContent,
-  ModalActions,
 } from "components/index";
 
 import { UserModalForm } from "../components/UserModalForm";
@@ -24,28 +20,6 @@ export const Users = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [choosenUser, setChoosenUser] = useState<User>({});
   const currentUser = useContext<User | null>(UserProfileContext);
-
-  /*const submitHandler = async () => {
-    const obj: User = {
-      name: choosenUser.name,
-      surname: choosenUser.surname,
-      email: choosenUser.email,
-      gender: choosenUser.gender
-        ? choosenUser.gender
-        : genderRef.current?.value,
-      role: choosenUser.role ? choosenUser.role : roleRef.current?.value,
-      password: choosenUser.password,
-      confirmedPassword: choosenUser.confirmedPassword,
-      createdAt: dateTime,
-      id: choosenUser.id,
-    };
-
-    await editUser(obj);
-    const data = await getAllUsers();
-    setUsers(data?.data);
-
-    setChoosenUser({});
-  };*/
 
   useEffect(() => {
     //se executa numai o data
@@ -72,10 +46,20 @@ export const Users = () => {
     }
   };
 
-  const addUsers = async (obj: User) => {
-    await createUser(obj);
-    const data = await getAllUsers();
-    setUsers(data?.data);
+  const addUsers = (obj: User) => {
+    createUser(obj).then(() => {
+      getAllUsers().then((res) => {
+        setUsers(res?.data);
+      });
+    });
+  };
+
+  const editUsers = (obj: User) => {
+    editUser(obj).then(() => {
+      getAllUsers().then((res) => {
+        setUsers(res?.data);
+      });
+    });
   };
 
   return (
@@ -86,14 +70,17 @@ export const Users = () => {
           clickHandler={clickHandlerDelete}
         >
           <ConfirmationModalTitle>
-            You're gonna delete this user. Are you sure?
+            {`You're gonna delete user: ${choosenUser.name} ${choosenUser.surname}. Are you sure?`}
           </ConfirmationModalTitle>
         </ConfirmationModal>
       )}
       <UserModalForm
-        data={choosenUser}
+        userData={Object.values(choosenUser).length > 0 ? choosenUser : null}
+        title={Object.values(choosenUser).length > 0 ? "Edit User" : "Add User"}
         open={isModalVisible}
-        setOpen={setIsModalVisible}
+        onClose={setIsModalVisible}
+        setUserData={setChoosenUser}
+        callback={Object.values(choosenUser).length > 0 ? editUsers : addUsers}
       />
 
       <div className="btn-wrapper">
