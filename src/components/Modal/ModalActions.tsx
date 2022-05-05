@@ -1,5 +1,5 @@
 import "styles/ModalFooter.scss";
 
-export const ModalFooter: React.FC = ({ children }) => {
+export const ModalActions: React.FC = ({ children }) => {
   return <div className="modal-footer">{children}</div>;
 };

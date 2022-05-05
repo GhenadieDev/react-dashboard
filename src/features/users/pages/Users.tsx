@@ -1,12 +1,19 @@
-import { createUser, deleteUser, editUser, getAllUsers } from "api/users";
-import { ConfirmationModalTitle } from "components/ConfirmationModal/ConfirmationModalTitle";
+import { createUser, deleteUser, getAllUsers } from "api/users";
 import { useContext, useEffect, useState } from "react";
 import { UserProfileContext } from "types/contexts";
 import { User } from "types/interfaces";
-import { Button, ConfirmationModal, Table } from "components/index";
+import {
+  Button,
+  ConfirmationModal,
+  Table,
+  ConfirmationModalTitle,
+  Modal,
+  ModalTitle,
+  ModalContent,
+  ModalActions,
+} from "components/index";
 
 import { UserModalForm } from "../components/UserModalForm";
-
 import styles from "styles/RootPages.module.scss";
 import "styles/UsersPage.scss";
 
@@ -14,10 +21,31 @@ export const Users = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [isConfirmationModalVisible, setConfirmationModalVisible] =
     useState(false);
-  const [editButtonIsClicked, setEditButtonIsClicked] = useState(false);
-  const [addButtonIsClicked, setAddButtonIsClicked] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [choosenUser, setChoosenUser] = useState<User>({});
   const currentUser = useContext<User | null>(UserProfileContext);
+
+  /*const submitHandler = async () => {
+    const obj: User = {
+      name: choosenUser.name,
+      surname: choosenUser.surname,
+      email: choosenUser.email,
+      gender: choosenUser.gender
+        ? choosenUser.gender
+        : genderRef.current?.value,
+      role: choosenUser.role ? choosenUser.role : roleRef.current?.value,
+      password: choosenUser.password,
+      confirmedPassword: choosenUser.confirmedPassword,
+      createdAt: dateTime,
+      id: choosenUser.id,
+    };
+
+    await editUser(obj);
+    const data = await getAllUsers();
+    setUsers(data?.data);
+
+    setChoosenUser({});
+  };*/
 
   useEffect(() => {
     //se executa numai o data
@@ -44,44 +72,10 @@ export const Users = () => {
     }
   };
 
-  const showModal = () => {
-    setConfirmationModalVisible(true);
-  };
-
-  const selectUser = (user: User) => {
-    setChoosenUser(user);
-  };
-
-  const showUserModal: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    switch (e.currentTarget.name) {
-      case "edit-button":
-        setEditButtonIsClicked(true);
-        break;
-      case "add-button":
-        setAddButtonIsClicked(true);
-        break;
-      default:
-        return;
-    }
-  };
-
-  const editUsers = async (obj: User) => {
-    await editUser(obj);
-    const data = await getAllUsers();
-    setUsers(data?.data);
-    setAddButtonIsClicked(false);
-    setEditButtonIsClicked(false);
-  };
-
   const addUsers = async (obj: User) => {
     await createUser(obj);
     const data = await getAllUsers();
     setUsers(data?.data);
-  };
-
-  const handleCloseUser = () => {
-    setAddButtonIsClicked(false);
-    setEditButtonIsClicked(false);
   };
 
   return (
@@ -96,22 +90,18 @@ export const Users = () => {
           </ConfirmationModalTitle>
         </ConfirmationModal>
       )}
-      {editButtonIsClicked ? (
-        <UserModalForm
-          title="Edit User"
-          data={choosenUser}
-          submitHandler={editUsers}
-          handleClose={handleCloseUser}
-        />
-      ) : addButtonIsClicked ? (
-        <UserModalForm
-          handleClose={handleCloseUser}
-          submitHandler={addUsers}
-          title="Add User"
-        />
-      ) : null}
+      <UserModalForm
+        data={choosenUser}
+        open={isModalVisible}
+        setOpen={setIsModalVisible}
+      />
+
       <div className="btn-wrapper">
-        <Button variant="primary" onClick={showUserModal} name="add-button">
+        <Button
+          variant="primary"
+          name="add-button"
+          onClick={() => setIsModalVisible(true)}
+        >
           Add new User
         </Button>
       </div>
@@ -131,7 +121,7 @@ export const Users = () => {
                 .filter((user: User) => user.id !== currentUser?.id)
                 .map((user: User) => {
                   return (
-                    <tr key={user.id} onClick={() => selectUser(user)}>
+                    <tr key={user.id} onClick={() => setChoosenUser(user)}>
                       <td>{user.name}</td>
                       <td>{user.surname}</td>
                       <td>{user.email}</td>
@@ -139,14 +129,17 @@ export const Users = () => {
                       <td>
                         <div className="action-btns-wrapper">
                           <Button
-                            onClick={showUserModal}
+                            onClick={() => setIsModalVisible(true)}
                             name="edit-button"
                             variant="primary"
                           >
                             Edit
                           </Button>
 
-                          <Button onClick={showModal} variant="danger">
+                          <Button
+                            onClick={() => setConfirmationModalVisible(true)}
+                            variant="danger"
+                          >
                             Delete
                           </Button>
                         </div>
