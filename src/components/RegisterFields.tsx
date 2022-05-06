@@ -21,13 +21,13 @@ interface Props {
   refsObject?: InputRefs;
 }
 
-export const RegisterFields: React.FC<Props> = ({
+export const RegisterFields = ({
   setFormData,
   setCheckboxIsChecked,
   checkboxIsChecked,
   reference,
   refsObject,
-}) => {
+}: Props) => {
   const context = useContext(ErrorContext);
 
   const onChangeHandler = (

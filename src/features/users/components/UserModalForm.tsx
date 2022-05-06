@@ -10,9 +10,10 @@ import {
 import { SetStateAction, useRef, useState } from "react";
 import { AddUserError, User } from "types/interfaces";
 
-import "styles/UserModalForm.scss";
 import { dateTime } from "types/date";
 import { checkAddedUser } from "utils/checkAddedUser";
+
+import "styles/UserModalForm.scss";
 
 interface UserModalFormProps {
   userData: User | null;

@@ -20,28 +20,26 @@ export const Login = () => {
   const [logError, setLogError] = useState<string>("");
   const navigate = useNavigate();
 
-  const clickHandler: React.MouseEventHandler = (e) => {
+  const clickHandler: React.MouseEventHandler = async (e) => {
     e.preventDefault();
+
     if (Object.keys(userData).length !== 0) {
-      userApi.logUser(userData).then((res: any) => {
-        if (res.status === 200) {
-          if (res.data.length > 0) {
-            setLogError("");
-            const user = res.data.find((element: any) => element.id);
-            if (user) {
-              window.localStorage.setItem("userId", JSON.stringify(user.id));
-              setUserData((prevState) => ({
-                ...prevState,
-                email: "",
-                password: "",
-              }));
-              navigate("/home");
-            }
-          } else {
-            setLogError("Email or password is invalid");
-          }
-        }
-      });
+      const result = await userApi.logUser(userData);
+      if (result?.status === 200 && result.data.length > 0) {
+        setLogError("");
+        window.localStorage.setItem(
+          "userId",
+          JSON.stringify(result.data[0].id)
+        );
+        setUserData((prevState) => ({
+          ...prevState,
+          email: "",
+          password: "",
+        }));
+        navigate("/home");
+      } else {
+        setLogError("Email or password is invalid");
+      }
     }
   };
 

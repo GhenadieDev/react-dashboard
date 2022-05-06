@@ -23,7 +23,6 @@ export const Users = () => {
   const currentUser = useContext<User | null>(UserProfileContext);
 
   useEffect(() => {
-    //se executa numai o data
     userApi.getAllUsers().then((res) => {
       res?.data.forEach((user: any) => {
         setUsers((prevState) => [...prevState, user]);
@@ -31,36 +30,28 @@ export const Users = () => {
     });
   }, []);
 
-  const clickHandlerDelete = () => {
+  const clickHandlerDelete = async () => {
     if (choosenUser !== null) {
-      const result = users.filter((user) => user.id !== choosenUser.id); //exclud utilizatorul ales din state
-      setUsers(result); //setez state-ul cu toti utilizatorii in afara de cel ales
-      userApi.deleteUser(choosenUser.id).then((res) => {
-        //se face un request de delete dupa id-ul utilizatorului
-        if (res?.status === 200) {
-          userApi.getAllUsers().then((res) => {
-            setUsers(res?.data);
-          });
-          setConfirmationModalVisible(false);
-        }
-      });
+      setUsers(users.filter((user) => user.id !== choosenUser.id));
+      const result = await userApi.deleteUser(choosenUser.id);
+      if (result?.status === 200) {
+        const allUsers = await userApi.getAllUsers();
+        setUsers(allUsers?.data);
+        setConfirmationModalVisible(false);
+      }
     }
   };
 
-  const addUsers = (obj: User) => {
-    userApi.createUser(obj).then(() => {
-      userApi.getAllUsers().then((res) => {
-        setUsers(res?.data);
-      });
-    });
+  const addUsers = async (obj: User) => {
+    await userApi.createUser(obj);
+    const allUsers = await userApi.getAllUsers();
+    setUsers(allUsers?.data);
   };
 
-  const editUsers = (obj: User) => {
-    userApi.editUser(obj).then(() => {
-      userApi.getAllUsers().then((res) => {
-        setUsers(res?.data);
-      });
-    });
+  const editUsers = async (obj: User) => {
+    await userApi.editUser(obj);
+    const allUsers = await userApi.getAllUsers();
+    setUsers(allUsers?.data);
   };
 
   return (

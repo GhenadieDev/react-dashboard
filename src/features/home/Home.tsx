@@ -16,16 +16,16 @@ export const Home = () => {
     } else {
       userApi
         .getUserById(localStorage.getItem("userId"))
-        .then((res: any) => {
-          if (res.status === 200) {
+        .then((res) => {
+          if (res?.status === 200) {
             setProfile((prevState) => ({
               ...prevState,
-              name: res.data.name,
-              surname: res.data.surname,
-              email: res.data.email,
-              gender: res.data.gender,
-              id: res.data.id,
-              role: res.data.role,
+              name: res.data?.name,
+              surname: res.data?.surname,
+              email: res.data?.email,
+              gender: res.data?.gender,
+              id: res.data?.id,
+              role: res.data?.role,
             }));
           }
         })

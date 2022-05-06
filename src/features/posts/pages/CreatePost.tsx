@@ -2,10 +2,10 @@ import { postApi } from "api/posts";
 import { Button, Form, FormHeader, Input, TextArea } from "components/index";
 import React, { useContext, useEffect, useState } from "react";
 
-import "styles/CreatePost.scss";
 import { UserProfileContext } from "types/contexts";
 import { dateTime } from "types/date";
 import { Post } from "types/interfaces";
+import "styles/CreatePost.scss";
 
 export const CreatePost = () => {
   const currentUser = useContext(UserProfileContext);

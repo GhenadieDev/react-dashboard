@@ -22,10 +22,12 @@ export const userApi = {
     }
   },
 
-  getUserById: async (userId: any) => {
+  getUserById: async (userId: number | string | null) => {
     if (userId) {
       try {
-        const result = await axios.get(`http://localhost:4000/users/${userId}`);
+        const result = await axios.get<User | null | undefined>(
+          `http://localhost:4000/users/${userId}`
+        );
         return result;
       } catch (error) {
         return Promise.reject(error);

@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { InputRefs, User, UserRegError } from "../../types/interfaces";
+import { InputRefs, User, UserRegError } from "types/interfaces";
+import { UserContext, ErrorContext } from "types/contexts";
+import { dateTime } from "types/date";
 
-import { UserContext } from "../../types/contexts";
-import { ErrorContext } from "../../types/contexts";
 import {
   Form,
   RegisterFields,
@@ -12,11 +12,10 @@ import {
   ErrorList,
   Button,
   FormHeader,
-} from "../../components/index";
+} from "components/index";
 
 import { userApi } from "api/users";
 import { checkRegisterFields } from "utils/checkRegisterFields";
-import { dateTime } from "types/date";
 import { AufContainer } from "features/auf_container/AufContainer";
 
 import "styles/RegisterPage.scss";
@@ -31,9 +30,9 @@ export const Register = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const [errors, setErrors] = useState<UserRegError>({});
-  const [submitBtnIsDisabled, setSubmitBtn] = useState<boolean>(true);
+  const [submitBtnIsDisabled, setSubmitBtn] = useState(true);
   const [fieldErrorIsDisplay, setFieldError] = useState(false);
-  const [regIsSucced, setIsSucced] = useState<boolean>(false);
+  const [regIsSucced, setIsSucced] = useState(false);
 
   const refsObject: InputRefs = {
     nameRef,
@@ -97,7 +96,7 @@ export const Register = () => {
     setErrors(result);
 
     const errors = Object.values(result).filter(
-      (el) => el !== "" && el.length !== 0 && el !== true
+      (error) => error !== "" && error.length !== 0 && error !== true
     );
 
     if (errors.length === 0) {
@@ -120,25 +119,27 @@ export const Register = () => {
         <ErrorContext.Provider value={errors}>
           {errors?.password?.length ? <ErrorList /> : null}
           {fieldErrorIsDisplay ? <InputError /> : null}
-          <Form>
-            <FormHeader title="Sign Up" />
-            <RegisterFields
-              reference={selectRef}
-              setFormData={setFormData}
-              setCheckboxIsChecked={setCheckboxIsChecked}
-              checkboxIsChecked={checkboxIsChecked}
-              refsObject={refsObject}
-            />
-            <div className="button-wrapper">
-              <Button
-                variant="primary"
-                disabled={formObject.formBottom?.disabledBtn}
-                onClick={submitHandler}
-              >
-                {formObject.formBottom?.submitBtnText}
-              </Button>
-            </div>
-          </Form>
+          <div className="form-wrapper">
+            <Form>
+              <FormHeader title="Sign Up" />
+              <RegisterFields
+                reference={selectRef}
+                setFormData={setFormData}
+                setCheckboxIsChecked={setCheckboxIsChecked}
+                checkboxIsChecked={checkboxIsChecked}
+                refsObject={refsObject}
+              />
+              <div className="button-wrapper">
+                <Button
+                  variant="primary"
+                  disabled={formObject.formBottom?.disabledBtn}
+                  onClick={submitHandler}
+                >
+                  {formObject.formBottom?.submitBtnText}
+                </Button>
+              </div>
+            </Form>
+          </div>
           {regIsSucced ? (
             <p>
               Succes, you can <Link to="/login">login</Link> now

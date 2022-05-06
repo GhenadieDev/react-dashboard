@@ -12,17 +12,6 @@
       "id": 1
     },
     {
-      "name": "Vadim",
-      "surname": "Boreanu",
-      "email": "grisa@mail.ru",
-      "gender": "Masculin",
-      "role": "operator",
-      "password": "MrsQz5*KL0ya",
-      "confirmedPassword": "MrsQz5*KL0ya",
-      "createdAt": "2022-05-03T10:59:16.167Z",
-      "id": 2
-    },
-    {
       "gender": "Masculin",
       "role": "admin",
       "createdAt": "2022-06-03T10:59:16.167Z",
