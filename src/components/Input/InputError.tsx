@@ -1,6 +1,6 @@
-import "../styles/InputError.scss";
+import "styles/Input/InputError.scss";
 import { useContext } from "react";
-import { ErrorContext } from "../types/contexts";
+import { ErrorContext } from "types/contexts";
 
 export const InputError = () => {
   const context = useContext(ErrorContext);

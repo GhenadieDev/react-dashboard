@@ -1,10 +1,10 @@
-import { getUserById } from "api/users";
+import { userApi } from "api/users";
 import { Layout } from "components";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserProfileContext } from "types/contexts";
 import { User } from "types/interfaces";
-import styles from "../../styles/RootPages.module.scss";
+import { AufContainer } from "features/auf_container/AufContainer";
 
 export const Home = () => {
   const [profile, setProfile] = useState<User>({});
@@ -14,7 +14,8 @@ export const Home = () => {
     if (!localStorage.getItem("userId")) {
       navigate("/login");
     } else {
-      getUserById(localStorage.getItem("userId"))
+      userApi
+        .getUserById(localStorage.getItem("userId"))
         .then((res: any) => {
           if (res.status === 200) {
             setProfile((prevState) => ({
@@ -35,10 +36,10 @@ export const Home = () => {
   }, [navigate]);
 
   return (
-    <div className={styles.page}>
+    <AufContainer>
       <UserProfileContext.Provider value={profile}>
         <Layout />
       </UserProfileContext.Provider>
-    </div>
+    </AufContainer>
   );
 };

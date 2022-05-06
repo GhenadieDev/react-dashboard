@@ -1,0 +1,11 @@
+.select-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-top: 20px;
+
+  &__title {
+    width: 30%;
+  }
+
+}

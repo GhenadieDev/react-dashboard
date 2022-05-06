@@ -5,20 +5,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
-  .form-wrapper {
-    width: 70%;
-  }
+.form-wrapper {
+  width: 70%;
+}
 
-  .desc-wrapper {
-    height: 250px;
-    padding-bottom: 20px;
-  }
+.desc-wrapper {
+  height: 250px;
+  padding-bottom: 20px;
+}
 
-  .btns-wrapper {
-    display: flex;
-    width: 50%;
-    margin: 0 auto;
-    column-gap: 10px;
-  }
+.btns-wrapper {
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+  column-gap: 10px;
 }

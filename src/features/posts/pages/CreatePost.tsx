@@ -1,4 +1,4 @@
-import { createPost } from "api/posts";
+import { postApi } from "api/posts";
 import { Button, Form, FormHeader, Input, TextArea } from "components/index";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -38,7 +38,7 @@ export const CreatePost = () => {
 
   const submitHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    createPost(post).then((res) => {
+    postApi.createPost(post).then((res) => {
       if (res?.status === 201) {
         setPost((prevState) => ({
           ...prevState,

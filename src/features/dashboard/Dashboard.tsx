@@ -1,5 +1,5 @@
-import { getAllUsers } from "api/users";
-import { getAllPosts } from "api/posts";
+import { userApi } from "api/users";
+import { postApi } from "api/posts";
 import { Chart } from "components/index";
 import { useState, useEffect } from "react";
 import { User, Post, ChartUserData, ChartPostData } from "types/interfaces";
@@ -7,7 +7,6 @@ import { User, Post, ChartUserData, ChartPostData } from "types/interfaces";
 import { groupUsersByMonth } from "utils/groupUsersByMonths";
 import { listOfMonths } from "types/constants";
 
-import "../../styles/Dashboard.scss";
 import { groupPostsByMonths } from "utils/groupPostsByMonths";
 
 export const Dashboard = () => {
@@ -17,7 +16,7 @@ export const Dashboard = () => {
   const [chartPostData, setChartPostData] = useState<ChartPostData[]>([]);
 
   useEffect(() => {
-    getAllUsers().then((res) => {
+    userApi.getAllUsers().then((res) => {
       if (res) {
         res.data.forEach((user: User) => {
           setAllUsers((prevState) => [...prevState, user]);
@@ -39,7 +38,7 @@ export const Dashboard = () => {
   }, [allPosts]);
 
   useEffect(() => {
-    getAllPosts().then((res) => {
+    postApi.getAllPosts().then((res) => {
       if (res) {
         res.data.forEach((post: Post) => {
           setAllPosts((prevState) => [...prevState, post]);
@@ -49,7 +48,7 @@ export const Dashboard = () => {
   }, []);
 
   return (
-    <div className="_dashboard">
+    <div className="dashboard">
       <Chart
         users={allUsers}
         posts={allPosts}

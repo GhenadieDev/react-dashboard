@@ -31,7 +31,11 @@ export const UserModalForm = ({
   setUserData,
   callback,
 }: UserModalFormProps) => {
-  const [currentData, setCurrentData] = useState<User>({});
+  const [currentData, setCurrentData] = useState<User>({
+    name: "",
+    surname: "",
+    email: "",
+  });
   const [validateErrors, setValidateErrors] = useState<AddUserError>({});
   const genderRef = useRef<HTMLSelectElement>(null);
   const roleRef = useRef<HTMLSelectElement>(null);
@@ -70,9 +74,15 @@ export const UserModalForm = ({
       }));
     } else {
       setValidateErrors({});
+      callback(obj);
+      setCurrentData((prevState) => ({
+        ...prevState,
+        name: "",
+        surname: "",
+        email: "",
+      }));
+      setUserData({});
     }
-    /*callback(obj);
-    setData({});*/
   };
 
   const handleClose = () => {
@@ -86,12 +96,12 @@ export const UserModalForm = ({
 
   return (
     <div className="user-modal-form">
-      <Modal open={open} onClose={onClose} setUserData={setUserData}>
+      <Modal open={open} setOpen={onClose} setUserData={setUserData}>
         <ModalTitle>{title}</ModalTitle>
         <ModalContent>
           <Input
             placeholder="Name"
-            defaultValue={userData?.name}
+            value={userData?.name ? userData.name : currentData.name}
             onChange={onChangeHandler}
             name="name"
             style={{
@@ -102,7 +112,7 @@ export const UserModalForm = ({
           />
           <Input
             placeholder="Surname"
-            defaultValue={userData?.surname}
+            value={userData?.surname ? userData.surname : currentData.surname}
             onChange={onChangeHandler}
             name="surname"
             style={{
@@ -113,7 +123,7 @@ export const UserModalForm = ({
           />
           <Input
             placeholder="Email"
-            defaultValue={userData?.email}
+            value={userData?.email ? userData.email : currentData.email}
             onChange={onChangeHandler}
             name="email"
             style={{
@@ -135,7 +145,7 @@ export const UserModalForm = ({
           </Select>
 
           <div className="select-wrapper">
-            <p>Select role</p>
+            <p className="select-wrapper__title">Select role</p>
             <Select
               defaultValue={userData?.role ? userData?.role : "Admin"}
               onChange={onChangeHandler}

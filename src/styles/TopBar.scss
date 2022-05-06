@@ -7,12 +7,12 @@
   justify-content: flex-end;
   background-color: #ffd480;
 
-  .user {
+  &__user {
     margin-right: 10px;
     width: fit-content;
   }
+}
 
-  .log-out {
-    width: fit-content;
-  }
+.log-out {
+  width: fit-content;
 }

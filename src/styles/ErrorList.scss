@@ -1,17 +1,15 @@
-.error-component {
-  .error-list {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    z-index: 1000;
-    background-color: bisque;
-    list-style: square;
-    border-radius: 7px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 30px;
-    padding-left: 30px;
-    line-height: 25px;
-    margin-left: 430px;
-  }
+.error-list {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 1000;
+  background-color: bisque;
+  list-style: square;
+  border-radius: 7px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 30px;
+  padding-left: 30px;
+  line-height: 25px;
+  margin-left: 430px;
 }

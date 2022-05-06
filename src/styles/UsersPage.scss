@@ -1,17 +1,21 @@
-._users-page {
+.users-page {
   height: 100%;
+}
 
-  .btn-wrapper {
+.btn-wrapper {
+  width: fit-content;
+  padding: 10px;
+}
+
+.action-btns-wrapper {
+  display: flex;
+  column-gap: 20px;
+
+  &__edit {
     width: fit-content;
-    padding: 10px;
   }
 
-  .action-btns-wrapper {
-    display: flex;
-    column-gap: 20px;
-
-    button {
-      width: fit-content;
-    }
+  &__delete {
+    width: fit-content;
   }
 }

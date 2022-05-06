@@ -1,5 +1,5 @@
-import { useRef, MouseEvent, SetStateAction, Dispatch } from "react";
-import { Button } from "../index";
+import { SetStateAction, Dispatch } from "react";
+import { Button, Mask } from "../index";
 
 import "styles/ConfirmationModal.scss";
 
@@ -12,19 +12,12 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   children,
   ...props
 }) => {
-  const modalRef = useRef<HTMLDivElement | null>(null);
-
-  const handleClose = (e: MouseEvent<HTMLElement>) => {
-    if ((e.target as Element).classList[0] === "confirmation-modal-wrapper") {
-      props.setOpen(false);
-    }
-  };
-
   return (
-    <div onClick={handleClose} className={`confirmation-modal-wrapper`}>
-      <div className="confirmation-modal" ref={modalRef}>
+    <div className="confirmation-modal-wrapper">
+      <Mask onClick={() => props.setOpen(false)} />
+      <div className="confirmation-modal flex">
         {children}
-        <div className="btns-wrapper">
+        <div className="btns-wrapper flex">
           <Button variant="primary" onClick={props.clickHandler}>
             Confirm
           </Button>

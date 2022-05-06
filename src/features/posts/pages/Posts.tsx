@@ -2,7 +2,7 @@ import { PostCard } from "../components/PostCard";
 import { Button, ConfirmationModal, Table } from "components/index";
 import { Post, User } from "types/interfaces";
 import { useContext, useEffect, useState } from "react";
-import { deletePost, getAllPosts, getPersonalPosts } from "api/posts";
+import { postApi } from "api/posts";
 import { UserProfileContext } from "types/contexts";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -24,9 +24,9 @@ export const Posts = () => {
   };
 
   const deletePosts = () => {
-    deletePost(choosenPost).then((res) => {
+    postApi.deletePost(choosenPost).then((res) => {
       if (res) {
-        getPersonalPosts(currentUser?.id).then((res) => {
+        postApi.getPersonalPosts(currentUser?.id).then((res) => {
           setPosts(res);
         });
       }
@@ -36,13 +36,13 @@ export const Posts = () => {
 
   useEffect(() => {
     if (currentUser?.role && currentUser.role === "operator") {
-      getPersonalPosts(currentUser?.id).then((res: Post[]) => {
+      postApi.getPersonalPosts(currentUser?.id).then((res: Post[]) => {
         if (res.length > 0) {
           setPosts(res);
         }
       });
     } else {
-      getAllPosts().then((res) => {
+      postApi.getAllPosts().then((res) => {
         if (res?.status === 200) {
           setPosts(res.data);
         }

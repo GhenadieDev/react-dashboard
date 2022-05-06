@@ -1,13 +1,19 @@
-import { Dispatch, SetStateAction, useContext } from "react";
-import { Input } from "./Input";
+import {
+  ChangeEvent,
+  Dispatch,
+  MouseEvent,
+  SetStateAction,
+  useContext,
+} from "react";
+import { Input } from "components/index";
 import { Select } from "./Select";
 
-import "../styles/RegisterFields.scss";
-import { InputRefs, User } from "../types/interfaces";
-import { ErrorContext } from "../types/contexts";
+import { InputRefs, User } from "types/interfaces";
+import { ErrorContext } from "types/contexts";
 
-interface IProps {
-  formData?: User | null;
+import "styles/RegisterFields.scss";
+
+interface Props {
   setFormData: Dispatch<SetStateAction<User | null>>;
   setCheckboxIsChecked: Dispatch<SetStateAction<boolean>>;
   checkboxIsChecked: boolean;
@@ -15,7 +21,7 @@ interface IProps {
   refsObject?: InputRefs;
 }
 
-export const RegisterFields: React.FC<IProps> = ({
+export const RegisterFields: React.FC<Props> = ({
   setFormData,
   setCheckboxIsChecked,
   checkboxIsChecked,
@@ -24,21 +30,23 @@ export const RegisterFields: React.FC<IProps> = ({
 }) => {
   const context = useContext(ErrorContext);
 
-  const onChangeHandler = (e: any): void => {
+  const onChangeHandler = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ): void => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
 
-  const onClickHandler = (e: any) => {
+  const onClickHandler = (e: MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
-    e.target.style.border = "0.3px solid #e6e6e6";
+    e.currentTarget.style.border = "0.3px solid #e6e6e6";
   };
 
   return (
-    <div className="register-fields">
-      <div className="field-wrapper">
+    <div className="register-fields flex">
+      <div className="field-wrapper flex">
         <Input
           type="text"
           placeholder="Name"
@@ -47,7 +55,9 @@ export const RegisterFields: React.FC<IProps> = ({
           onClick={onClickHandler}
           ref={refsObject?.nameRef}
         />
-        {context?.name ? <p className="empty-field">{context?.name}</p> : null}
+        {context?.name ? (
+          <p className="field-wrapper__empty-field">{context?.name}</p>
+        ) : null}
       </div>
       <div className="field-wrapper">
         <Input
@@ -59,7 +69,7 @@ export const RegisterFields: React.FC<IProps> = ({
           ref={refsObject?.surnameRef}
         />
         {context?.surname ? (
-          <p className="empty-field">{context?.surname}</p>
+          <p className="field-wrapper__empty-field">{context?.surname}</p>
         ) : null}
       </div>
       <div className="field-wrapper">
@@ -72,7 +82,7 @@ export const RegisterFields: React.FC<IProps> = ({
           ref={refsObject?.emailRef}
         />
         {context?.email ? (
-          <p className="empty-field">{context?.email}</p>
+          <p className="field-wrapper__empty-field">{context?.email}</p>
         ) : null}
       </div>
       <div className="select-wrapper">
@@ -101,12 +111,14 @@ export const RegisterFields: React.FC<IProps> = ({
         ref={refsObject?.confirmPasswordRef}
       />
       {context?.passwordIsTheSame === false ? (
-        <p className="confirm-pass">Please, enter the same password</p>
+        <p className="register-fields__confirm-pass">
+          Please, enter the same password
+        </p>
       ) : null}
-      <div className="checkbox-wrapper">
+      <div className="checkbox-wrapper flex">
         <input
           type="checkbox"
-          id="data"
+          className="checkbox-wrapper__data"
           name="data"
           onClick={() => setCheckboxIsChecked(!checkboxIsChecked)}
         />

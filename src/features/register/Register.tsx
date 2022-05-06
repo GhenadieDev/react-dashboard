@@ -14,13 +14,12 @@ import {
   FormHeader,
 } from "../../components/index";
 
-import { createUser } from "api/users";
+import { userApi } from "api/users";
 import { checkRegisterFields } from "utils/checkRegisterFields";
-
-import "../../styles/RegisterPage.scss";
-import styles from "../../styles/RootPages.module.scss";
 import { dateTime } from "types/date";
 import { AufContainer } from "features/auf_container/AufContainer";
+
+import "styles/RegisterPage.scss";
 
 export const Register = () => {
   const [formData, setFormData] = useState<User | null>({});
@@ -102,7 +101,7 @@ export const Register = () => {
     );
 
     if (errors.length === 0) {
-      createUser(formData).then((res) => {
+      userApi.createUser(formData).then((res) => {
         if (res?.status === 201) {
           Object.values(refsObject).forEach(
             (input) => (input.current.value = "")

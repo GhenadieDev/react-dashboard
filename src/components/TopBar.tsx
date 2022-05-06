@@ -15,10 +15,10 @@ export const TopBar = () => {
 
   return (
     <header className="topbar">
-      <p className="user">{profile?.name + " " + profile?.surname}</p>
+      <p className="topbar__user">{profile?.name + " " + profile?.surname}</p>
       <div className="btn-wrapper">
         <Button className="log-out" onClick={clickHandler} variant="primary">
-          <span>&#10140;</span>
+          <span className="log-out__icon">&#10140;</span>
         </Button>
       </div>
     </header>

@@ -9,15 +9,16 @@
     grid-template-columns: minmax(20%, auto) 4fr 1fr;
     grid-template-rows: fit-content(200px) 1fr 80px;
 
-  .topbar-container {
-    grid-area: header;
-  }
+}
 
-  .left-menu-container {
-    grid-area: sidebar;
-  }
+.topbar-container {
+  grid-area: header;
+}
 
-  .main-container {
-    grid-area: main;
-  }
+.left-menu-container {
+  grid-area: sidebar;
+}
+
+.main-container {
+  grid-area: main;
 }

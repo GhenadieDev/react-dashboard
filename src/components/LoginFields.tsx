@@ -1,8 +1,9 @@
-import { Input } from "./Input";
+import { Input } from "components/index";
 
-import "../styles/LoginFields.scss";
 import { User } from "types/interfaces";
 import React, { Dispatch, SetStateAction } from "react";
+
+import "styles/LoginFields.scss";
 
 interface LoginProps {
   setUserData: Dispatch<SetStateAction<User>>;

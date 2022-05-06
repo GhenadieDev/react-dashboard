@@ -1,4 +1,4 @@
-import { editPost, getPersonalPostById } from "api/posts";
+import { postApi } from "api/posts";
 import { Button, Form, FormHeader, Input, TextArea } from "components/index";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -12,7 +12,7 @@ export const EditPost = () => {
 
   useEffect(() => {
     if (postID) {
-      getPersonalPostById(postID).then((res) => {
+      postApi.getPersonalPostById(postID).then((res) => {
         if (res?.status === 200) {
           setCurrentPost((prevState) => ({
             ...prevState,
@@ -43,7 +43,7 @@ export const EditPost = () => {
 
   const submitHandler: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
-    editPost(currentPost);
+    postApi.editPost(currentPost);
   };
 
   return (

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "styles/FormHeader.scss";
+import "styles/Form/FormHeader.scss";
 
 interface FormHeaderProps {
   title?: string;
@@ -16,7 +16,7 @@ export const FormHeader = ({
 }: FormHeaderProps) => {
   return (
     <div className="form-header">
-      <h4 className="form-title">{title}</h4>
+      <h4 className="form-header__title">{title}</h4>
       {location ? (
         <p className="question">
           {question}
