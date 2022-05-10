@@ -1,5 +1,7 @@
 export * from "./Button";
 export * from "./Chart/Chart";
+export * from "./Chart/PostChart";
+export * from "./Chart/UserChart";
 export * from "./ConfirmationModal/ConfirmationModal";
 export * from "./ConfirmationModal/ConfirmationModalTitle";
 export * from "./ErrorList";

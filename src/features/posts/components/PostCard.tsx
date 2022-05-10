@@ -8,7 +8,7 @@ import "styles/PostCard.scss";
 export const PostCard: React.FC<Post> = ({ children, ...props }) => {
   return (
     <div className="postcard">
-      <p className="date">{getDate(props.date)}</p>
+      <time className="date">{getDate(props.date)}</time>
 
       <Link to={`/home/posts/${props.id}`} className="post-link">
         <figure className="image-wrapper">

@@ -76,7 +76,7 @@ export const Posts = () => {
           </div>
         ) : null}
         {currentUser?.role && currentUser.role === "operator" ? (
-          <div className="postscards-wrapper">
+          <article className="postscards-wrapper">
             {posts.length > 0
               ? posts.map((post) => {
                   return (
@@ -101,7 +101,7 @@ export const Posts = () => {
                   );
                 })
               : null}
-          </div>
+          </article>
         ) : (
           <Table className="user-posts">
             <thead>
@@ -125,7 +125,9 @@ export const Posts = () => {
                           {post.title}
                         </td>
                         <td>{post.image_url}</td>
-                        <td>{post.date}</td>
+                        <td>
+                          <time>{post.date}</time>
+                        </td>
                         <td>{post.author?.fullName}</td>
                         <td>
                           <div className="actions-btns-wrapper">

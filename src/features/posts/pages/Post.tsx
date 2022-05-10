@@ -23,13 +23,15 @@ export const PostPage = () => {
   return (
     <div className="post">
       <div className="text-wrapper">
-        <div className="title-wrapper">
+        <section className="title-wrapper">
           <h3 className="title-wrapper__title">{currentPost.title}</h3>
-          <p className="title-wrapper__date">{getDate(currentPost.date)}</p>
-        </div>
-        <div className="desc-wrapper">
+          <time className="title-wrapper__date">
+            {getDate(currentPost.date)}
+          </time>
+        </section>
+        <section className="desc-wrapper">
           <p className="desc-wrapper__desc">{currentPost.description}</p>
-        </div>
+        </section>
       </div>
 
       <figure className="image-wrapper">

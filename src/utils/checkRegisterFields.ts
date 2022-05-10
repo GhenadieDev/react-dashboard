@@ -3,8 +3,8 @@ import {
   PasswordValidation,
   User,
   UserRegError,
-} from "../types/interfaces";
-import { emailRegex, passwordRegex } from "../types/regex";
+} from "types/interfaces";
+import { emailRegex, passwordRegex } from "types/regex";
 
 export const checkRegisterFields = (
   dataFromInputs: User | null,
@@ -35,7 +35,7 @@ export const checkRegisterFields = (
     const inputsList = Object.values(inputs);
 
     inputsList.forEach((target: any) => {
-      if (target.current.value === "" && target.current.value !== " ") {
+      if (target?.current?.value === "" && target?.current.value !== " ") {
         tempErrorsObject.inputs = "Fields can not be empty";
         target.current.style.border = "1px solid red";
       } else {

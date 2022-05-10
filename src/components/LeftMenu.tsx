@@ -9,25 +9,27 @@ export const LeftMenu = () => {
 
   return (
     <aside className="leftbar">
-      <ul className="left-menu">
-        <li className="left-menu-item">
-          <Link to="/home/dashboard" className="left-menu-item__link">
-            Dashboard
-          </Link>
-        </li>
-        {currentUser?.role && currentUser.role === "admin" ? (
+      <nav className="leftbar">
+        <ul className="left-menu">
           <li className="left-menu-item">
-            <Link to="/home/users" className="left-menu-item__link">
-              Users
+            <Link to="/home/dashboard" className="left-menu-item__link">
+              Dashboard
             </Link>
           </li>
-        ) : null}
-        <li className="left-menu-item">
-          <Link to="/home/posts" className="left-menu-item__link">
-            Posts
-          </Link>
-        </li>
-      </ul>
+          {currentUser?.role && currentUser.role === "admin" ? (
+            <li className="left-menu-item">
+              <Link to="/home/users" className="left-menu-item__link">
+                Users
+              </Link>
+            </li>
+          ) : null}
+          <li className="left-menu-item">
+            <Link to="/home/posts" className="left-menu-item__link">
+              Posts
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </aside>
   );
 };
