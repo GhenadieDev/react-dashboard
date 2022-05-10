@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import "../styles/Main.scss";
+import "styles/Main.scss";
 
 export const Main = () => {
   return (

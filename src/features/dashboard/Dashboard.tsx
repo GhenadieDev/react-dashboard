@@ -1,7 +1,8 @@
+import { useState, useEffect } from "react";
 import { userApi } from "api/users";
 import { postApi } from "api/posts";
 import { Chart } from "components/index";
-import { useState, useEffect } from "react";
+
 import { User, Post, ChartUserData, ChartPostData } from "types/interfaces";
 
 import { groupUsersByMonth } from "utils/groupUsersByMonths";
@@ -10,8 +11,8 @@ import { listOfMonths } from "types/constants";
 
 export const Dashboard = () => {
   const [allUsers, setAllUsers] = useState<User[]>([]);
-  const [chartUserData, setChartUserData] = useState<ChartUserData[]>([]);
   const [allPosts, setAllPosts] = useState<Post[]>([]);
+  const [chartUserData, setChartUserData] = useState<ChartUserData[]>([]);
   const [chartPostData, setChartPostData] = useState<ChartPostData[]>([]);
 
   useEffect(() => {

@@ -6,7 +6,7 @@ export const groupPostsByMonths = (
   listOfMonths: Month[],
   setData: React.Dispatch<SetStateAction<ChartPostData[]>>
 ) => {
-  listOfMonths.forEach((month, idx) => {
+  listOfMonths.forEach((month) => {
     const newObj = {
       name: month.name,
       posts: posts.filter(

@@ -1,8 +1,10 @@
-import { Button } from "components/index";
 import { useContext } from "react";
+import { Button } from "components/index";
+
 import { UserProfileContext } from "types/contexts";
 import { User } from "types/interfaces";
-import "../styles/TopBar.scss";
+
+import "styles/TopBar.scss";
 
 export const TopBar = () => {
   const profile = useContext<User | null>(UserProfileContext);

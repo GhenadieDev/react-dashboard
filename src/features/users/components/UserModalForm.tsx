@@ -13,8 +13,6 @@ import { AddUserError, User } from "types/interfaces";
 import { dateTime } from "types/date";
 import { checkAddedUser } from "utils/checkAddedUser";
 
-import "styles/UserModalForm.scss";
-
 interface UserModalFormProps {
   userData: User | null;
   title: string;

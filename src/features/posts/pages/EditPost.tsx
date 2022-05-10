@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { Post } from "types/interfaces";
+import { getDate } from "utils/getDate";
+
 import "styles/EditPost.scss";
 
 export const EditPost = () => {
@@ -68,11 +70,7 @@ export const EditPost = () => {
             onChange={handleChange}
             name="image_url"
           />
-          <Input
-            defaultValue={currentPost.date
-              ?.toString()
-              .substring(0, currentPost.date.toString().indexOf("T"))}
-          />
+          <Input defaultValue={getDate(currentPost.date)} />
           <Button variant="primary" onClick={submitHandler}>
             Submit
           </Button>

@@ -6,7 +6,7 @@ export const groupUsersByMonth = (
   listOfMonths: Month[],
   setData: React.Dispatch<SetStateAction<ChartUserData[]>>
 ) => {
-  listOfMonths.forEach((month, idx) => {
+  listOfMonths.forEach((month) => {
     const newObj = {
       name: month.name,
       users: users.filter(

@@ -1,6 +1,6 @@
 import { TopBar, LeftMenu, Main } from "./index";
 
-import "../styles/Layout.scss";
+import "styles/Layout.scss";
 
 export const Layout = () => {
   return (

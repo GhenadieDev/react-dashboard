@@ -1,4 +1,4 @@
-import "../styles/Button.scss";
+import "styles/Button.scss";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: string;

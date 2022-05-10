@@ -114,39 +114,41 @@ export const Register = () => {
   };
 
   return (
-    <AufContainer className="register">
-      <UserContext.Provider value={formData}>
-        <ErrorContext.Provider value={errors}>
-          {errors?.password?.length ? <ErrorList /> : null}
-          {fieldErrorIsDisplay ? <InputError /> : null}
-          <div className="form-wrapper">
-            <Form>
-              <FormHeader title="Sign Up" />
-              <RegisterFields
-                reference={selectRef}
-                setFormData={setFormData}
-                setCheckboxIsChecked={setCheckboxIsChecked}
-                checkboxIsChecked={checkboxIsChecked}
-                refsObject={refsObject}
-              />
-              <div className="button-wrapper">
-                <Button
-                  variant="primary"
-                  disabled={formObject.formBottom?.disabledBtn}
-                  onClick={submitHandler}
-                >
-                  {formObject.formBottom?.submitBtnText}
-                </Button>
-              </div>
-            </Form>
-          </div>
-          {regIsSucced ? (
-            <p>
-              Succes, you can <Link to="/login">login</Link> now
-            </p>
-          ) : null}
-        </ErrorContext.Provider>
-      </UserContext.Provider>
+    <AufContainer>
+      <div className="register">
+        <UserContext.Provider value={formData}>
+          <ErrorContext.Provider value={errors}>
+            {errors?.password?.length ? <ErrorList /> : null}
+            {fieldErrorIsDisplay ? <InputError /> : null}
+            <div className="form-wrapper">
+              <Form>
+                <FormHeader title="Sign Up" />
+                <RegisterFields
+                  reference={selectRef}
+                  setFormData={setFormData}
+                  setCheckboxIsChecked={setCheckboxIsChecked}
+                  checkboxIsChecked={checkboxIsChecked}
+                  refsObject={refsObject}
+                />
+                <div className="button-wrapper">
+                  <Button
+                    variant="primary"
+                    disabled={formObject.formBottom?.disabledBtn}
+                    onClick={submitHandler}
+                  >
+                    {formObject.formBottom?.submitBtnText}
+                  </Button>
+                </div>
+              </Form>
+            </div>
+            {regIsSucced ? (
+              <p>
+                Succes, you can <Link to="/login">login</Link> now
+              </p>
+            ) : null}
+          </ErrorContext.Provider>
+        </UserContext.Provider>
+      </div>
     </AufContainer>
   );
 };

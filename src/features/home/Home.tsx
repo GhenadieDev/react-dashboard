@@ -1,7 +1,8 @@
-import { userApi } from "api/users";
-import { Layout } from "components";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { userApi } from "api/users";
+import { Layout } from "components";
 import { UserProfileContext } from "types/contexts";
 import { User } from "types/interfaces";
 import { AufContainer } from "features/auf_container/AufContainer";

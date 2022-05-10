@@ -1,6 +1,7 @@
-import { ChartPostData, ChartUserData, Post, User } from "types/interfaces";
 import { UserChart } from "./UserChart";
 import { PostChart } from "./PostChart";
+
+import { ChartPostData, ChartUserData, Post, User } from "types/interfaces";
 
 import "styles/Chart.scss";
 

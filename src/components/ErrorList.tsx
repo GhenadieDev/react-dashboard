@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { ErrorContext } from "types/contexts";
 import { UserRegError } from "types/interfaces";
+
 import "styles/ErrorList.scss";
 
 interface ErrorListProps {
