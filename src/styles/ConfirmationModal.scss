@@ -1,6 +1,6 @@
 .confirmation-modal {
   background-color: white;
-  width: 40%;
+  width: fit-content;
   max-height: 500px;
   position: absolute;
   top: 50%;
@@ -9,14 +9,17 @@
   padding: 20px;
   border-radius: 7px;
   flex-direction: column;
+
+  .btns-wrapper {
+      border: 1px solid black;
+      margin-left: 0;
+      flex-direction: row;
+      width: 50%;
+      padding-top: 20px;
+      column-gap: 10px;
+    }
 }
 
 .flex {
   display: flex;
-}
-
-.btns-wrapper {
-  width: 70%;
-  padding-top: 20px;
-  column-gap: 10px;
 }

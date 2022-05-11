@@ -1,17 +1,26 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { postApi } from "api/posts";
-import { Button, Form, FormHeader, Input, TextArea } from "components/index";
+import {
+  Button,
+  Form,
+  FormHeader,
+  Input,
+  Loader,
+  TextArea,
+} from "components/index";
 
 import { Post } from "types/interfaces";
-import { getDate } from "utils/getDate";
 
+import { useLoading } from "hooks/useLoading";
 import "styles/EditPost.scss";
+import "styles/common.scss";
 
 export const EditPost = () => {
   const { postID } = useParams();
   const [currentPost, setCurrentPost] = useState<Post>({});
+  const [isLoading, toggleLoading] = useLoading();
 
   useEffect(() => {
     if (postID) {
@@ -46,14 +55,22 @@ export const EditPost = () => {
 
   const submitHandler: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
-    postApi.editPost(currentPost);
+    toggleLoading();
+    postApi.editPost(currentPost).then((res) => {
+      if (res?.status === 200) {
+        toggleLoading();
+      }
+    });
   };
 
   return (
     <div className="edit-post">
       <div className="form-wrapper">
         <Form>
-          <FormHeader title="Edit Post" />
+          <div className="header-container flex">
+            <FormHeader title="Edit Post" />
+            {isLoading ? <Loader /> : null}
+          </div>
           <Input
             defaultValue={currentPost.title}
             onChange={handleChange}
@@ -71,7 +88,6 @@ export const EditPost = () => {
             onChange={handleChange}
             name="image_url"
           />
-          <Input defaultValue={getDate(currentPost.date)} />
           <Button variant="primary" onClick={submitHandler}>
             Submit
           </Button>

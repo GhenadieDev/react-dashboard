@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useLoading } from "hooks/useLoading";
+import { Loading } from "types/contexts";
 
 import { userApi } from "api/users";
 import { UserProfileContext } from "types/contexts";
@@ -8,7 +9,7 @@ import {
   Button,
   ConfirmationModal,
   Table,
-  ConfirmationModalTitle,
+  ConfirmationModalHeader,
   Loader,
 } from "components/index";
 
@@ -16,6 +17,7 @@ import { UserModalForm } from "../components/UserModalForm";
 import { AufContainer } from "features/auf_container/AufContainer";
 
 import "styles/UsersPage.scss";
+import "styles/common.scss";
 
 export const Users = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -24,7 +26,7 @@ export const Users = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [choosenUser, setChoosenUser] = useState<User>({});
   const currentUser = useContext<User | null>(UserProfileContext);
-  const [isLoading, startLoading, stopLoading] = useLoading(false);
+  const [isLoading, toggleLoading] = useLoading();
 
   useEffect(() => {
     userApi.getAllUsers().then((res) => {
@@ -37,10 +39,10 @@ export const Users = () => {
   const clickHandlerDelete = async () => {
     if (choosenUser !== null) {
       setUsers(users.filter((user) => user.id !== choosenUser.id));
-      startLoading();
+      toggleLoading();
       const result = await userApi.deleteUser(choosenUser.id);
       if (result?.status === 200) {
-        stopLoading();
+        toggleLoading();
         const allUsers = await userApi.getAllUsers();
         setUsers(allUsers?.data);
         setConfirmationModalVisible(false);
@@ -49,15 +51,20 @@ export const Users = () => {
   };
 
   const addUsers = async (obj: User) => {
+    toggleLoading();
     await userApi.createUser(obj);
     const allUsers = await userApi.getAllUsers();
     setUsers(allUsers?.data);
+    toggleLoading();
   };
 
   const editUsers = async (obj: User) => {
+    toggleLoading();
     await userApi.editUser(obj);
     const allUsers = await userApi.getAllUsers();
+    setIsModalVisible(false);
     setUsers(allUsers?.data);
+    toggleLoading();
   };
 
   return (
@@ -68,26 +75,30 @@ export const Users = () => {
             setOpen={setConfirmationModalVisible}
             clickHandler={clickHandlerDelete}
           >
-            <div className="title-container">
-              <ConfirmationModalTitle>
-                {`You're gonna delete user: ${choosenUser.name} ${choosenUser.surname}. Are you sure?`}
-              </ConfirmationModalTitle>
-              {isLoading ? <Loader /> : null}
-            </div>
+            <ConfirmationModalHeader>
+              <div className="header-container flex">
+                <h4>{`You're gonna delete user: ${choosenUser.name} ${choosenUser.surname}. Are you sure?`}</h4>
+                {isLoading ? <Loader /> : null}
+              </div>
+            </ConfirmationModalHeader>
           </ConfirmationModal>
         )}
-        <UserModalForm
-          userData={Object.values(choosenUser).length > 0 ? choosenUser : null}
-          title={
-            Object.values(choosenUser).length > 0 ? "Edit User" : "Add User"
-          }
-          open={isModalVisible}
-          onClose={setIsModalVisible}
-          setUserData={setChoosenUser}
-          callback={
-            Object.values(choosenUser).length > 0 ? editUsers : addUsers
-          }
-        />
+        <Loading.Provider value={isLoading}>
+          <UserModalForm
+            userData={
+              Object.values(choosenUser).length > 0 ? choosenUser : null
+            }
+            title={
+              Object.values(choosenUser).length > 0 ? "Edit User" : "Add User"
+            }
+            open={isModalVisible}
+            onClose={setIsModalVisible}
+            setUserData={setChoosenUser}
+            callback={
+              Object.values(choosenUser).length > 0 ? editUsers : addUsers
+            }
+          />
+        </Loading.Provider>
 
         <div className="btn-wrapper">
           <Button

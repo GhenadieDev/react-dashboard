@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const useLoading = (initialState: boolean) => {
-  const [isLoading, setLoading] = useState(initialState);
+export const useLoading = () => {
+  const [isLoading, setLoading] = useState(false);
 
-  const startLoading = () => setLoading(true);
-  const stopLoading = () => setLoading(false);
+  /*const startLoading = () => setLoading(true);
+  const stopLoading = () => setLoading(false);*/
+  const toggleLoading = () => {
+    setLoading((prevState) => !prevState);
+  };
 
-  return [isLoading, startLoading, stopLoading] as const;
+  useEffect(() => {
+    console.log("loading...");
+  }, [isLoading]);
+
+  return [isLoading, toggleLoading] as const;
 };

@@ -3,7 +3,7 @@ export * from "./Chart/Chart";
 export * from "./Chart/PostChart";
 export * from "./Chart/UserChart";
 export * from "./ConfirmationModal/ConfirmationModal";
-export * from "./ConfirmationModal/ConfirmationModalTitle";
+export * from "./ConfirmationModal/ConfirmationModalHeader";
 export * from "./ErrorList";
 export * from "./Form/Form";
 export * from "./Form/FormHeader";

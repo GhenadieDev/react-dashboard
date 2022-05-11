@@ -1,12 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import { postApi } from "api/posts";
-import { Button, Form, FormHeader, Input, TextArea } from "components/index";
+import {
+  Button,
+  Form,
+  FormHeader,
+  Input,
+  Loader,
+  TextArea,
+} from "components/index";
 
 import { UserProfileContext } from "types/contexts";
 import { dateTime } from "types/date";
 import { Post } from "types/interfaces";
 
+import { useLoading } from "hooks/useLoading";
+
 import "styles/CreatePost.scss";
+import "styles/common.scss";
 
 export const CreatePost = () => {
   const currentUser = useContext(UserProfileContext);
@@ -15,6 +25,7 @@ export const CreatePost = () => {
     image_url: "",
     description: "",
   });
+  const [isLoading, toggleLoading] = useLoading();
 
   useEffect(() => {
     setPost((prevState) => ({
@@ -39,6 +50,7 @@ export const CreatePost = () => {
 
   const submitHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    toggleLoading();
     postApi.createPost(post).then((res) => {
       if (res?.status === 201) {
         setPost((prevState) => ({
@@ -47,6 +59,7 @@ export const CreatePost = () => {
           description: "",
           image_url: "",
         }));
+        toggleLoading();
       }
     });
   };
@@ -55,7 +68,10 @@ export const CreatePost = () => {
     <div className="create-post">
       <div className="form-wrapper">
         <Form>
-          <FormHeader title="Add Post" />
+          <div className="header-container flex">
+            <FormHeader title="Add Post" />
+            {isLoading ? <Loader /> : null}
+          </div>
           <Input
             value={post.title}
             placeholder="Title"

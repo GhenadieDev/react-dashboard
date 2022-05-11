@@ -1,8 +1,9 @@
-import { SetStateAction, useRef, useState } from "react";
+import React, { SetStateAction, useRef, useState, useContext } from "react";
 
 import {
   Button,
   Input,
+  Loader,
   Modal,
   ModalActions,
   ModalContent,
@@ -14,6 +15,9 @@ import { AddUserError, User } from "types/interfaces";
 import { dateTime } from "types/date";
 
 import { checkAddedUser } from "utils/checkAddedUser";
+import { Loading } from "types/contexts";
+
+import "styles/common.scss";
 
 interface UserModalFormProps {
   userData: User | null;
@@ -32,14 +36,14 @@ export const UserModalForm = ({
   setUserData,
   callback,
 }: UserModalFormProps) => {
-  const [currentData, setCurrentData] = useState<User>({
-    name: "",
-    surname: "",
-    email: "",
-  });
+  const [currentData, setCurrentData] = useState<User | null>({});
   const [validateErrors, setValidateErrors] = useState<AddUserError>({});
   const genderRef = useRef<HTMLSelectElement>(null);
   const roleRef = useRef<HTMLSelectElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const surnameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const loading = useContext(Loading);
 
   const onChangeHandler: React.ChangeEventHandler<
     HTMLInputElement | HTMLSelectElement
@@ -52,13 +56,13 @@ export const UserModalForm = ({
 
   const submitHandler = () => {
     const obj: User = {
-      name: currentData.name ? currentData.name : userData?.name,
-      surname: currentData.surname ? currentData.surname : userData?.surname,
-      email: currentData.email ? currentData.email : userData?.email,
-      gender: currentData.gender
+      name: currentData?.name ? currentData.name : userData?.name,
+      surname: currentData?.surname ? currentData.surname : userData?.surname,
+      email: currentData?.email ? currentData.email : userData?.email,
+      gender: currentData?.gender
         ? currentData.gender
         : genderRef.current?.value,
-      role: currentData.role ? currentData.role : roleRef.current?.value,
+      role: currentData?.role ? currentData.role : roleRef.current?.value,
       password: userData?.password,
       confirmedPassword: userData?.confirmedPassword,
       createdAt: !userData ? dateTime : userData.createdAt,
@@ -76,12 +80,11 @@ export const UserModalForm = ({
     } else {
       setValidateErrors({});
       callback(obj);
-      setCurrentData((prevState) => ({
-        ...prevState,
-        name: "",
-        surname: "",
-        email: "",
-      }));
+      if (nameRef.current && surnameRef.current && emailRef.current) {
+        nameRef.current.value = "";
+        surnameRef.current.value = "";
+        emailRef.current.value = "";
+      }
       setUserData({});
     }
   };
@@ -89,6 +92,7 @@ export const UserModalForm = ({
   const handleClose = () => {
     onClose(false);
     setUserData({});
+    setCurrentData({});
   };
 
   if (!open) {
@@ -98,11 +102,15 @@ export const UserModalForm = ({
   return (
     <div className="user-modal-form">
       <Modal open={open} setOpen={onClose} setUserData={setUserData}>
-        <ModalTitle>{title}</ModalTitle>
+        <div className="title-container flex">
+          <ModalTitle>{title}</ModalTitle>
+          {loading ? <Loader /> : null}
+        </div>
         <ModalContent>
           <Input
+            ref={nameRef}
             placeholder="Name"
-            value={userData?.name ? userData.name : currentData.name}
+            defaultValue={userData?.name ? userData.name : currentData?.name}
             onChange={onChangeHandler}
             name="name"
             style={{
@@ -112,8 +120,11 @@ export const UserModalForm = ({
             }}
           />
           <Input
+            ref={surnameRef}
             placeholder="Surname"
-            value={userData?.surname ? userData.surname : currentData.surname}
+            defaultValue={
+              userData?.surname ? userData.surname : currentData?.surname
+            }
             onChange={onChangeHandler}
             name="surname"
             style={{
@@ -123,8 +134,9 @@ export const UserModalForm = ({
             }}
           />
           <Input
+            ref={emailRef}
             placeholder="Email"
-            value={userData?.email ? userData.email : currentData.email}
+            defaultValue={userData?.email ? userData.email : currentData?.email}
             onChange={onChangeHandler}
             name="email"
             style={{
@@ -135,7 +147,7 @@ export const UserModalForm = ({
             }}
           />
           <Select
-            defaultValue={userData?.gender ? userData.gender : "Masculin"}
+            value={userData?.gender ? userData.gender : "Masculin"}
             onChange={onChangeHandler}
             name="gender"
             ref={genderRef}

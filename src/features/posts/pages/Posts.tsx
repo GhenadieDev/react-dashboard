@@ -6,15 +6,18 @@ import {
   Button,
   ConfirmationModal,
   Table,
-  ConfirmationModalTitle,
+  ConfirmationModalHeader,
+  Loader,
 } from "components/index";
 import { AufContainer } from "features/auf_container/AufContainer";
 
 import { Post, User } from "types/interfaces";
 import { UserProfileContext } from "types/contexts";
 import { postApi } from "api/posts";
+import { useLoading } from "hooks/useLoading";
 
 import "styles/Posts.scss";
+import "styles/common.scss";
 
 export const Posts = () => {
   const currentUser = useContext<User | null>(UserProfileContext);
@@ -23,6 +26,7 @@ export const Posts = () => {
     useState(false);
   const [choosenPost, setChoosenPost] = useState<Post>({});
   const navigate = useNavigate();
+  const [isLoading, toggleLoading] = useLoading();
 
   const showConfirmationModal = (post: Post) => {
     setConfirmationModalVisible(true);
@@ -30,8 +34,10 @@ export const Posts = () => {
   };
 
   const deletePosts = async () => {
+    toggleLoading();
     const res = await postApi.deletePost(choosenPost);
-    if (res) {
+    if (res?.status === 200) {
+      toggleLoading();
       const personalPosts = await postApi.getPersonalPosts(currentUser?.id);
       setPosts(personalPosts);
     }
@@ -62,9 +68,12 @@ export const Posts = () => {
             setOpen={setConfirmationModalVisible}
             clickHandler={deletePosts}
           >
-            <ConfirmationModalTitle>
-              You're gonna delete this post. Are you sure?
-            </ConfirmationModalTitle>
+            <ConfirmationModalHeader>
+              <div className="header-container flex">
+                <h4>You're gonna delete this post. Are you sure?</h4>
+                {isLoading ? <Loader /> : null}
+              </div>
+            </ConfirmationModalHeader>
           </ConfirmationModal>
         ) : null}
         {currentUser?.role && currentUser.role === "operator" ? (

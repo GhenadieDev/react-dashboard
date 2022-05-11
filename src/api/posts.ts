@@ -35,7 +35,11 @@ export const postApi = {
 
   editPost: async (post: Post) => {
     try {
-      await axios.put(`http://localhost:4000/posts/${post.id}`, post);
+      const result = await axios.put(
+        `http://localhost:4000/posts/${post.id}`,
+        post
+      );
+      return result;
     } catch (error) {
       console.log("edit post error: ", error);
     }
