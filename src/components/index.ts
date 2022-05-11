@@ -23,3 +23,4 @@ export * from "./Modal/ModalContent";
 export * from "./Modal/ModalActions";
 export * from "./Modal/Mask";
 export * from "./TextArea";
+export * from "./Loader";

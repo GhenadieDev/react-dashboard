@@ -1,5 +1,5 @@
-import { Post } from "types/interfaces";
 import { Link } from "react-router-dom";
+import { Post } from "types/interfaces";
 
 import { getDate } from "utils/getDate";
 

@@ -1,5 +1,11 @@
 .users-page {
   height: 100%;
+
+  .title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
 }
 
 .btn-wrapper {

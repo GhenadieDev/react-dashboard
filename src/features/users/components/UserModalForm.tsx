@@ -1,3 +1,5 @@
+import { SetStateAction, useRef, useState } from "react";
+
 import {
   Button,
   Input,
@@ -7,10 +9,10 @@ import {
   ModalTitle,
   Select,
 } from "components/index";
-import { SetStateAction, useRef, useState } from "react";
-import { AddUserError, User } from "types/interfaces";
 
+import { AddUserError, User } from "types/interfaces";
 import { dateTime } from "types/date";
+
 import { checkAddedUser } from "utils/checkAddedUser";
 
 interface UserModalFormProps {

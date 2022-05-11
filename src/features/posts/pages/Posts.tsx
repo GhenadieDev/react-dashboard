@@ -1,3 +1,6 @@
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import { PostCard } from "../components/PostCard";
 import {
   Button,
@@ -5,13 +8,11 @@ import {
   Table,
   ConfirmationModalTitle,
 } from "components/index";
-import { Post, User } from "types/interfaces";
-import { useContext, useEffect, useState } from "react";
-import { postApi } from "api/posts";
-import { UserProfileContext } from "types/contexts";
-import { Link, useNavigate } from "react-router-dom";
-
 import { AufContainer } from "features/auf_container/AufContainer";
+
+import { Post, User } from "types/interfaces";
+import { UserProfileContext } from "types/contexts";
+import { postApi } from "api/posts";
 
 import "styles/Posts.scss";
 
@@ -28,14 +29,12 @@ export const Posts = () => {
     setChoosenPost(post);
   };
 
-  const deletePosts = () => {
-    postApi.deletePost(choosenPost).then((res) => {
-      if (res) {
-        postApi.getPersonalPosts(currentUser?.id).then((res) => {
-          setPosts(res);
-        });
-      }
-    });
+  const deletePosts = async () => {
+    const res = await postApi.deletePost(choosenPost);
+    if (res) {
+      const personalPosts = await postApi.getPersonalPosts(currentUser?.id);
+      setPosts(personalPosts);
+    }
     setConfirmationModalVisible(false);
   };
 

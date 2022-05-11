@@ -1,5 +1,7 @@
-import { userApi } from "api/users";
 import { useContext, useEffect, useState } from "react";
+import { useLoading } from "hooks/useLoading";
+
+import { userApi } from "api/users";
 import { UserProfileContext } from "types/contexts";
 import { User } from "types/interfaces";
 import {
@@ -7,6 +9,7 @@ import {
   ConfirmationModal,
   Table,
   ConfirmationModalTitle,
+  Loader,
 } from "components/index";
 
 import { UserModalForm } from "../components/UserModalForm";
@@ -21,6 +24,7 @@ export const Users = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [choosenUser, setChoosenUser] = useState<User>({});
   const currentUser = useContext<User | null>(UserProfileContext);
+  const [isLoading, startLoading, stopLoading] = useLoading(false);
 
   useEffect(() => {
     userApi.getAllUsers().then((res) => {
@@ -33,8 +37,10 @@ export const Users = () => {
   const clickHandlerDelete = async () => {
     if (choosenUser !== null) {
       setUsers(users.filter((user) => user.id !== choosenUser.id));
+      startLoading();
       const result = await userApi.deleteUser(choosenUser.id);
       if (result?.status === 200) {
+        stopLoading();
         const allUsers = await userApi.getAllUsers();
         setUsers(allUsers?.data);
         setConfirmationModalVisible(false);
@@ -62,9 +68,12 @@ export const Users = () => {
             setOpen={setConfirmationModalVisible}
             clickHandler={clickHandlerDelete}
           >
-            <ConfirmationModalTitle>
-              {`You're gonna delete user: ${choosenUser.name} ${choosenUser.surname}. Are you sure?`}
-            </ConfirmationModalTitle>
+            <div className="title-container">
+              <ConfirmationModalTitle>
+                {`You're gonna delete user: ${choosenUser.name} ${choosenUser.surname}. Are you sure?`}
+              </ConfirmationModalTitle>
+              {isLoading ? <Loader /> : null}
+            </div>
           </ConfirmationModal>
         )}
         <UserModalForm

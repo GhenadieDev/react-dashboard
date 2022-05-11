@@ -34,12 +34,13 @@ export interface UserRegError {
   passwordIsTheSame?: boolean;
 }
 
-export interface InputRefs {
-  nameRef?: React.Ref<HTMLInputElement> | null;
-  surnameRef?: React.Ref<HTMLInputElement> | null;
-  emailRef?: React.Ref<HTMLInputElement> | null;
-  passwordRef?: React.Ref<HTMLInputElement> | null;
-  confirmPasswordRef?: React.Ref<HTMLInputElement> | null;
+export interface Refs {
+  selectRef: React.Ref<HTMLSelectElement>;
+  nameRef: React.Ref<HTMLInputElement> | null;
+  surnameRef: React.Ref<HTMLInputElement> | null;
+  emailRef: React.Ref<HTMLInputElement> | null;
+  passwordRef: React.Ref<HTMLInputElement> | null;
+  confirmPasswordRef: React.Ref<HTMLInputElement> | null;
 }
 
 export interface PasswordValidation {

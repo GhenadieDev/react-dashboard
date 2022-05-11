@@ -1,7 +1,8 @@
-import { postApi } from "api/posts";
-import { Button, Form, FormHeader, Input, TextArea } from "components/index";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
+import { postApi } from "api/posts";
+import { Button, Form, FormHeader, Input, TextArea } from "components/index";
 
 import { Post } from "types/interfaces";
 import { getDate } from "utils/getDate";

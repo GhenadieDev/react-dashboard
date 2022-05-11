@@ -5,10 +5,9 @@ import {
   SetStateAction,
   useContext,
 } from "react";
-import { Input } from "components/index";
-import { Select } from "./Select";
+import { Input, Select } from "components/index";
 
-import { InputRefs, User } from "types/interfaces";
+import { Refs, User } from "types/interfaces";
 import { ErrorContext } from "types/contexts";
 
 import "styles/RegisterFields.scss";
@@ -17,15 +16,13 @@ interface Props {
   setFormData: Dispatch<SetStateAction<User | null>>;
   setCheckboxIsChecked: Dispatch<SetStateAction<boolean>>;
   checkboxIsChecked: boolean;
-  reference?: React.Ref<HTMLSelectElement>;
-  refsObject?: InputRefs;
+  refsObject?: Refs;
 }
 
 export const RegisterFields = ({
   setFormData,
   setCheckboxIsChecked,
   checkboxIsChecked,
-  reference,
   refsObject,
 }: Props) => {
   const context = useContext(ErrorContext);
@@ -86,7 +83,12 @@ export const RegisterFields = ({
         ) : null}
       </div>
       <div className="select-wrapper">
-        <Select name="gender" ref={reference} onChange={onChangeHandler}>
+        <Select
+          name="gender"
+          value="Masculin"
+          ref={refsObject?.selectRef}
+          onChange={onChangeHandler}
+        >
           <option value="Masculin">Masculin</option>
           <option value="Feminin">Feminin</option>
           <option value="Ma abtin">Ma abtin</option>

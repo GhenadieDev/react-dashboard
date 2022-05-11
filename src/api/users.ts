@@ -1,8 +1,9 @@
 import axios from "axios";
-import { User } from "../types/interfaces";
+import { User } from "types/interfaces";
 
 export const userApi = {
   createUser: async (user: User | null) => {
+    console.log("sa apelat functia");
     try {
       const result = await axios.post("http://localhost:4000/users", user);
       return result;

@@ -1,9 +1,8 @@
 import { Routes, Route } from "react-router-dom";
+
 import { AuthRoute } from "./features/auth/AuthRoute";
 import { Register } from "./features/register/Register";
 import { NullPage } from "./features/null/NullPage";
-
-import "./App.css";
 import { Login } from "features/login/Login";
 import { Dashboard } from "features/dashboard/Dashboard";
 import { Users } from "features/users/pages/Users";
@@ -12,6 +11,8 @@ import { Home } from "features/home/Home";
 import { PostPage } from "features/posts/pages/Post";
 import { CreatePost } from "features/posts/pages/CreatePost";
 import { EditPost } from "features/posts/pages/EditPost";
+
+import "./App.css";
 
 function App() {
   return (

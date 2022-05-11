@@ -2,17 +2,6 @@
   "users": [
     {
       "gender": "Masculin",
-      "role": "operator",
-      "createdAt": "2022-05-03T10:59:16.167Z",
-      "name": "Vlad",
-      "surname": "Tipes",
-      "email": "vladimir@gmail.com",
-      "password": "UhvSlQsH$zKa",
-      "confirmedPassword": "UhvSlQsH$zKa",
-      "id": 1
-    },
-    {
-      "gender": "Masculin",
       "role": "admin",
       "createdAt": "2022-06-03T10:59:16.167Z",
       "name": "Dimitri",
@@ -21,6 +10,33 @@
       "password": "UhvSlQsH$zKs",
       "confirmedPassword": "UhvSlQsH$zKs",
       "id": 4
+    },
+    {
+      "name": "Lydia",
+      "surname": "Kelly",
+      "email": "l.kelly@randatmail.com",
+      "gender": "Feminin",
+      "role": "operator",
+      "createdAt": "2022-05-10T17:09:46.097Z",
+      "id": 6
+    },
+    {
+      "name": "Cherry",
+      "surname": "Chapman",
+      "email": "c.chapman@randatmail.com",
+      "gender": "Masculin",
+      "role": "operator",
+      "createdAt": "2022-05-10T17:09:46.097Z",
+      "id": 7
+    },
+    {
+      "name": "Albert",
+      "surname": "Eliot",
+      "email": "a.elliott@randatmail.com",
+      "gender": "Masculin",
+      "role": "operator",
+      "createdAt": "2022-05-10T17:09:46.097Z",
+      "id": 8
     }
   ],
   "posts": [

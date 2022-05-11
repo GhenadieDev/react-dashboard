@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { InputRefs, User, UserRegError } from "types/interfaces";
+import { Refs, User, UserRegError } from "types/interfaces";
 import { UserContext, ErrorContext } from "types/contexts";
 import { dateTime } from "types/date";
 
@@ -22,19 +22,22 @@ import "styles/RegisterPage.scss";
 
 export const Register = () => {
   const [formData, setFormData] = useState<User | null>({});
-  const [checkboxIsChecked, setCheckboxIsChecked] = useState<boolean>(false);
+  const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
+
   const selectRef = useRef<HTMLSelectElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const surnameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
+
   const [errors, setErrors] = useState<UserRegError>({});
   const [submitBtnIsDisabled, setSubmitBtn] = useState(true);
   const [fieldErrorIsDisplay, setFieldError] = useState(false);
   const [regIsSucced, setIsSucced] = useState(false);
 
-  const refsObject: InputRefs = {
+  const refsObject: Refs = {
+    selectRef,
     nameRef,
     surnameRef,
     emailRef,
@@ -124,7 +127,6 @@ export const Register = () => {
               <Form>
                 <FormHeader title="Sign Up" />
                 <RegisterFields
-                  reference={selectRef}
                   setFormData={setFormData}
                   setCheckboxIsChecked={setCheckboxIsChecked}
                   checkboxIsChecked={checkboxIsChecked}
@@ -140,12 +142,12 @@ export const Register = () => {
                   </Button>
                 </div>
               </Form>
+              {regIsSucced ? (
+                <p>
+                  Succes, you can <Link to="/login">login</Link> now
+                </p>
+              ) : null}
             </div>
-            {regIsSucced ? (
-              <p>
-                Succes, you can <Link to="/login">login</Link> now
-              </p>
-            ) : null}
           </ErrorContext.Provider>
         </UserContext.Provider>
       </div>

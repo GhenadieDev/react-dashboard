@@ -32,12 +32,6 @@ export const Dashboard = () => {
   }, [allUsers]);
 
   useEffect(() => {
-    if (allPosts.length > 0) {
-      groupPostsByMonths(allPosts, listOfMonths, setChartPostData);
-    }
-  }, [allPosts]);
-
-  useEffect(() => {
     postApi.getAllPosts().then((res) => {
       if (res) {
         res.data.forEach((post: Post) => {
@@ -46,6 +40,12 @@ export const Dashboard = () => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    if (allPosts.length > 0) {
+      groupPostsByMonths(allPosts, listOfMonths, setChartPostData);
+    }
+  }, [allPosts]);
 
   return (
     <div className="dashboard">
