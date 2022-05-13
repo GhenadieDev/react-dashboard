@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const useLoading = () => {
   const [isLoading, setLoading] = useState(false);
@@ -8,10 +8,6 @@ export const useLoading = () => {
   const toggleLoading = () => {
     setLoading((prevState) => !prevState);
   };
-
-  useEffect(() => {
-    console.log("loading...");
-  }, [isLoading]);
 
   return [isLoading, toggleLoading] as const;
 };
