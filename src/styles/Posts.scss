@@ -1,13 +1,13 @@
 .btn-wrapper {
   width: fit-content;
-  padding: 20px;
+  margin-left: 10px;
 }
 
 .postscards-wrapper {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 400px;
-  gap: 10px;
+  grid-template-rows: fit-content(200px);
+  gap: 20px;
   padding: 20px;
 
   a {

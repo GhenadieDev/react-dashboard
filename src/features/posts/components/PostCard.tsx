@@ -8,7 +8,10 @@ import "styles/PostCard.scss";
 export const PostCard: React.FC<Post> = ({ children, ...props }) => {
   return (
     <div className="postcard">
-      <time className="date">{getDate(props.date)}</time>
+      <div className="postcard-header">
+        <h4 className="postcard-header__title">{props.title}</h4>
+        <time className="postcard-header__date">{getDate(props.date)}</time>
+      </div>
 
       <Link to={`/home/posts/${props.id}`} className="post-link">
         <figure className="image-wrapper">
@@ -18,8 +21,9 @@ export const PostCard: React.FC<Post> = ({ children, ...props }) => {
             className="image-wrapper__post-img"
           />
         </figure>
-        <h4 className="post-link__title">{props.title}</h4>
-        <p className="post-link__desc">{props.description}</p>
+        <div className="desc-wrapper">
+          <p className="desc-wrapper__desc">{props.description}</p>
+        </div>
       </Link>
       <div className="btns-wrapper">{children}</div>
     </div>

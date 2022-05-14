@@ -85,17 +85,6 @@
       },
       "date": "2022-05-12T14:35:40.445Z",
       "id": 4
-    },
-    {
-      "title": "random title",
-      "image_url": "https://images.unsplash.com/photo-1593340646418-af8bc7d03b2e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "description": "pokpwkpokrkepgokerpokgpoerkpogkerpokgo",
-      "author": {
-        "id": 6,
-        "fullName": "Lisa Gerald"
-      },
-      "date": "2022-05-12T17:26:55.042Z",
-      "id": 5
     }
   ]
 }

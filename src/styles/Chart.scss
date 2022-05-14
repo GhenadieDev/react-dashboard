@@ -65,6 +65,10 @@ $box-style: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
   .totals {
     flex-direction: column;
     row-gap: 20px;
+
+    .total-posts, .total-users {
+      width: 100%;
+    }
   }
 }
 

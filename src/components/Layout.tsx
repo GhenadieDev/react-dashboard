@@ -1,19 +1,25 @@
-import { TopBar, LeftMenu, Main } from "./index";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
-import "styles/Layout.scss";
+import { Layout as EBSLayout, Sidebar } from "ebs-design";
+import { TopBar, LeftMenu, Burger } from "./index";
 
 export const Layout = () => {
+  const [sidebarIsDisplay, setSidebarIsDisplay] = useState(false);
+
   return (
-    <div className="layout">
-      <div className="topbar-container">
+    <EBSLayout>
+      <EBSLayout.Topbar>
+        <Burger onClick={() => setSidebarIsDisplay(true)} />
         <TopBar />
-      </div>
-      <div className="left-menu-container">
+      </EBSLayout.Topbar>
+      <Sidebar style={{ zIndex: 0 }}>
         <LeftMenu />
-      </div>
-      <div className="main-container">
-        <Main />
-      </div>
-    </div>
+      </Sidebar>
+
+      <EBSLayout.Content>
+        <Outlet />
+      </EBSLayout.Content>
+    </EBSLayout>
   );
 };
