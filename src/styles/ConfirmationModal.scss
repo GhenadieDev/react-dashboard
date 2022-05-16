@@ -1,3 +1,14 @@
+.confirmation-modal-wrapper {
+  z-index: 1000000000;
+  position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+}
+
 .confirmation-modal {
   background-color: white;
   width: fit-content;
