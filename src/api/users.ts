@@ -11,7 +11,7 @@ export const userApi = {
     }
   },
 
-  logUser: async (user: Pick<User, "email" | "password">) => {
+  logUser: async (user: User) => {
     try {
       const result = await axios.get(
         `http://localhost:4000/users?email=${user.email}&password=${user.password}`
