@@ -17,8 +17,8 @@
       "email": "l.kelly@randatmail.com",
       "gender": "Feminin",
       "role": "operator",
-      "password": "Hb8kXN32F57m$D",
-      "confirmedPassword": "Hb8kXN32F57m$D",
+      "password": "Hb8kXN32F57m$d",
+      "confirmedPassword": "Hb8kXN32F57m$d",
       "createdAt": "2022-05-10T17:09:46.097Z",
       "id": 6
     },
@@ -30,15 +30,6 @@
       "role": "operator",
       "createdAt": "2022-05-10T17:09:46.097Z",
       "id": 7
-    },
-    {
-      "name": "Jasmin",
-      "surname": "Moor",
-      "email": "j.moore@randatmail.com",
-      "gender": "Feminin",
-      "role": "operator",
-      "createdAt": "2022-05-11T09:54:33.962Z",
-      "id": 8
     }
   ],
   "posts": [

@@ -3,35 +3,31 @@
     display: flex;
 }
 
+.field-wrapper {
+    width: 100%;
+
+    &__empty-field {
+        margin-top: -20px;
+        width: fit-content;
+        transition: 0.2s ease-out;
+    }
+}
+
 .register-fields {
     flex-direction: column;
-    
     &__confirm-pass {
         margin-top: -13px;
         color: red;
     }
 }
 
-.field-wrapper {
-    width: 100%;
-
-    &__empty-field {
-        position: absolute;
-        margin-left: 430px;
-        z-index: 1000;
-        background-color: bisque;
-        padding: 10px;
-        border-radius: 7px;
-        transition: 0.2s ease-out;
-    }
-}
-
 .select-wrapper {
+    width: 100%;
     padding-bottom: 20px;
 }
 
 .checkbox-wrapper {
-    align-items: center;
+    margin-right: auto;
     padding: 10px 0;
 
     &__data {

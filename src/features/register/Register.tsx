@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
 
 import { Refs, User, UserRegError } from "types/interfaces";
 import { UserContext, ErrorContext } from "types/contexts";

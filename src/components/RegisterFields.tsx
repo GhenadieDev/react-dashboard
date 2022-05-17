@@ -83,6 +83,7 @@ export const RegisterFields = ({
         ) : null}
       </div>
       <div className="select-wrapper">
+        <p>Select gender</p>
         <Select
           name="gender"
           value="Masculin"
