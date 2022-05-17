@@ -37,6 +37,15 @@ export const Register = () => {
   const [fieldErrorIsDisplay, setFieldError] = useState(false);
   const [regIsSucced, setIsSucced] = useState(false);
 
+  const { refetch } = useQuery(
+    "reg-user",
+    async () => {
+      const result = await userApi.createUser(formData);
+      return result;
+    },
+    { refetchOnWindowFocus: false, enabled: false }
+  );
+
   const refsObject: Refs = {
     selectRef,
     nameRef,
@@ -94,7 +103,7 @@ export const Register = () => {
     }, 7000);
   }, [errors.inputs]);
 
-  const submitHandler: React.MouseEventHandler = (e) => {
+  const submitHandler: React.MouseEventHandler = async (e) => {
     e.preventDefault();
     const result = checkRegisterFields(formData, refsObject);
     setErrors(result);
@@ -104,16 +113,15 @@ export const Register = () => {
     );
 
     if (errors.length === 0) {
-      userApi.createUser(formData).then((res) => {
-        if (res?.status === 201) {
-          Object.values(refsObject).forEach(
-            (input) => (input.current.value = "")
-          );
-          setIsSucced(true);
-        } else {
-          setIsSucced(false);
-        }
-      });
+      const { data } = await refetch();
+      if (data?.status === 201) {
+        Object.values(refsObject).forEach(
+          (input) => (input.current.value = "")
+        );
+        setIsSucced(true);
+      } else {
+        setIsSucced(false);
+      }
     }
   };
 

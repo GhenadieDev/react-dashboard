@@ -4,6 +4,7 @@ import { Form, LoginFields, FormHeader, Button } from "components/index";
 import { User } from "types/interfaces";
 import { userApi } from "api/users";
 import { AufContainer } from "features/auf_container/AufContainer";
+import { useQuery } from "react-query";
 
 import "styles/LoginPage.scss";
 
@@ -20,17 +21,26 @@ export const Login = () => {
   const [logError, setLogError] = useState<string>("");
   const navigate = useNavigate();
 
+  const { refetch } = useQuery(
+    "log-user",
+    async () => {
+      const result = await userApi.logUser(userData);
+      return result;
+    },
+    {
+      refetchOnWindowFocus: false,
+      enabled: false,
+    }
+  );
+
   const clickHandler: React.MouseEventHandler = async (e) => {
     e.preventDefault();
 
     if (Object.keys(userData).length !== 0) {
-      const result = await userApi.logUser(userData);
-      if (result?.status === 200 && result.data.length > 0) {
+      const { data } = await refetch();
+      if (data?.data.length > 0) {
         setLogError("");
-        window.localStorage.setItem(
-          "userId",
-          JSON.stringify(result.data[0].id)
-        );
+        window.localStorage.setItem("userId", JSON.stringify(data?.data[0].id));
         setUserData((prevState) => ({
           ...prevState,
           email: "",
@@ -38,7 +48,7 @@ export const Login = () => {
         }));
         navigate("/home");
       } else {
-        setLogError("Email or password is invalid");
+        setLogError("Email or Password is invalid");
       }
     }
   };
