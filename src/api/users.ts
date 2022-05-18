@@ -29,8 +29,8 @@ export const userApi = {
           `http://localhost:4000/users/${userId}`
         );
         return result;
-      } catch (error) {
-        return Promise.reject(error);
+      } catch (error: any) {
+        throw new Error(error?.message);
       }
     }
   },

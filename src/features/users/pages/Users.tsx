@@ -25,7 +25,7 @@ export const Users = () => {
     useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [choosenUser, setChoosenUser] = useState<User>({});
-  const currentUser = useContext<User | null>(UserProfileContext);
+  const currentUser = useContext<User | null | undefined>(UserProfileContext);
   const [isLoading, toggleLoading] = useLoading();
 
   useEffect(() => {

@@ -20,7 +20,7 @@ import "styles/Posts.scss";
 import "styles/common.scss";
 
 export const Posts = () => {
-  const currentUser = useContext<User | null>(UserProfileContext);
+  const currentUser = useContext<User | null | undefined>(UserProfileContext);
   const [posts, setPosts] = useState<Post[]>([]);
   const [isConfirmationModalVisible, setConfirmationModalVisible] =
     useState(false);

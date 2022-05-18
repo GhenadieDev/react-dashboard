@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
 
 import { userApi } from "api/users";
 import { Layout } from "components";
@@ -8,37 +9,31 @@ import { User } from "types/interfaces";
 import { AufContainer } from "features/auf_container/AufContainer";
 
 export const Home = () => {
-  const [profile, setProfile] = useState<User>({});
   const navigate = useNavigate();
+
+  const { data: profile } = useQuery(
+    "logged",
+    async () => {
+      const result = await userApi.getUserById(localStorage.getItem("userId"));
+      return result;
+    },
+    {
+      enabled: localStorage.getItem("userId") !== null,
+      onError: () => {
+        navigate("/login");
+      },
+    }
+  );
 
   useEffect(() => {
     if (!localStorage.getItem("userId")) {
       navigate("/login");
-    } else {
-      userApi
-        .getUserById(localStorage.getItem("userId"))
-        .then((res) => {
-          if (res?.status === 200) {
-            setProfile((prevState) => ({
-              ...prevState,
-              name: res.data?.name,
-              surname: res.data?.surname,
-              email: res.data?.email,
-              gender: res.data?.gender,
-              id: res.data?.id,
-              role: res.data?.role,
-            }));
-          }
-        })
-        .catch((err) => {
-          navigate("/login");
-        });
     }
   }, [navigate]);
 
   return (
     <AufContainer>
-      <UserProfileContext.Provider value={profile}>
+      <UserProfileContext.Provider value={profile?.data}>
         <Layout />
       </UserProfileContext.Provider>
     </AufContainer>
