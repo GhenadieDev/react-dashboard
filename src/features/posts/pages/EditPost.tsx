@@ -2,25 +2,16 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { postApi } from "api/posts";
-import {
-  Button,
-  Form,
-  FormHeader,
-  Input,
-  Loader,
-  TextArea,
-} from "components/index";
+import { Button, EBSForm, FormHeader, Input, Textarea } from "components/index";
 
 import { Post } from "types/interfaces";
 
-import { useLoading } from "hooks/useLoading";
 import "styles/EditPost.scss";
 import "styles/common.scss";
 
 export const EditPost = () => {
   const { postID } = useParams();
   const [currentPost, setCurrentPost] = useState<Post>({});
-  const [isLoading, toggleLoading] = useLoading();
 
   useEffect(() => {
     if (postID) {
@@ -33,11 +24,8 @@ export const EditPost = () => {
             description: res.data.description,
             image_url: res.data.image_url,
             id: res.data.id,
-            author: {
-              ...prevState.author,
-              id: res.data.author.id,
-              fullName: res.data.author.fullName,
-            },
+            authorId: res.data.authorId,
+            authorName: res.data.authorName,
           }));
         }
       });
@@ -53,45 +41,30 @@ export const EditPost = () => {
     }));
   };
 
-  const submitHandler: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault();
-    toggleLoading();
-    postApi.editPost(currentPost).then((res) => {
-      if (res?.status === 200) {
-        toggleLoading();
-      }
-    });
+  const submitHandler = async () => {
+    await postApi.editPost(currentPost);
   };
 
   return (
     <div className="edit-post">
       <div className="form-wrapper">
-        <Form>
+        <EBSForm>
           <div className="header-container flex">
             <FormHeader title="Edit Post" />
-            {isLoading ? <Loader /> : null}
           </div>
-          <Input
-            defaultValue={currentPost.title}
-            onChange={handleChange}
-            name="title"
-          />
+          <Input defaultValue={currentPost.title} name="title" />
           <div className="desc-wrapper">
-            <TextArea
+            <Textarea
               defaultValue={currentPost.description}
-              onChange={handleChange}
+              //onChange={handleChange}
               name="description"
             />
           </div>
-          <Input
-            defaultValue={currentPost.image_url}
-            onChange={handleChange}
-            name="image_url"
-          />
-          <Button variant="primary" onClick={submitHandler}>
+          <Input defaultValue={currentPost.image_url} name="image_url" />
+          <Button type="primary" onClick={submitHandler}>
             Submit
           </Button>
-        </Form>
+        </EBSForm>
       </div>
     </div>
   );

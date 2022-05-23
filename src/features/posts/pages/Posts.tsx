@@ -5,16 +5,14 @@ import { PostCard } from "../components/PostCard";
 import {
   Button,
   ConfirmationModal,
-  Table,
   ConfirmationModalHeader,
-  Loader,
+  Table,
 } from "components/index";
 import { AufContainer } from "features/auf_container/AufContainer";
 
 import { Post, User } from "types/interfaces";
 import { UserProfileContext } from "types/contexts";
 import { postApi } from "api/posts";
-import { useLoading } from "hooks/useLoading";
 
 import "styles/Posts.scss";
 import "styles/common.scss";
@@ -26,7 +24,6 @@ export const Posts = () => {
     useState(false);
   const [choosenPost, setChoosenPost] = useState<Post>({});
   const navigate = useNavigate();
-  const [isLoading, toggleLoading] = useLoading();
 
   const showConfirmationModal = (post: Post) => {
     setConfirmationModalVisible(true);
@@ -34,10 +31,8 @@ export const Posts = () => {
   };
 
   const deletePosts = async () => {
-    toggleLoading();
     const res = await postApi.deletePost(choosenPost);
     if (res?.status === 200) {
-      toggleLoading();
       const personalPosts = await postApi.getPersonalPosts(currentUser?.id);
       setPosts(personalPosts);
     }
@@ -71,7 +66,6 @@ export const Posts = () => {
             <ConfirmationModalHeader>
               <div className="header-container flex">
                 <h4>You're gonna delete this post. Are you sure?</h4>
-                {isLoading ? <Loader /> : null}
               </div>
             </ConfirmationModalHeader>
           </ConfirmationModal>
@@ -79,7 +73,7 @@ export const Posts = () => {
         {currentUser?.role && currentUser.role === "operator" ? (
           <div className="btn-wrapper">
             <Link to="/home/posts/create">
-              <Button variant="primary">Add Post</Button>
+              <Button type="primary">Add Post</Button>
             </Link>
           </div>
         ) : null}
@@ -97,10 +91,10 @@ export const Posts = () => {
                       id={post.id}
                     >
                       <Link to={`/home/posts/${post.id}/edit`}>
-                        <Button variant="primary">Edit</Button>
+                        <Button type="primary">Edit</Button>
                       </Link>
                       <Button
-                        variant="danger"
+                        type="primary"
                         onClick={() => showConfirmationModal(post)}
                       >
                         Delete
@@ -111,16 +105,38 @@ export const Posts = () => {
               : null}
           </article>
         ) : (
-          <Table className="user-posts">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Image URL</th>
-                <th>Created At</th>
-                <th>Author</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
+          <Table
+            columns={[
+              {
+                dataIndex: "title",
+                title: "Title",
+              },
+              {
+                dataIndex: "image_url",
+                title: "Image URL",
+              },
+              {
+                dataIndex: "date",
+                title: "Created At",
+              },
+              {
+                dataIndex: "authorName",
+                title: "Author",
+              },
+              {
+                title: "Actions",
+              },
+            ]}
+            data={posts}
+          />
+        )}
+      </div>
+    </AufContainer>
+  );
+};
+
+/*
+<Table className="user-posts">
             <tbody>
               {posts.length > 0
                 ? posts.map((post) => {
@@ -143,10 +159,10 @@ export const Posts = () => {
                               to={`/home/posts/${post.id}/edit`}
                               state={post}
                             >
-                              <Button variant="primary">Edit</Button>
+                              <Button type="primary">Edit</Button>
                             </Link>
                             <Button
-                              variant="danger"
+                              type="primary"
                               onClick={() => showConfirmationModal(post)}
                             >
                               Delete
@@ -159,8 +175,4 @@ export const Posts = () => {
                 : null}
             </tbody>
           </Table>
-        )}
-      </div>
-    </AufContainer>
-  );
-};
+*/

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserProfileContext } from "types/contexts";
+import { ListGroup } from "components/index";
 
 import "styles/LeftMenu.scss";
 
@@ -10,25 +11,25 @@ export const LeftMenu = () => {
   return (
     <aside className="leftbar">
       <nav className="leftbar">
-        <ul className="left-menu">
-          <li className="left-menu-item">
+        <ListGroup>
+          <ListGroup.Item className="left-menu-item">
             <Link to="/home/dashboard" className="left-menu-item__link">
               Dashboard
             </Link>
-          </li>
+          </ListGroup.Item>
           {currentUser?.role && currentUser.role === "admin" ? (
-            <li className="left-menu-item">
+            <ListGroup.Item className="left-menu-item">
               <Link to="/home/users" className="left-menu-item__link">
                 Users
               </Link>
-            </li>
+            </ListGroup.Item>
           ) : null}
-          <li className="left-menu-item">
+          <ListGroup.Item className="left-menu-item">
             <Link to="/home/posts" className="left-menu-item__link">
               Posts
             </Link>
-          </li>
-        </ul>
+          </ListGroup.Item>
+        </ListGroup>
       </nav>
     </aside>
   );

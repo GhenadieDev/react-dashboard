@@ -1,9 +1,8 @@
-import React, { SetStateAction, useRef, useState, useContext } from "react";
+import React, { SetStateAction, useRef, useState } from "react";
 
 import {
   Button,
   Input,
-  Loader,
   Modal,
   ModalActions,
   ModalContent,
@@ -14,10 +13,8 @@ import {
 import { AddUserError, User } from "types/interfaces";
 import { dateTime } from "types/date";
 
-import { checkAddedUser } from "utils/checkAddedUser";
-import { Loading } from "types/contexts";
-
 import "styles/common.scss";
+import { Form } from "ebs-design";
 
 interface UserModalFormProps {
   userData: User | null;
@@ -43,7 +40,6 @@ export const UserModalForm = ({
   const nameRef = useRef<HTMLInputElement>(null);
   const surnameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
-  const loading = useContext(Loading);
 
   const onChangeHandler: React.ChangeEventHandler<
     HTMLInputElement | HTMLSelectElement
@@ -55,7 +51,7 @@ export const UserModalForm = ({
   };
 
   const submitHandler = () => {
-    const obj: User = {
+    /*const obj: User = {
       name: currentData?.name ? currentData.name : userData?.name,
       surname: currentData?.surname ? currentData.surname : userData?.surname,
       email: currentData?.email ? currentData.email : userData?.email,
@@ -86,7 +82,7 @@ export const UserModalForm = ({
         emailRef.current.value = "";
       }
       setUserData({});
-    }
+    }*/
   };
 
   const handleClose = () => {
@@ -104,14 +100,12 @@ export const UserModalForm = ({
       <Modal open={open} setOpen={onClose} setUserData={setUserData}>
         <div className="title-container flex">
           <ModalTitle>{title}</ModalTitle>
-          {loading ? <Loader /> : null}
         </div>
         <ModalContent>
           <Input
             ref={nameRef}
             placeholder="Name"
             defaultValue={userData?.name ? userData.name : currentData?.name}
-            onChange={onChangeHandler}
             name="name"
             style={{
               border: validateErrors.nameField
@@ -125,7 +119,6 @@ export const UserModalForm = ({
             defaultValue={
               userData?.surname ? userData.surname : currentData?.surname
             }
-            onChange={onChangeHandler}
             name="surname"
             style={{
               border: validateErrors.surnameField
@@ -137,7 +130,6 @@ export const UserModalForm = ({
             ref={emailRef}
             placeholder="Email"
             defaultValue={userData?.email ? userData.email : currentData?.email}
-            onChange={onChangeHandler}
             name="email"
             style={{
               border:
@@ -146,35 +138,28 @@ export const UserModalForm = ({
                   : "0.3px solid #e6e6e6",
             }}
           />
-          <Select
-            value={userData?.gender ? userData.gender : "Masculin"}
-            onChange={onChangeHandler}
-            name="gender"
-            ref={genderRef}
+          <Form.Field name="gender">
+            <Select value={userData?.gender ? userData.gender : "Masculin"}>
+              <option value="Masculin">Masculin</option>
+              <option value="Feminin">Feminin</option>
+              <option value="other">Ma abtin</option>
+            </Select>
+          </Form.Field>
+          <Form.Field
+            name="role"
+            initialValue={userData?.role ? userData?.role : "Admin"}
           >
-            <option value="Masculin">Masculin</option>
-            <option value="Feminin">Feminin</option>
-            <option value="other">Ma abtin</option>
-          </Select>
-
-          <div className="select-wrapper">
-            <p className="select-wrapper__title">Select role</p>
-            <Select
-              defaultValue={userData?.role ? userData?.role : "Admin"}
-              onChange={onChangeHandler}
-              name="role"
-              ref={roleRef}
-            >
+            <Select>
               <option value="admin">Admin</option>
               <option value="operator">Operator</option>
             </Select>
-          </div>
+          </Form.Field>
         </ModalContent>
         <ModalActions>
-          <Button variant="primary" onClick={submitHandler}>
+          <Button type="primary" onClick={submitHandler}>
             Submit
           </Button>
-          <Button variant="danger" onClick={handleClose}>
+          <Button type="primary" onClick={handleClose}>
             Cancel
           </Button>
         </ModalActions>

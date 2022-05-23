@@ -21,18 +21,6 @@
   column-gap: 10px;
 }
 
-.posts {
-    tbody {
-      .table-row {
-        &:hover {
-          cursor: pointer;
-          background-color: bisque;
-          transition: 0.3s ease-out;
-        }
-      }
-    }
-}
-
 @media(max-width: 1200px) {
   .postscards-wrapper {
     grid-template-columns: repeat(3, 1fr);

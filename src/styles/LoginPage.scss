@@ -8,18 +8,27 @@
 
     .form-wrapper {
         width: 30%;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        padding: 20px 20px;
+        border-radius: 7px;
     }
 
 }
 
-@media(max-width: 1090px) {
-    .form-wrapper {
-        width: 40%;
+@media(max-width: 1060px) {
+    .login {
+        .form-wrapper {
+                width: 60%;
+            }
     }
 }
 
-@media(max-width: 590px) {
-    .form-wrapper {
-        width: 70%;
+@media(max-width: 529px) {
+    .login {
+        .form-wrapper {
+            width: 80%;
+        }
     }
 }
+

@@ -1,65 +1,30 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { postApi } from "api/posts";
-import {
-  Button,
-  Form,
-  FormHeader,
-  Input,
-  Loader,
-  TextArea,
-} from "components/index";
+import { Button, EBSForm, FormHeader, Input, Textarea } from "components/index";
+import { useForm } from "ebs-design";
 
 import { UserProfileContext } from "types/contexts";
 import { dateTime } from "types/date";
 import { Post } from "types/interfaces";
 
-import { useLoading } from "hooks/useLoading";
-
 import "styles/CreatePost.scss";
-import "styles/common.scss";
 
 export const CreatePost = () => {
   const currentUser = useContext(UserProfileContext);
-  const [post, setPost] = useState<Post>({
-    title: "",
-    image_url: "",
-    description: "",
-  });
-  const [isLoading, toggleLoading] = useLoading();
+  const [form] = useForm();
 
-  useEffect(() => {
-    setPost((prevState) => ({
-      ...prevState,
-      author: {
-        ...prevState.author,
-        id: currentUser?.id,
-        fullName: currentUser?.name + " " + currentUser?.surname,
-      },
+  const submitHandler = (values: any) => {
+    const post: Post = {
+      authorId: currentUser?.id,
+      authorName: currentUser?.name + " " + currentUser?.surname,
       date: dateTime,
-    }));
-  }, [currentUser?.id, currentUser?.name, currentUser?.surname]);
-
-  const onChangeHandler: React.ChangeEventHandler<
-    HTMLInputElement | HTMLTextAreaElement
-  > = (e) => {
-    setPost((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const submitHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    toggleLoading();
+      title: values.title,
+      description: values.description,
+      image_url: values.image_url,
+    };
     postApi.createPost(post).then((res) => {
       if (res?.status === 201) {
-        setPost((prevState) => ({
-          ...prevState,
-          title: "",
-          description: "",
-          image_url: "",
-        }));
-        toggleLoading();
+        form.resetFields();
       }
     });
   };
@@ -67,39 +32,37 @@ export const CreatePost = () => {
   return (
     <div className="create-post">
       <div className="form-wrapper">
-        <Form>
+        <EBSForm onFinish={submitHandler} form={form}>
           <div className="header-container flex">
             <FormHeader title="Add Post" />
-            {isLoading ? <Loader /> : null}
           </div>
-          <Input
-            value={post.title}
-            placeholder="Title"
-            type="text"
-            onChange={onChangeHandler}
+          <EBSForm.Field
+            initialValue=""
             name="title"
-          />
-          <div className="desc-wrapper">
-            <TextArea
-              value={post.description}
-              placeholder="Description"
-              onChange={onChangeHandler}
-              name="description"
-            />
-          </div>
-          <Input
-            value={post.image_url}
-            type="text"
-            placeholder="Image URL"
-            onChange={onChangeHandler}
+            rules={[{ required: true }]}
+          >
+            <Input placeholder="Title" type="text" isClearable />
+          </EBSForm.Field>
+          <EBSForm.Field
+            initialValue=""
+            name="description"
+            rules={[{ required: true }]}
+          >
+            <Textarea placeholder="Description" />
+          </EBSForm.Field>
+          <EBSForm.Field
+            initialValue=""
             name="image_url"
-          />
+            rules={[{ required: true }]}
+          >
+            <Input type="text" placeholder="Image URL" isClearable />
+          </EBSForm.Field>
           <div className="btns-wrapper">
-            <Button variant="primary" onClick={submitHandler}>
+            <Button submit type="primary" onClick={() => submitHandler}>
               Submit
             </Button>
           </div>
-        </Form>
+        </EBSForm>
       </div>
     </div>
   );

@@ -1,6 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { useLoading } from "hooks/useLoading";
-import { Loading } from "types/contexts";
 
 import { userApi } from "api/users";
 import { UserProfileContext } from "types/contexts";
@@ -10,7 +8,6 @@ import {
   ConfirmationModal,
   Table,
   ConfirmationModalHeader,
-  Loader,
 } from "components/index";
 
 import { UserModalForm } from "../components/UserModalForm";
@@ -26,7 +23,6 @@ export const Users = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [choosenUser, setChoosenUser] = useState<User>({});
   const currentUser = useContext<User | null | undefined>(UserProfileContext);
-  const [isLoading, toggleLoading] = useLoading();
 
   useEffect(() => {
     userApi.getAllUsers().then((res) => {
@@ -39,10 +35,8 @@ export const Users = () => {
   const clickHandlerDelete = async () => {
     if (choosenUser !== null) {
       setUsers(users.filter((user) => user.id !== choosenUser.id));
-      toggleLoading();
       const result = await userApi.deleteUser(choosenUser.id);
       if (result?.status === 200) {
-        toggleLoading();
         const allUsers = await userApi.getAllUsers();
         setUsers(allUsers?.data);
         setConfirmationModalVisible(false);
@@ -51,20 +45,16 @@ export const Users = () => {
   };
 
   const addUsers = async (obj: User) => {
-    toggleLoading();
     await userApi.createUser(obj);
     const allUsers = await userApi.getAllUsers();
     setUsers(allUsers?.data);
-    toggleLoading();
   };
 
   const editUsers = async (obj: User) => {
-    toggleLoading();
     await userApi.editUser(obj);
     const allUsers = await userApi.getAllUsers();
     setIsModalVisible(false);
     setUsers(allUsers?.data);
-    toggleLoading();
   };
 
   return (
@@ -78,38 +68,65 @@ export const Users = () => {
             <ConfirmationModalHeader>
               <div className="header-container flex">
                 <h4>{`You're gonna delete user: ${choosenUser.name} ${choosenUser.surname}. Are you sure?`}</h4>
-                {isLoading ? <Loader /> : null}
               </div>
             </ConfirmationModalHeader>
           </ConfirmationModal>
         )}
-        <Loading.Provider value={isLoading}>
-          <UserModalForm
-            userData={
-              Object.values(choosenUser).length > 0 ? choosenUser : null
-            }
-            title={
-              Object.values(choosenUser).length > 0 ? "Edit User" : "Add User"
-            }
-            open={isModalVisible}
-            onClose={setIsModalVisible}
-            setUserData={setChoosenUser}
-            callback={
-              Object.values(choosenUser).length > 0 ? editUsers : addUsers
-            }
-          />
-        </Loading.Provider>
+        <UserModalForm
+          userData={Object.values(choosenUser).length > 0 ? choosenUser : null}
+          title={
+            Object.values(choosenUser).length > 0 ? "Edit User" : "Add User"
+          }
+          open={isModalVisible}
+          onClose={setIsModalVisible}
+          setUserData={setChoosenUser}
+          callback={
+            Object.values(choosenUser).length > 0 ? editUsers : addUsers
+          }
+        />
 
         <div className="btn-wrapper">
           <Button
-            variant="primary"
+            type="primary"
             name="add-button"
             onClick={() => setIsModalVisible(true)}
           >
             Add new User
           </Button>
         </div>
-        <Table>
+        {/*
+        <Table
+          columns={[
+            {
+              dataIndex: "name",
+              title: "Name",
+            },
+            {
+              dataIndex: "surname",
+              title: "Surname",
+            },
+            {
+              dataIndex: "email",
+              title: "Email",
+            },
+            {
+              dataIndex: "gender",
+              title: "Gender",
+            },
+            {
+              dataIndex: "actions",
+              title: "Actions",
+            },
+          ]}
+        />
+        */}
+      </div>
+    </AufContainer>
+  );
+};
+
+/*
+  <Table>
           <thead>
             <tr>
               <th>Name</th>
@@ -136,7 +153,7 @@ export const Users = () => {
                               className="action-btns-wrapper__edit"
                               onClick={() => setIsModalVisible(true)}
                               name="edit-button"
-                              variant="primary"
+                              type="primary"
                             >
                               Edit
                             </Button>
@@ -144,7 +161,7 @@ export const Users = () => {
                             <Button
                               className="action-btns-wrapper__delete"
                               onClick={() => setConfirmationModalVisible(true)}
-                              variant="danger"
+                              type="primary"
                             >
                               Delete
                             </Button>
@@ -156,7 +173,4 @@ export const Users = () => {
               : null}
           </tbody>
         </Table>
-      </div>
-    </AufContainer>
-  );
-};
+*/

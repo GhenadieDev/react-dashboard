@@ -13,7 +13,7 @@ import { CreatePost } from "features/posts/pages/CreatePost";
 import { EditPost } from "features/posts/pages/EditPost";
 
 import "./App.css";
-import "ebs-design/dist/styles/index.scss";
+import "styles/variables.scss";
 
 function App() {
   return (

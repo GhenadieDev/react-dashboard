@@ -30,52 +30,28 @@
       "role": "operator",
       "createdAt": "2022-05-10T17:09:46.097Z",
       "id": 7
+    },
+    {
+      "role": "operator",
+      "createdAt": "2022-05-20T12:02:10.562Z",
+      "name": "porkgep",
+      "surname": "pokerpok",
+      "email": "fpwofowpek@mail.ru",
+      "gender": "Feminin",
+      "password": "Ghena1994@2",
+      "confirmedPassword": "Ghena1994@2",
+      "id": 8
     }
   ],
   "posts": [
     {
-      "date": "2022-05-04T09:32:57.857Z",
-      "title": "Titanic - Legendary Ship",
-      "description": "The first-class accommodation was designed to be the pinnacle of comfort and luxury, with a gymnasium, swimming pool, libraries, high-class restaurants, and opulent cabins. A high-powered radiotelegraph transmitter was available for sending passenger \"marconigrams\" and for the ship's operational use. The Titanic had advanced safety features, such as watertight compartments and remotely activated watertight doors.",
-      "image_url": "https://images.unsplash.com/photo-1558431571-4a9f128e135f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80",
-      "id": 1,
-      "author": {
-        "id": 1,
-        "fullName": "Vlad Tipes"
-      }
-    },
-    {
-      "title": "Antarctica",
-      "image_url": "https://images.unsplash.com/photo-1493328967571-819121ed5085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
-      "description": "The ice shelves of Antarctica were probably first seen in 1820, during a Russian expedition led by Fabian Gottlieb von Bellingshausen and Mikhail Lazarev. The decades that followed saw further exploration in French, American, and British expeditions. The first confirmed landing was by a Norwegian team in 1895. In the early 20th century, there were a few expeditions into the interior of the continent. British explorer Ernest Shackleton was the first to reach the magnetic South Pole in 1907, and the geographic south pole was first reached in 1911 by Norwegian explorers.",
-      "author": {
-        "id": 6,
-        "fullName": "Lisa Gerald"
-      },
-      "date": "2022-05-11T16:39:19.287Z",
-      "id": 2
-    },
-    {
-      "title": "Everest",
-      "image_url": "https://images.unsplash.com/photo-1623127899673-39264566a100?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-      "description": "Mount Everest attracts many climbers, including highly experienced mountaineers. There are two main climbing routes, one approaching the summit from the southeast in Nepal (known as the \"standard route\") and the other from the north in Tibet. While not posing substantial technical climbing challenges on the standard route, Everest presents dangers such as altitude sickness, weather, and wind, as well as hazards from avalanches and the Khumbu Icefall. As of 2019, over 300 people have died on Everest,[4] many of whose bodies remain on the mountain.",
-      "author": {
-        "id": 6,
-        "fullName": "Lisa Gerald"
-      },
-      "date": "2022-05-12T14:35:40.445Z",
-      "id": 3
-    },
-    {
-      "title": "Grand Canyon",
-      "image_url": "https://images.unsplash.com/photo-1615551043360-33de8b5f410c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80",
-      "description": "The canyon and adjacent rim are contained within Grand Canyon National Park, the Kaibab National Forest, Grand Canyon–Parashant National Monument, the Hualapai Indian Reservation, the Havasupai Indian Reservation and the Navajo Nation. President Theodore Roosevelt was a major proponent of the preservation of the Grand Canyon area and visited it on numerous occasions to hunt and enjoy the scenery.",
-      "author": {
-        "id": 6,
-        "fullName": "Lisa Gerald"
-      },
-      "date": "2022-05-12T14:35:40.445Z",
-      "id": 4
+      "authorId": 8,
+      "authorName": "porkgep pokerpok",
+      "date": "2022-05-20T17:30:54.549Z",
+      "title": "powepfewokpo",
+      "description": "pokfwpoefkpowk",
+      "image_url": "https://images.unsplash.com/photo-1558431571-4a9f128e135f?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332",
+      "id": 1
     }
   ]
 }

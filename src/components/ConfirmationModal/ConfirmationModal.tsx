@@ -18,10 +18,10 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
       <div className="confirmation-modal flex">
         {children}
         <div className="btns-wrapper flex">
-          <Button variant="primary" onClick={props.clickHandler}>
+          <Button type="primary" onClick={props.clickHandler}>
             Confirm
           </Button>
-          <Button variant="danger" onClick={() => props.setOpen(false)}>
+          <Button type="primary" onClick={() => props.setOpen(false)}>
             Cancel
           </Button>
         </div>
