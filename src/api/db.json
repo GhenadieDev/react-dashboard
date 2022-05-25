@@ -34,15 +34,15 @@
       "id": 8
     },
     {
+      "name": "Franckenstein",
+      "surname": "Gutenberg",
+      "email": "frank@gmail.com",
       "role": "operator",
-      "createdAt": "2022-05-25T16:16:02.912Z",
-      "name": "pfwoekpo",
-      "surname": "pokwpof",
-      "email": "pofkwpeof@gmail.com",
       "gender": "Masculin",
       "password": "Nw0F?@bP}{Ma",
       "confirmedPassword": "Nw0F?@bP}{Ma",
-      "id": 9
+      "id": 9,
+      "createdAt": "2022-05-25T16:30:09.890Z"
     }
   ],
   "posts": [

@@ -28,14 +28,8 @@ export const userApi = {
   },
 
   getAllUsers: async () => {
-    try {
-      const result = await axios.get("http://localhost:4000/users");
-      if (result.status === 200) {
-        return result;
-      }
-    } catch (error) {
-      console.log("get all users error: ", error);
-    }
+    const result = await axios.get("http://localhost:4000/users");
+    return result;
   },
 
   deleteUser: async (userId: number | string | undefined) => {

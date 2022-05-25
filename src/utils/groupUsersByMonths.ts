@@ -9,7 +9,7 @@ export const groupUsersByMonth = (
   listOfMonths.forEach((month) => {
     const newObj = {
       name: month.name,
-      users: users.filter(
+      users: users?.filter(
         (user) =>
           user.createdAt
             ?.toString()
