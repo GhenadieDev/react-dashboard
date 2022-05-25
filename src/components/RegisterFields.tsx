@@ -18,17 +18,13 @@ export const RegisterFields = ({
 }: Props) => {
   return (
     <>
-      <EBSForm.Field name="name" rules={[{ required: true }]} initialValue="">
-        <Input autoFocus={true} type="text" placeholder="Name" isClearable />
+      <EBSForm.Field name="name" rules={[{ required: true }]}>
+        <Input autoFocus={true} placeholder="Name" isClearable />
       </EBSForm.Field>
-      <EBSForm.Field
-        name="surname"
-        rules={[{ required: true }]}
-        initialValue=""
-      >
-        <Input type="text" placeholder="Surname" isClearable />
+      <EBSForm.Field name="surname" rules={[{ required: true }]}>
+        <Input placeholder="Surname" isClearable />
       </EBSForm.Field>
-      <EBSForm.Field name="email" initialValue="" rules={[{ required: true }]}>
+      <EBSForm.Field name="email" rules={[{ required: true }]}>
         <Input type="email" placeholder="Email" isClearable />
       </EBSForm.Field>
       <EBSForm.Field name="gender" rules={[{ required: true }]}>
@@ -58,21 +54,16 @@ export const RegisterFields = ({
             pattern: passwordPattern,
           },
         ]}
-        initialValue=""
       >
         <Input type="password" placeholder="Password" isClearable />
       </EBSForm.Field>
-      <EBSForm.Field
-        name="confirmedPassword"
-        rules={[{ required: true }]}
-        initialValue=""
-      >
+      <EBSForm.Field name="confirmedPassword" rules={[{ required: true }]}>
         <Input type="password" placeholder="Confirm password" isClearable />
       </EBSForm.Field>
       {samepassword !== null ? (
         <p style={{ color: "red" }}>{samepassword}</p>
       ) : null}
-      <EBSForm.Field>
+      <EBSForm.Field rules={[{ required: true }]} name="checkedTerms">
         <Checkbox
           text="I agree with the processing of personal data"
           onClick={() => setCheckboxIsChecked(!checkboxIsChecked)}

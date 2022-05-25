@@ -3,12 +3,8 @@ import { User } from "types/interfaces";
 
 export const userApi = {
   createUser: async (user: User | null) => {
-    try {
-      const result = await axios.post("http://localhost:4000/users", user);
-      return result;
-    } catch (error) {
-      console.log("post users error: ", error);
-    }
+    const result = await axios.post("http://localhost:4000/users", user);
+    return result;
   },
 
   logUser: async (user: User) => {

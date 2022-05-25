@@ -15,6 +15,11 @@ const formObject = {
   disabledBtn: false,
 };
 
+const inittialFieldsValue = {
+  email: "",
+  password: "",
+};
+
 export const Login = () => {
   const [logError, setLogError] = useState<string>("");
   const navigate = useNavigate();
@@ -26,10 +31,6 @@ export const Login = () => {
   });
 
   const [form] = useForm();
-
-  useEffect(() => {
-    form.setFieldsValue("");
-  }, [form]);
 
   useEffect(() => {
     if (mutation.isSuccess) {
@@ -53,7 +54,12 @@ export const Login = () => {
     <AufContainer>
       <div className="login">
         <div className="form-wrapper">
-          <EBSForm type="vertical" onFinish={submitHandler} form={form}>
+          <EBSForm
+            type="vertical"
+            onFinish={submitHandler}
+            form={form}
+            initialValues={inittialFieldsValue}
+          >
             <FormHeader
               title="Log In"
               question="Don't have an account?"
