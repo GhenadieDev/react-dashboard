@@ -12,14 +12,10 @@ export const userApi = {
   },
 
   logUser: async (user: User) => {
-    try {
-      const result = await axios.get(
-        `http://localhost:4000/users?email=${user.email}&password=${user.password}`
-      );
-      return result;
-    } catch (error) {
-      console.log("log error: ", error);
-    }
+    const result = await axios.get(
+      `http://localhost:4000/users?email=${user.email}&password=${user.password}`
+    );
+    return result;
   },
 
   getUserById: async (userId: number | string | null) => {

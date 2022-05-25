@@ -1,23 +1,16 @@
-import React, { SetStateAction, useRef, useState } from "react";
+import React, { SetStateAction } from "react";
 
-import {
-  Button,
-  Input,
-  Modal,
-  ModalActions,
-  ModalContent,
-  ModalTitle,
-  Select,
-} from "components/index";
+import { Button, EBSForm, Input, Modal, Select } from "components/index";
 
-import { AddUserError, User } from "types/interfaces";
-import { dateTime } from "types/date";
+import { Post, User } from "types/interfaces";
 
 import "styles/common.scss";
-import { Form } from "ebs-design";
+import { Space } from "ebs-design";
+import { dateTime } from "types/date";
 
 interface UserModalFormProps {
-  userData: User | null;
+  formInstance?: any;
+  userData?: User;
   title: string;
   open: boolean;
   onClose: React.Dispatch<SetStateAction<boolean>>;
@@ -26,6 +19,7 @@ interface UserModalFormProps {
 }
 
 export const UserModalForm = ({
+  formInstance,
   userData,
   title,
   open,
@@ -33,62 +27,26 @@ export const UserModalForm = ({
   setUserData,
   callback,
 }: UserModalFormProps) => {
-  const [currentData, setCurrentData] = useState<User | null>({});
-  const [validateErrors, setValidateErrors] = useState<AddUserError>({});
-  const genderRef = useRef<HTMLSelectElement>(null);
-  const roleRef = useRef<HTMLSelectElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const surnameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-
-  const onChangeHandler: React.ChangeEventHandler<
-    HTMLInputElement | HTMLSelectElement
-  > = (e) => {
-    setCurrentData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
   const submitHandler = () => {
-    /*const obj: User = {
-      name: currentData?.name ? currentData.name : userData?.name,
-      surname: currentData?.surname ? currentData.surname : userData?.surname,
-      email: currentData?.email ? currentData.email : userData?.email,
-      gender: currentData?.gender
-        ? currentData.gender
-        : genderRef.current?.value,
-      role: currentData?.role ? currentData.role : roleRef.current?.value,
+    const fields = formInstance.getFieldsValue();
+    const user: User = {
+      name: fields.name,
+      surname: fields.surname,
+      email: fields.email,
+      role: fields.role,
+      gender: fields.gender,
       password: userData?.password,
       confirmedPassword: userData?.confirmedPassword,
-      createdAt: !userData ? dateTime : userData.createdAt,
       id: userData?.id,
+      createdAt: dateTime,
     };
-
-    const result = checkAddedUser(obj);
-    if (result !== null) {
-      setValidateErrors((prevState) => ({
-        ...prevState,
-        nameField: result.nameField,
-        surnameField: result.surnameField,
-        email: result.email,
-      }));
-    } else {
-      setValidateErrors({});
-      callback(obj);
-      if (nameRef.current && surnameRef.current && emailRef.current) {
-        nameRef.current.value = "";
-        surnameRef.current.value = "";
-        emailRef.current.value = "";
-      }
-      setUserData({});
-    }*/
+    callback(user);
   };
 
   const handleClose = () => {
-    onClose(false);
     setUserData({});
-    setCurrentData({});
+    formInstance.resetFields();
+    onClose(false);
   };
 
   if (!open) {
@@ -97,83 +55,62 @@ export const UserModalForm = ({
 
   return (
     <div className="user-modal-form">
-      <Modal open={open} setOpen={onClose} setUserData={setUserData}>
-        <div className="title-container flex">
-          <ModalTitle>{title}</ModalTitle>
-        </div>
-        <ModalContent>
-          <Input
-            ref={nameRef}
-            placeholder="Name"
-            defaultValue={userData?.name ? userData.name : currentData?.name}
-            name="name"
-            style={{
-              border: validateErrors.nameField
-                ? "1px solid red"
-                : "0.3px solid #e6e6e6",
-            }}
-          />
-          <Input
-            ref={surnameRef}
-            placeholder="Surname"
-            defaultValue={
-              userData?.surname ? userData.surname : currentData?.surname
-            }
-            name="surname"
-            style={{
-              border: validateErrors.surnameField
-                ? "1px solid red"
-                : "0.3px solid #e6e6e6",
-            }}
-          />
-          <Input
-            ref={emailRef}
-            placeholder="Email"
-            defaultValue={userData?.email ? userData.email : currentData?.email}
-            name="email"
-            style={{
-              border:
-                validateErrors.email === null
-                  ? "1px solid red"
-                  : "0.3px solid #e6e6e6",
-            }}
-          />
-          <Form.Field name="gender">
-            <Select value={userData?.gender ? userData.gender : "Masculin"}>
-              <option value="Masculin">Masculin</option>
-              <option value="Feminin">Feminin</option>
-              <option value="other">Ma abtin</option>
-            </Select>
-          </Form.Field>
-          <Form.Field
-            name="role"
-            initialValue={userData?.role ? userData?.role : "Admin"}
-          >
-            <Select>
-              <option value="admin">Admin</option>
-              <option value="operator">Operator</option>
-            </Select>
-          </Form.Field>
-        </ModalContent>
-        <ModalActions>
-          <Button type="primary" onClick={submitHandler}>
-            Submit
-          </Button>
-          <Button type="primary" onClick={handleClose}>
-            Cancel
-          </Button>
-        </ModalActions>
-        {validateErrors.nameField === "Fields is required" ? (
-          <p>Fields is required</p>
-        ) : validateErrors.nameField === "Fields can not be empty" ? (
-          <p>Fields can not be empty</p>
-        ) : validateErrors.surnameField === "Fields is required" ? (
-          <p>Fields is required</p>
-        ) : validateErrors.surnameField === "Fields can not be empty" ? (
-          <p>Fields can not be empty</p>
-        ) : validateErrors.email === null ? (
-          <p>Email is invalid</p>
-        ) : null}
+      <Modal title={title} open={open} mask>
+        <Modal.Content>
+          <EBSForm type="vertical" form={formInstance} onFinish={submitHandler}>
+            <EBSForm.Field rules={[{ required: true }]} name="name">
+              <Input placeholder="Name" isClearable />
+            </EBSForm.Field>
+            <EBSForm.Field rules={[{ required: true }]} name="surname">
+              <Input placeholder="Surname" isClearable />
+            </EBSForm.Field>
+            <EBSForm.Field rules={[{ required: true }]} name="email">
+              <Input type="email" placeholder="Email" isClearable />
+            </EBSForm.Field>
+            <EBSForm.Field name="gender" rules={[{ required: true }]}>
+              <Select
+                placeholder="Select gender"
+                options={[
+                  {
+                    text: "Masculin",
+                    value: "Masculin",
+                  },
+                  {
+                    text: "Feminin",
+                    value: "Feminin",
+                  },
+                  {
+                    text: "Ma abtin",
+                    value: "Other",
+                  },
+                ]}
+              />
+            </EBSForm.Field>
+            <EBSForm.Field name="role" rules={[{ required: true }]}>
+              <Select
+                placeholder="Select role"
+                options={[
+                  {
+                    text: "Admin",
+                    value: "Masculin",
+                  },
+                  {
+                    text: "Operator",
+                    value: "Feminin",
+                  },
+                ]}
+              />
+            </EBSForm.Field>
+            <Space justify="space-between">
+              <Button submit type="primary" onSubmit={() => submitHandler}>
+                Submit
+              </Button>
+              <Button type="primary" onClick={handleClose}>
+                Cancel
+              </Button>
+            </Space>
+          </EBSForm>
+        </Modal.Content>
       </Modal>
     </div>
   );

@@ -2,17 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { PostCard } from "../components/PostCard";
-import {
-  Button,
-  ConfirmationModal,
-  ConfirmationModalHeader,
-  Table,
-} from "components/index";
+import { Button, Table, Modal } from "components/index";
 import { AufContainer } from "features/auf_container/AufContainer";
 
 import { Post, User } from "types/interfaces";
 import { UserProfileContext } from "types/contexts";
 import { postApi } from "api/posts";
+import { Space, useForm } from "ebs-design";
 
 import "styles/Posts.scss";
 import "styles/common.scss";
@@ -26,8 +22,8 @@ export const Posts = () => {
   const navigate = useNavigate();
 
   const showConfirmationModal = (post: Post) => {
-    setConfirmationModalVisible(true);
     setChoosenPost(post);
+    setConfirmationModalVisible(true);
   };
 
   const deletePosts = async () => {
@@ -37,6 +33,7 @@ export const Posts = () => {
       setPosts(personalPosts);
     }
     setConfirmationModalVisible(false);
+    setChoosenPost({});
   };
 
   useEffect(() => {
@@ -58,18 +55,21 @@ export const Posts = () => {
   return (
     <AufContainer>
       <div className="posts">
-        {isConfirmationModalVisible ? (
-          <ConfirmationModal
-            setOpen={setConfirmationModalVisible}
-            clickHandler={deletePosts}
-          >
-            <ConfirmationModalHeader>
-              <div className="header-container flex">
-                <h4>You're gonna delete this post. Are you sure?</h4>
-              </div>
-            </ConfirmationModalHeader>
-          </ConfirmationModal>
-        ) : null}
+        <Modal
+          title="You're gonna delete this post. Are you sure?"
+          open={isConfirmationModalVisible}
+          mask
+        >
+          <Modal.Footer>
+            <Space>
+              <Button onClick={() => setConfirmationModalVisible(false)}>
+                Cancel
+              </Button>
+              <Button onClick={deletePosts}>Submit</Button>
+            </Space>
+          </Modal.Footer>
+        </Modal>
+
         {currentUser?.role && currentUser.role === "operator" ? (
           <div className="btn-wrapper">
             <Link to="/home/posts/create">
@@ -110,6 +110,11 @@ export const Posts = () => {
               {
                 dataIndex: "title",
                 title: "Title",
+                onCell: (record) => ({
+                  onClick() {
+                    navigate(`/home/posts/${record.id}`);
+                  },
+                }),
               },
               {
                 dataIndex: "image_url",
@@ -125,6 +130,21 @@ export const Posts = () => {
               },
               {
                 title: "Actions",
+                render: (record) => {
+                  return (
+                    <div className="actions-btns-wrapper">
+                      <Link to={`/home/posts/${record.id}/edit`}>
+                        <Button type="primary">Edit</Button>
+                      </Link>
+                      <Button
+                        type="primary"
+                        onClick={() => showConfirmationModal(record)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  );
+                },
               },
             ]}
             data={posts}
@@ -134,45 +154,3 @@ export const Posts = () => {
     </AufContainer>
   );
 };
-
-/*
-<Table className="user-posts">
-            <tbody>
-              {posts.length > 0
-                ? posts.map((post) => {
-                    return (
-                      <tr key={post.id} className="table-row">
-                        <td
-                          onClick={() => navigate(`/home/posts/${post.id}`)}
-                          className="post-link"
-                        >
-                          {post.title}
-                        </td>
-                        <td>{post.image_url}</td>
-                        <td>
-                          <time>{post.date}</time>
-                        </td>
-                        <td>{post.author?.fullName}</td>
-                        <td>
-                          <div className="actions-btns-wrapper">
-                            <Link
-                              to={`/home/posts/${post.id}/edit`}
-                              state={post}
-                            >
-                              <Button type="primary">Edit</Button>
-                            </Link>
-                            <Button
-                              type="primary"
-                              onClick={() => showConfirmationModal(post)}
-                            >
-                              Delete
-                            </Button>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })
-                : null}
-            </tbody>
-          </Table>
-*/

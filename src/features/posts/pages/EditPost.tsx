@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useForm } from "ebs-design";
 
 import { postApi } from "api/posts";
 import { Button, EBSForm, FormHeader, Input, Textarea } from "components/index";
@@ -12,6 +13,7 @@ import "styles/common.scss";
 export const EditPost = () => {
   const { postID } = useParams();
   const [currentPost, setCurrentPost] = useState<Post>({});
+  const [form] = useForm();
 
   useEffect(() => {
     if (postID) {
@@ -32,36 +34,34 @@ export const EditPost = () => {
     }
   }, [postID]);
 
-  const handleChange: React.ChangeEventHandler<
-    HTMLInputElement | HTMLTextAreaElement
-  > = (e) => {
-    setCurrentPost((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  useEffect(() => {
+    if (currentPost) {
+      form.setFieldsValue(currentPost);
+    }
+  }, [currentPost, form]);
 
-  const submitHandler = async () => {
-    await postApi.editPost(currentPost);
+  const submitHandler = async (values: Post) => {
+    let newObj = { ...currentPost, ...values };
+    await postApi.editPost(newObj);
   };
 
   return (
     <div className="edit-post">
       <div className="form-wrapper">
-        <EBSForm>
+        <EBSForm form={form} onFinish={submitHandler}>
           <div className="header-container flex">
             <FormHeader title="Edit Post" />
           </div>
-          <Input defaultValue={currentPost.title} name="title" />
-          <div className="desc-wrapper">
-            <Textarea
-              defaultValue={currentPost.description}
-              //onChange={handleChange}
-              name="description"
-            />
-          </div>
-          <Input defaultValue={currentPost.image_url} name="image_url" />
-          <Button type="primary" onClick={submitHandler}>
+          <EBSForm.Field name="title">
+            <Input placeholder="Title" />
+          </EBSForm.Field>
+          <EBSForm.Field name="description">
+            <Textarea placeholder="Description" />
+          </EBSForm.Field>
+          <EBSForm.Field name="image_url">
+            <Input placeholder="Image URL" />
+          </EBSForm.Field>
+          <Button submit type="primary" onClick={() => submitHandler}>
             Submit
           </Button>
         </EBSForm>

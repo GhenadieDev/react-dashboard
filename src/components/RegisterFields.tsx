@@ -81,17 +81,3 @@ export const RegisterFields = ({
     </>
   );
 };
-
-/*
-  <div className="checkbox-wrapper flex">
-        <input
-          type="checkbox"
-          className="checkbox-wrapper__data"
-          name="data"
-          onClick={() => setCheckboxIsChecked(!checkboxIsChecked)}
-        />
-        <label htmlFor="data">
-          I agree with the processing of personal data
-        </label>
-      </div>
-*/
