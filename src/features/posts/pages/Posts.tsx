@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
+import { queryClient } from "index";
 
 import { PostCard } from "../components/PostCard";
 import { Button, Table, Modal } from "components/index";
@@ -16,7 +17,6 @@ import "styles/common.scss";
 
 export const Posts = () => {
   const currentUser = useContext<User | null | undefined>(UserProfileContext);
-  const [posts, setPosts] = useState<Post[]>([]);
   const [isConfirmationModalVisible, setConfirmationModalVisible] =
     useState(false);
   const [choosenPost, setChoosenPost] = useState<Post>({});
@@ -26,11 +26,18 @@ export const Posts = () => {
     async (choosenPost: Post) => await postApi.deletePost(choosenPost),
     {
       onSuccess: async () => {
-        const personalPosts = await postApi.getPersonalPosts(currentUser?.id);
-        setPosts(personalPosts.data);
+        queryClient.invalidateQueries("posts");
       },
     }
   );
+
+  const { data: posts } = useQuery("posts", async () => {
+    if (currentUser?.role === "operator") {
+      return await postApi.getPersonalPosts(currentUser.id);
+    } else {
+      return await postApi.getAllPosts();
+    }
+  });
 
   const showConfirmationModal = (post: Post) => {
     setChoosenPost(post);
@@ -42,22 +49,6 @@ export const Posts = () => {
     setConfirmationModalVisible(false);
     setChoosenPost({});
   };
-
-  useEffect(() => {
-    if (currentUser?.role && currentUser.role === "operator") {
-      postApi.getPersonalPosts(currentUser?.id).then((res) => {
-        if (res.data.length > 0) {
-          setPosts(res.data);
-        }
-      });
-    } else {
-      postApi.getAllPosts().then((res) => {
-        if (res?.status === 200) {
-          setPosts(res.data);
-        }
-      });
-    }
-  }, [currentUser?.id, currentUser?.role]);
 
   return (
     <AufContainer>
@@ -86,30 +77,28 @@ export const Posts = () => {
         ) : null}
         {currentUser?.role && currentUser.role === "operator" ? (
           <article className="postscards-wrapper">
-            {posts?.length > 0
-              ? posts.map((post) => {
-                  return (
-                    <PostCard
-                      key={post.id}
-                      image_url={post.image_url}
-                      title={post.title}
-                      description={post.description}
-                      date={post.date}
-                      id={post.id}
-                    >
-                      <Link to={`/home/posts/${post.id}/edit`}>
-                        <Button type="primary">Edit</Button>
-                      </Link>
-                      <Button
-                        type="primary"
-                        onClick={() => showConfirmationModal(post)}
-                      >
-                        Delete
-                      </Button>
-                    </PostCard>
-                  );
-                })
-              : null}
+            {posts?.data.map((post: Post) => {
+              return (
+                <PostCard
+                  key={post.id}
+                  image_url={post.image_url}
+                  title={post.title}
+                  description={post.description}
+                  date={post.date}
+                  id={post.id}
+                >
+                  <Link to={`/home/posts/${post.id}/edit`}>
+                    <Button type="primary">Edit</Button>
+                  </Link>
+                  <Button
+                    type="primary"
+                    onClick={() => showConfirmationModal(post)}
+                  >
+                    Delete
+                  </Button>
+                </PostCard>
+              );
+            })}
           </article>
         ) : (
           <Table
@@ -117,7 +106,7 @@ export const Posts = () => {
               {
                 dataIndex: "title",
                 title: "Title",
-                onCell: (record) => ({
+                onCell: (record: Post) => ({
                   onClick() {
                     navigate(`/home/posts/${record.id}`);
                   },
@@ -154,7 +143,7 @@ export const Posts = () => {
                 },
               },
             ]}
-            data={posts}
+            data={posts?.data}
           />
         )}
       </div>

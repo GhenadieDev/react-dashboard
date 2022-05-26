@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "ebs-design";
 
@@ -9,40 +9,30 @@ import { Post } from "types/interfaces";
 
 import "styles/EditPost.scss";
 import "styles/common.scss";
+import { useMutation, useQuery } from "react-query";
 
 export const EditPost = () => {
   const { postID } = useParams();
-  const [currentPost, setCurrentPost] = useState<Post>({});
   const [form] = useForm();
 
-  useEffect(() => {
-    if (postID) {
-      postApi.getPersonalPostById(postID).then((res) => {
-        if (res?.status === 200) {
-          setCurrentPost((prevState) => ({
-            ...prevState,
-            date: res.data.date,
-            title: res.data.title,
-            description: res.data.description,
-            image_url: res.data.image_url,
-            id: res.data.id,
-            authorId: res.data.authorId,
-            authorName: res.data.authorName,
-          }));
-        }
-      });
-    }
-  }, [postID]);
+  const { data: post, isSuccess } = useQuery(
+    "post",
+    async () => await postApi.getPersonalPostById(postID)
+  );
+
+  const mutation = useMutation((fieldsValue: Post) =>
+    postApi.editPost(fieldsValue)
+  );
 
   useEffect(() => {
-    if (currentPost) {
-      form.setFieldsValue(currentPost);
+    if (isSuccess) {
+      form.setFieldsValue(post?.data);
     }
-  }, [currentPost, form]);
+  }, [form, isSuccess, post?.data]);
 
   const submitHandler = async (values: Post) => {
-    let newObj = { ...currentPost, ...values };
-    await postApi.editPost(newObj);
+    let newObj: Post = { ...post?.data, ...values };
+    await mutation.mutateAsync(newObj);
   };
 
   return (
@@ -61,7 +51,12 @@ export const EditPost = () => {
           <EBSForm.Field name="image_url">
             <Input placeholder="Image URL" />
           </EBSForm.Field>
-          <Button submit type="primary" onClick={() => submitHandler}>
+          <Button
+            submit
+            type="primary"
+            onClick={() => submitHandler}
+            loading={mutation.isLoading}
+          >
             Submit
           </Button>
         </EBSForm>

@@ -9,7 +9,7 @@ export const postApi = {
     return result;
   },
 
-  getPersonalPostById: async (postId: string | number) => {
+  getPersonalPostById: async (postId?: string | number) => {
     try {
       const result = await axios.get(`http://localhost:4000/posts/${postId}`);
       return result;

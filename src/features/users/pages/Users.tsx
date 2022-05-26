@@ -1,5 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { useForm } from "ebs-design";
+import { useContext, useState } from "react";
+import { add, useForm } from "ebs-design";
+import { queryClient } from "index";
 
 import { userApi } from "api/users";
 import { UserProfileContext } from "types/contexts";
@@ -10,53 +11,67 @@ import { UserModalForm } from "../components/UserModalForm";
 import { AufContainer } from "features/auf_container/AufContainer";
 
 import { Space } from "ebs-design";
+import { useMutation, useQuery } from "react-query";
+
 import "styles/UsersPage.scss";
 import "styles/common.scss";
 
 export const Users = () => {
-  const [users, setUsers] = useState<User[]>([]);
   const [isConfirmationModalVisible, setConfirmationModalVisible] =
     useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [choosenUser, setChoosenUser] = useState<User>({});
   const currentUser = useContext<User | null | undefined>(UserProfileContext);
 
-  const [form] = useForm();
+  const { data: users, isLoading } = useQuery(
+    "users",
+    async () => await userApi.getAllUsers()
+  );
 
-  useEffect(() => {
-    userApi.getAllUsers().then((res) => {
-      res?.data.forEach((user: any) => {
-        setUsers((prevState) => [...prevState, user]);
-      });
-    });
-  }, []);
+  const deleteMutation = useMutation(
+    async (userId?: string | number) => await userApi.deleteUser(userId),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("users");
+        setConfirmationModalVisible(false);
+      },
+    }
+  );
+
+  const addMutation = useMutation(
+    async (user: User) => await userApi.createUser(user),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("users");
+        form.resetFields();
+      },
+    }
+  );
+
+  const editMutation = useMutation(
+    async (user: User) => await userApi.editUser(user),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("users");
+        setChoosenUser({});
+      },
+    }
+  );
+
+  const [form] = useForm();
 
   const clickHandlerDelete = async () => {
     if (choosenUser !== null) {
-      setUsers(users.filter((user) => user.id !== choosenUser.id));
-      const result = await userApi.deleteUser(choosenUser.id);
-      if (result?.status === 200) {
-        const allUsers = await userApi.getAllUsers();
-        setUsers(allUsers?.data);
-        setConfirmationModalVisible(false);
-      }
+      deleteMutation.mutate(choosenUser.id);
     }
   };
 
-  const addUsers = async (obj: User) => {
-    await userApi.createUser(obj);
-    const allUsers = await userApi.getAllUsers();
-    setUsers(allUsers?.data);
-    form.resetFields();
+  const addUsers = (obj: User) => {
+    addMutation.mutate(obj);
   };
 
   const editUsers = async (obj: User) => {
-    await userApi.editUser(obj);
-    const allUsers = await userApi.getAllUsers();
-    setUsers(allUsers?.data);
-    setIsModalVisible(false);
-    form.resetFields();
-    setChoosenUser({});
+    editMutation.mutate(obj);
   };
 
   const onCellHandler = (record: User) => {
@@ -74,7 +89,11 @@ export const Users = () => {
         >
           <Modal.Footer>
             <Space justify="space-between">
-              <Button type="primary" onClick={clickHandlerDelete}>
+              <Button
+                type="primary"
+                onClick={clickHandlerDelete}
+                loading={isLoading}
+              >
                 Confirm
               </Button>
               <Button
@@ -145,7 +164,7 @@ export const Users = () => {
               }),
             },
           ]}
-          data={users.filter((user) => user.id !== currentUser?.id)}
+          data={users?.data.filter((user: User) => user.id !== currentUser?.id)}
         />
       </div>
     </AufContainer>

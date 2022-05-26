@@ -6,12 +6,22 @@ import { useForm } from "ebs-design";
 import { UserProfileContext } from "types/contexts";
 import { dateTime } from "types/date";
 import { Post } from "types/interfaces";
+import { useMutation } from "react-query";
 
 import "styles/CreatePost.scss";
 
 export const CreatePost = () => {
   const currentUser = useContext(UserProfileContext);
   const [form] = useForm();
+
+  const mutation = useMutation(
+    async (post: Post) => await postApi.createPost(post),
+    {
+      onSuccess: () => {
+        form.resetFields();
+      },
+    }
+  );
 
   const submitHandler = (values: Post) => {
     const post: Post = {
@@ -22,11 +32,8 @@ export const CreatePost = () => {
       description: values.description,
       image_url: values.image_url,
     };
-    postApi.createPost(post).then((res) => {
-      if (res?.status === 201) {
-        form.resetFields();
-      }
-    });
+
+    mutation.mutate(post);
   };
 
   return (
@@ -58,7 +65,12 @@ export const CreatePost = () => {
             <Input type="text" placeholder="Image URL" isClearable />
           </EBSForm.Field>
           <div className="btns-wrapper">
-            <Button submit type="primary" onClick={() => submitHandler}>
+            <Button
+              submit
+              type="primary"
+              onClick={() => submitHandler}
+              loading={mutation.isLoading}
+            >
               Submit
             </Button>
           </div>

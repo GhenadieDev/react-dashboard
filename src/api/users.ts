@@ -33,28 +33,15 @@ export const userApi = {
   },
 
   deleteUser: async (userId: number | string | undefined) => {
-    try {
-      const result = await axios.delete(
-        `http://localhost:4000/users/${userId}`
-      );
-      return result;
-    } catch (error) {
-      console.log("delete erorr: ", error);
-    }
+    const result = await axios.delete(`http://localhost:4000/users/${userId}`);
+    return result;
   },
 
   editUser: async (user: User) => {
-    try {
-      const result = await axios.put(
-        `http://localhost:4000/users/${user.id}`,
-        user
-      );
-
-      if (result.status === 201) {
-        return result;
-      }
-    } catch (error) {
-      console.log("edit error: ", error);
-    }
+    const result = await axios.put(
+      `http://localhost:4000/users/${user.id}`,
+      user
+    );
+    return result;
   },
 };
