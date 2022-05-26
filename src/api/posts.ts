@@ -3,16 +3,10 @@ import { Post } from "types/interfaces";
 
 export const postApi = {
   getPersonalPosts: async (userId: number | string | undefined) => {
-    try {
-      const result = await axios.get(
-        `http://localhost:4000/posts?authorId=${userId}`
-      );
-      if (result.status === 200) {
-        return result.data;
-      }
-    } catch (error) {
-      console.log("get all posts error: ", error);
-    }
+    const result = await axios.get(
+      `http://localhost:4000/posts?authorId=${userId}`
+    );
+    return result;
   },
 
   getPersonalPostById: async (postId: string | number) => {
@@ -46,24 +40,12 @@ export const postApi = {
   },
 
   deletePost: async (post: Post) => {
-    try {
-      const result = await axios.delete(
-        `http://localhost:4000/posts/${post.id}`
-      );
-      if (result.status === 200) {
-        return result;
-      }
-    } catch (error) {
-      console.log("delete post error: ", error);
-    }
+    const result = await axios.delete(`http://localhost:4000/posts/${post.id}`);
+    return result;
   },
 
   getAllPosts: async () => {
-    try {
-      const result = await axios.get("http://localhost:4000/posts/");
-      return result;
-    } catch (error) {
-      console.log("get all posts error: ", error);
-    }
+    const result = await axios.get("http://localhost:4000/posts/");
+    return result;
   },
 };

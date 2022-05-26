@@ -2,7 +2,7 @@ import React, { SetStateAction } from "react";
 
 import { Button, EBSForm, Input, Modal, Select } from "components/index";
 
-import { Post, User } from "types/interfaces";
+import { User } from "types/interfaces";
 
 import "styles/common.scss";
 import { Space } from "ebs-design";

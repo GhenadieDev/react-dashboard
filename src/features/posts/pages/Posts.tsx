@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "react-query";
 
 import { PostCard } from "../components/PostCard";
 import { Button, Table, Modal } from "components/index";
@@ -8,7 +9,7 @@ import { AufContainer } from "features/auf_container/AufContainer";
 import { Post, User } from "types/interfaces";
 import { UserProfileContext } from "types/contexts";
 import { postApi } from "api/posts";
-import { Space, useForm } from "ebs-design";
+import { Space } from "ebs-design";
 
 import "styles/Posts.scss";
 import "styles/common.scss";
@@ -21,26 +22,32 @@ export const Posts = () => {
   const [choosenPost, setChoosenPost] = useState<Post>({});
   const navigate = useNavigate();
 
+  const deleteMutation = useMutation(
+    async (choosenPost: Post) => await postApi.deletePost(choosenPost),
+    {
+      onSuccess: async () => {
+        const personalPosts = await postApi.getPersonalPosts(currentUser?.id);
+        setPosts(personalPosts.data);
+      },
+    }
+  );
+
   const showConfirmationModal = (post: Post) => {
     setChoosenPost(post);
     setConfirmationModalVisible(true);
   };
 
   const deletePosts = async () => {
-    const res = await postApi.deletePost(choosenPost);
-    if (res?.status === 200) {
-      const personalPosts = await postApi.getPersonalPosts(currentUser?.id);
-      setPosts(personalPosts);
-    }
+    await deleteMutation.mutateAsync(choosenPost);
     setConfirmationModalVisible(false);
     setChoosenPost({});
   };
 
   useEffect(() => {
     if (currentUser?.role && currentUser.role === "operator") {
-      postApi.getPersonalPosts(currentUser?.id).then((res: Post[]) => {
-        if (res.length > 0) {
-          setPosts(res);
+      postApi.getPersonalPosts(currentUser?.id).then((res) => {
+        if (res.data.length > 0) {
+          setPosts(res.data);
         }
       });
     } else {
@@ -79,7 +86,7 @@ export const Posts = () => {
         ) : null}
         {currentUser?.role && currentUser.role === "operator" ? (
           <article className="postscards-wrapper">
-            {posts.length > 0
+            {posts?.length > 0
               ? posts.map((post) => {
                   return (
                     <PostCard

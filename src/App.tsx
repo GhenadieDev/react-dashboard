@@ -25,8 +25,8 @@ function App() {
         <Route path="/home" element={<Home />}>
           <Route index element={<Dashboard />} />
           <Route path="/home/dashboard" element={<Dashboard />} />
-          <Route path="users" element={<Users />} />
-          <Route path="posts" element={<Posts />} />
+          <Route path="/home/users" element={<Users />} />
+          <Route path="/home/posts" element={<Posts />} />
           <Route path="/home/posts/:postID" element={<PostPage />} />
           <Route path="/home/posts/:postID/edit" element={<EditPost />} />
           <Route path="/home/posts/create" element={<CreatePost />} />

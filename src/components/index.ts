@@ -15,3 +15,4 @@ export * from "./TopBar";
 export * from "./LeftMenu";
 export { Textarea } from "ebs-design";
 export { Modal } from "ebs-design";
+export { Loader } from "ebs-design";

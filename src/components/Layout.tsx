@@ -15,7 +15,7 @@ export const Layout = () => {
         <LeftMenu />
       </Sidebar>
 
-      <EBSLayout.Content>
+      <EBSLayout.Content style={{ height: "100%" }}>
         <Outlet />
       </EBSLayout.Content>
     </EBSLayout>

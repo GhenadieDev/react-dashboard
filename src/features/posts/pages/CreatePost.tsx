@@ -13,7 +13,7 @@ export const CreatePost = () => {
   const currentUser = useContext(UserProfileContext);
   const [form] = useForm();
 
-  const submitHandler = (values: any) => {
+  const submitHandler = (values: Post) => {
     const post: Post = {
       authorId: currentUser?.id,
       authorName: currentUser?.name + " " + currentUser?.surname,

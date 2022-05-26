@@ -40,7 +40,7 @@ export const Login = () => {
         JSON.stringify(mutation.data.data[0].id)
       );
       form.resetFields();
-      navigate("/home");
+      navigate("/home/dashboard");
     }
   }, [mutation.data, mutation.isSuccess, form, navigate]);
 
