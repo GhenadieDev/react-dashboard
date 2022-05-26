@@ -4,6 +4,7 @@
 }
 
 .postscards-wrapper {
+  margin-top: -150px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: fit-content(200px);

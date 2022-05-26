@@ -1,11 +1,17 @@
 import { useContext, useState } from "react";
-import { add, useForm } from "ebs-design";
+import { useForm } from "ebs-design";
 import { queryClient } from "index";
 
 import { userApi } from "api/users";
 import { UserProfileContext } from "types/contexts";
 import { User } from "types/interfaces";
-import { Button, Table, Modal } from "components/index";
+import {
+  Button,
+  Table,
+  Modal,
+  Loader,
+  MissingDataText,
+} from "components/index";
 
 import { UserModalForm } from "../components/UserModalForm";
 import { AufContainer } from "features/auf_container/AufContainer";
@@ -81,92 +87,123 @@ export const Users = () => {
 
   return (
     <AufContainer>
-      <div className="users-page">
-        <Modal
-          title={`You're gonna delete user: ${choosenUser.name} ${choosenUser.surname}. Are you sure?`}
-          open={isConfirmationModalVisible}
-          mask
+      <div className="btn-wrapper">
+        <Button
+          type="primary"
+          name="add-button"
+          onClick={() => setIsModalVisible(true)}
         >
-          <Modal.Footer>
-            <Space justify="space-between">
-              <Button
-                type="primary"
-                onClick={clickHandlerDelete}
-                loading={isLoading}
-              >
-                Confirm
-              </Button>
-              <Button
-                type="primary"
-                onClick={() => setConfirmationModalVisible(false)}
-              >
-                Cancel
-              </Button>
-            </Space>
-          </Modal.Footer>
-        </Modal>
-        <UserModalForm
-          formInstance={form}
-          userData={choosenUser}
-          title={Object.keys(choosenUser).length > 0 ? "Edit User" : "Add User"}
-          open={isModalVisible}
-          onClose={setIsModalVisible}
-          setUserData={setChoosenUser}
-          callback={Object.keys(choosenUser).length > 0 ? editUsers : addUsers}
-        />
-
-        <div className="btn-wrapper">
-          <Button
-            type="primary"
-            name="add-button"
-            onClick={() => setIsModalVisible(true)}
-          >
-            Add new User
-          </Button>
-        </div>
-        <Table
-          columns={[
-            {
-              dataIndex: "name",
-              title: "Name",
-            },
-            {
-              dataIndex: "surname",
-              title: "Surname",
-            },
-            {
-              dataIndex: "email",
-              title: "Email",
-            },
-            {
-              dataIndex: "gender",
-              title: "Gender",
-            },
-            {
-              dataIndex: " ",
-              title: "Actions",
-              render: () => {
-                return (
-                  <div className="action-btns-wrapper">
-                    <Button onClick={() => setIsModalVisible(true)}>
-                      Edit
-                    </Button>
-                    <Button onClick={() => setConfirmationModalVisible(true)}>
-                      Delete
-                    </Button>
-                  </div>
-                );
-              },
-              onCell: (record) => ({
-                onClick() {
-                  onCellHandler(record);
-                },
-              }),
-            },
-          ]}
-          data={users?.data.filter((user: User) => user.id !== currentUser?.id)}
-        />
+          Add new User
+        </Button>
       </div>
+      <Space
+        direction="vertical"
+        align="center"
+        justify="center"
+        style={{ height: "100%" }}
+      >
+        <Loader fade height="100%" size="regular" fixed loading={isLoading}>
+          {users?.data.filter((user: User) => user.id !== currentUser?.id)
+            .length === 0 ? (
+            <MissingDataText title="Users have not added yet" />
+          ) : (
+            <div className="users-page">
+              <Modal
+                title={`You're gonna delete user: ${choosenUser.name} ${choosenUser.surname}. Are you sure?`}
+                open={isConfirmationModalVisible}
+                mask
+              >
+                <Modal.Footer>
+                  <Space justify="space-between">
+                    <Button
+                      type="primary"
+                      onClick={clickHandlerDelete}
+                      loading={isLoading}
+                    >
+                      Confirm
+                    </Button>
+                    <Button
+                      type="primary"
+                      onClick={() => setConfirmationModalVisible(false)}
+                    >
+                      Cancel
+                    </Button>
+                  </Space>
+                </Modal.Footer>
+              </Modal>
+              <UserModalForm
+                formInstance={form}
+                userData={choosenUser}
+                title={
+                  Object.keys(choosenUser).length > 0 ? "Edit User" : "Add User"
+                }
+                open={isModalVisible}
+                onClose={setIsModalVisible}
+                setUserData={setChoosenUser}
+                callback={
+                  Object.keys(choosenUser).length > 0 ? editUsers : addUsers
+                }
+              />
+
+              <div className="btn-wrapper">
+                <Button
+                  type="primary"
+                  name="add-button"
+                  onClick={() => setIsModalVisible(true)}
+                >
+                  Add new User
+                </Button>
+              </div>
+              <Table
+                columns={[
+                  {
+                    dataIndex: "name",
+                    title: "Name",
+                  },
+                  {
+                    dataIndex: "surname",
+                    title: "Surname",
+                  },
+                  {
+                    dataIndex: "email",
+                    title: "Email",
+                  },
+                  {
+                    dataIndex: "gender",
+                    title: "Gender",
+                  },
+                  {
+                    dataIndex: " ",
+                    title: "Actions",
+                    render: () => {
+                      return (
+                        <div className="action-btns-wrapper">
+                          <Button onClick={() => setIsModalVisible(true)}>
+                            Edit
+                          </Button>
+                          <Button
+                            onClick={() => setConfirmationModalVisible(true)}
+                          >
+                            Delete
+                          </Button>
+                        </div>
+                      );
+                    },
+                    onCell: (record) => ({
+                      onClick() {
+                        onCellHandler(record);
+                      },
+                    }),
+                  },
+                ]}
+                data={users?.data.filter(
+                  (user: User) => user.id !== currentUser?.id
+                )}
+              />
+            </div>
+          )}
+        </Loader>
+      </Space>
     </AufContainer>
   );
 };

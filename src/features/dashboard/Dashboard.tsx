@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
+import { useQuery } from "react-query";
+
 import { userApi } from "api/users";
 import { postApi } from "api/posts";
-import { Chart, UserChart, PostChart, Loader } from "components/index";
-import { useQuery } from "react-query";
+
+import { groupUsersByMonth } from "utils/groupUsersByMonths";
+import { groupPostsByMonths } from "utils/groupPostsByMonths";
 
 import { ChartUserData, ChartPostData } from "types/interfaces";
 import { listOfMonths } from "types/constants";
 
-import { groupUsersByMonth } from "utils/groupUsersByMonths";
-import { groupPostsByMonths } from "utils/groupPostsByMonths";
+import { Chart, UserChart, PostChart, Loader } from "components/index";
 
 export const Dashboard = () => {
   const [chartUserData, setChartUserData] = useState<ChartUserData[]>([]);

@@ -1,12 +1,11 @@
 import React, { SetStateAction } from "react";
-
 import { Button, EBSForm, Input, Modal, Select } from "components/index";
-
 import { User } from "types/interfaces";
 
-import "styles/common.scss";
 import { Space } from "ebs-design";
 import { dateTime } from "types/date";
+
+import "styles/common.scss";
 
 interface UserModalFormProps {
   formInstance?: any;

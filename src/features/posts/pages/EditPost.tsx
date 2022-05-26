@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "ebs-design";
+import { useMutation, useQuery } from "react-query";
 
 import { postApi } from "api/posts";
 import { Button, EBSForm, FormHeader, Input, Textarea } from "components/index";
@@ -9,7 +10,6 @@ import { Post } from "types/interfaces";
 
 import "styles/EditPost.scss";
 import "styles/common.scss";
-import { useMutation, useQuery } from "react-query";
 
 export const EditPost = () => {
   const { postID } = useParams();
