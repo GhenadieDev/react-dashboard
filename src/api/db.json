@@ -10,17 +10,55 @@
       "password": "UhvSlQsH$zKs",
       "confirmedPassword": "UhvSlQsH$zKs",
       "id": 4
+    },
+    {
+      "role": "operator",
+      "createdAt": "2022-05-26T16:37:52.077Z",
+      "name": "Edith",
+      "surname": "Johnson",
+      "email": "e.johnson@randatmail.com",
+      "gender": "Feminin",
+      "password": "XmiYG9W$T|5tqS",
+      "confirmedPassword": "XmiYG9W$T|5tqS",
+      "id": 6
     }
   ],
   "posts": [
     {
-      "authorId": 9,
-      "authorName": "Franckenstein Gutenberg",
-      "date": "2022-05-26T13:58:30.715Z",
-      "title": "random post",
-      "description": "Mount Everest attracts many climbers, including highly experienced mountaineers. There are two main climbing routes, one approaching the summit from the southeast in Nepal (known as the \"standard route\") and the other from the north in Tibet. While not posing substantial technical climbing challenges on the standard route, Everest presents dangers such as altitude sickness, weather, and wind, as well as hazards from avalanches and the Khumbu Icefall. As of 2019, over 300 people have died on Everest many of whose bodies remain on the mountain.",
-      "image_url": "https://images.unsplash.com/photo-1516616370751-86d6bd8b0651?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170",
+      "authorId": 6,
+      "authorName": "Edith Johnson",
+      "date": "2022-05-27T11:35:57.246Z",
+      "title": "pweofkpweokp",
+      "description": "pokwpkgopekrgpoker po pe korproekpok p erkpo",
+      "image_url": "https://images.unsplash.com/photo-1574687263812-a27e1c9e11ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=471&q=80",
       "id": 1
+    },
+    {
+      "authorId": 6,
+      "authorName": "Edith Johnson",
+      "date": "2022-05-27T11:35:57.246Z",
+      "title": "wpefowpeokpowekof",
+      "description": "pwkpoekfpokwepofew",
+      "image_url": "https://images.unsplash.com/photo-1574687263812-a27e1c9e11ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=471&q=80",
+      "id": 2
+    },
+    {
+      "authorId": 6,
+      "authorName": "Edith Johnson",
+      "date": "2022-05-27T11:35:57.246Z",
+      "title": "wepfweopkfowekpkkoewkpfow",
+      "description": "fowfpwkeok okwpeokpowkepo kowke kwpoe",
+      "image_url": "https://images.unsplash.com/photo-1574687263812-a27e1c9e11ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=471&q=80",
+      "id": 4
+    },
+    {
+      "authorId": 6,
+      "authorName": "Edith Johnson",
+      "date": "2022-05-27T11:35:57.246Z",
+      "title": "wepofjpweokpo",
+      "description": "wpokpowkefokpoewkfpokweokfpowe",
+      "image_url": "https://images.unsplash.com/photo-1574687263812-a27e1c9e11ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=471&q=80",
+      "id": 5
     }
   ]
 }

@@ -9,7 +9,6 @@ export { Table } from "ebs-design";
 export { Select } from "ebs-design";
 export { Input } from "ebs-design";
 
-export * from "./MissingDataText";
 export * from "./Chart/Chart";
 export * from "./Chart/PostChart";
 export * from "./Chart/UserChart";
@@ -18,3 +17,4 @@ export * from "./Layout";
 export * from "./RegisterFields";
 export * from "./TopBar";
 export * from "./LeftMenu";
+export * from "./MissingText";
