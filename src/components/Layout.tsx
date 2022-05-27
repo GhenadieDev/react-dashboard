@@ -6,7 +6,7 @@ import { TopBar, LeftMenu } from "./index";
 export const Layout = () => {
   return (
     <EBSLayout>
-      <EBSLayout.Topbar>
+      <EBSLayout.Topbar style={{ padding: 0 }}>
         <EBSLayout.Topbar.Toggler />
         <TopBar />
       </EBSLayout.Topbar>

@@ -4,8 +4,9 @@ import { Post } from "types/interfaces";
 import { getDate } from "utils/getDate";
 
 import "styles/PostCard.scss";
+import React from "react";
 
-export const PostCard: React.FC<Post> = ({ children, ...props }) => {
+export const PostCard = (props: React.PropsWithChildren<Post | any>) => {
   return (
     <div className="postcard">
       <div className="postcard-header">
@@ -25,7 +26,7 @@ export const PostCard: React.FC<Post> = ({ children, ...props }) => {
           <p className="desc-wrapper__desc">{props.description}</p>
         </div>
       </Link>
-      <div className="btns-wrapper">{children}</div>
+      <div className="btns-wrapper">{props.children}</div>
     </div>
   );
 };

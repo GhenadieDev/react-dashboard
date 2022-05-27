@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { UserProfileContext } from "types/contexts";
 import { ListGroup } from "components/index";
 
@@ -11,23 +11,23 @@ export const LeftMenu = () => {
   return (
     <aside className="leftbar">
       <nav className="leftbar">
-        <ListGroup>
+        <ListGroup className="left-menu">
           <ListGroup.Item className="left-menu-item">
-            <Link to="/home/dashboard" className="left-menu-item__link">
+            <NavLink to="/home/dashboard" className="left-menu-item__link">
               Dashboard
-            </Link>
+            </NavLink>
           </ListGroup.Item>
           {currentUser?.role && currentUser.role === "admin" ? (
             <ListGroup.Item className="left-menu-item">
-              <Link to="/home/users" className="left-menu-item__link">
+              <NavLink to="/home/users" className="left-menu-item__link">
                 Users
-              </Link>
+              </NavLink>
             </ListGroup.Item>
           ) : null}
           <ListGroup.Item className="left-menu-item">
-            <Link to="/home/posts" className="left-menu-item__link">
+            <NavLink to="/home/posts" className="left-menu-item__link">
               Posts
-            </Link>
+            </NavLink>
           </ListGroup.Item>
         </ListGroup>
       </nav>

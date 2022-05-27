@@ -5,7 +5,6 @@ import { queryClient } from "index";
 
 import { PostCard } from "../components/PostCard";
 import { Button, Table, Modal, Loader, MissingText } from "components/index";
-import { AufContainer } from "features/auf_container/AufContainer";
 
 import { Post, User } from "types/interfaces";
 import { UserProfileContext } from "types/contexts";
@@ -88,10 +87,10 @@ export const Posts = () => {
                     id={post.id}
                   >
                     <Link to={`/home/posts/${post.id}/edit`}>
-                      <Button type="primary">Edit</Button>
+                      <Button>Edit</Button>
                     </Link>
                     <Button
-                      type="primary"
+                      type="dark"
                       onClick={() => showConfirmationModal(post)}
                     >
                       Delete
@@ -133,10 +132,10 @@ export const Posts = () => {
                   return (
                     <div className="actions-btns-wrapper">
                       <Link to={`/home/posts/${record.id}/edit`}>
-                        <Button type="primary">Edit</Button>
+                        <Button>Edit</Button>
                       </Link>
                       <Button
-                        type="primary"
+                        type="dark"
                         onClick={() => showConfirmationModal(record)}
                       >
                         Delete

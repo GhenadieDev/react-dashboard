@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { Button } from "components/index";
 
 import { UserProfileContext } from "types/contexts";
 import { User } from "types/interfaces";
+import logout from "icons/logout.png";
 
 import "styles/TopBar.scss";
 
@@ -18,9 +18,9 @@ export const TopBar = () => {
     <header className="topbar">
       <p className="topbar__user">{profile?.name + " " + profile?.surname}</p>
       <div className="btn-wrapper">
-        <Button className="log-out" onClick={clickHandler} type="primary">
-          <span className="log-out__icon">&#10140;</span>
-        </Button>
+        <div className="log-out" onClick={clickHandler}>
+          <img className="log-out__img" src={logout} alt="logout" />
+        </div>
       </div>
     </header>
   );

@@ -3,7 +3,6 @@
 }
 
 .left-menu-item {
-
   &:hover {
       background-color: rgb(193, 209, 204);
       transition: 0.2s ease-out;
@@ -15,5 +14,10 @@
       width: 100%;
       display: block;
       font-size: 20px;
+
+      &.active {
+        border-left: 2px solid blue;
+        background-color: rgb(193, 209, 204);
+      }
   }
 }

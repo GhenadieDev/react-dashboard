@@ -16,13 +16,6 @@ export const PostPage = () => {
   return (
     <Loader fade fixed height="100%" size="regular" loading={isLoading}>
       <div className="post">
-        <figure className="image-wrapper">
-          <img
-            src={currentPost?.data.image_url}
-            alt=""
-            className="image-wrapper__image"
-          />
-        </figure>
         <div className="text-wrapper">
           <section className="title-wrapper">
             <h3 className="title-wrapper__title">{currentPost?.data.title}</h3>
@@ -36,6 +29,14 @@ export const PostPage = () => {
             </p>
           </section>
         </div>
+
+        <figure className="image-wrapper">
+          <img
+            src={currentPost?.data.image_url}
+            alt=""
+            className="image-wrapper__image"
+          />
+        </figure>
       </div>
     </Loader>
   );

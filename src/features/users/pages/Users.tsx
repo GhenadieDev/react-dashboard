@@ -8,7 +8,6 @@ import { User } from "types/interfaces";
 import { Button, Table, Modal, Loader } from "components/index";
 
 import { UserModalForm } from "../components/UserModalForm";
-import { AufContainer } from "features/auf_container/AufContainer";
 
 import { Space } from "ebs-design";
 import { useMutation, useQuery } from "react-query";
@@ -150,7 +149,10 @@ export const Users = () => {
                     <Button onClick={() => setIsModalVisible(true)}>
                       Edit
                     </Button>
-                    <Button onClick={() => setConfirmationModalVisible(true)}>
+                    <Button
+                      onClick={() => setConfirmationModalVisible(true)}
+                      type="dark"
+                    >
                       Delete
                     </Button>
                   </div>
