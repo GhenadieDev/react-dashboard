@@ -21,7 +21,7 @@ export const FormHeader = ({
       {location ? (
         <p className="question">
           {question}
-          <Link to={location}>{linkText}</Link>
+          <Link to={location}>{" " + linkText}</Link>
         </p>
       ) : null}
     </div>

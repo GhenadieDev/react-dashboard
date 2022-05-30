@@ -9,6 +9,7 @@ import { useMutation } from "react-query";
 import { useForm } from "ebs-design";
 
 import "styles/LoginPage.scss";
+import { ResetPassword } from "features/users/pages/ResetPassword";
 
 const formObject = {
   submitBtnText: "Log In",
@@ -22,6 +23,7 @@ const inittialFieldsValue = {
 
 export const Login = () => {
   const [logError, setLogError] = useState<string>("");
+  const [resetIsClicked, setResetIsClicked] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const mutation = useMutation((values: User) => userApi.logUser(values), {
@@ -52,6 +54,9 @@ export const Login = () => {
 
   return (
     <AufContainer>
+      {resetIsClicked ? (
+        <ResetPassword setResetIsClicked={setResetIsClicked} />
+      ) : null}
       <div className="login">
         <div className="form-wrapper">
           <EBSForm
@@ -85,6 +90,9 @@ export const Login = () => {
               onClick={() => submitHandler}
             >
               {formObject.submitBtnText}
+            </Button>
+            <Button type="text" onClick={() => setResetIsClicked(true)}>
+              forgot password?
             </Button>
           </EBSForm>
         </div>

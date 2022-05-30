@@ -44,4 +44,20 @@ export const userApi = {
     );
     return result;
   },
+
+  editUserPassword: async (user: User) => {
+    if (user.email) {
+      const result = await axios.get(
+        `http://localhost:4000/users?email=${user.email}`
+      );
+      if (result.data.length > 0) {
+        await axios.patch(
+          `http://localhost:4000/users/${result.data[0].id}`,
+          user
+        );
+      } else {
+        throw new Error("User with this email not found. Try again");
+      }
+    }
+  },
 };
