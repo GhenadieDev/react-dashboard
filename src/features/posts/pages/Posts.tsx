@@ -15,7 +15,7 @@ import "styles/Posts.scss";
 import "styles/common.scss";
 
 export const Posts = () => {
-  const currentUser = useContext<User | null | undefined>(UserProfileContext);
+  const currentUser = useContext<User | null>(UserProfileContext);
   const [isConfirmationModalVisible, setConfirmationModalVisible] =
     useState(false);
   const [choosenPost, setChoosenPost] = useState<Post>({});
@@ -30,13 +30,19 @@ export const Posts = () => {
     }
   );
 
-  const { data: posts, isLoading } = useQuery("posts", async () => {
-    if (currentUser?.role === "operator") {
-      return await postApi.getPersonalPosts(currentUser.id);
-    } else {
-      return await postApi.getAllPosts();
+  const { data: posts, isLoading } = useQuery(
+    "posts",
+    () => {
+      if (currentUser?.role === "operator") {
+        return postApi.getPersonalPosts(currentUser.id);
+      } else {
+        return postApi.getAllPosts();
+      }
+    },
+    {
+      enabled: currentUser !== undefined,
     }
-  });
+  );
 
   const showConfirmationModal = (post: Post) => {
     setChoosenPost(post);
@@ -74,9 +80,9 @@ export const Posts = () => {
           </Modal.Footer>
         </Modal>
         {currentUser?.role && currentUser.role === "operator" ? (
-          posts?.data.length > 0 ? (
+          posts?.length > 0 ? (
             <article className="postscards-wrapper">
-              {posts?.data.map((post: Post) => {
+              {posts?.map((post: Post) => {
                 return (
                   <PostCard
                     key={post.id}
@@ -102,7 +108,7 @@ export const Posts = () => {
           ) : (
             <MissingText title="You have not added any post yet" />
           )
-        ) : posts?.data.length > 0 ? (
+        ) : posts?.length > 0 ? (
           <Table
             columns={[
               {
@@ -145,7 +151,7 @@ export const Posts = () => {
                 },
               },
             ]}
-            data={posts?.data}
+            data={posts}
           />
         ) : (
           <MissingText title="Posts have not added yet" />

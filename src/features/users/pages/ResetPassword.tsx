@@ -1,13 +1,15 @@
-import { AufContainer } from "features/auf_container/AufContainer";
-import { EBSForm, Input, Button, FormHeader, Loader } from "components/index";
-import { useForm } from "ebs-design";
+import { SetStateAction, useState } from "react";
 import { useMutation } from "react-query";
+
+import { PageWrapper } from "features/page-wrapper/PageWrapper";
+import { EBSForm, Input, Button, FormHeader } from "components/index";
+import { useForm } from "ebs-design";
 import { userApi } from "api/users";
 
-import "styles/ResetPassword.scss";
-import { SetStateAction, useState } from "react";
 import { User } from "types/interfaces";
 import { passwordPattern } from "types/regex";
+
+import "styles/ResetPassword.scss";
 
 interface ResetProps {
   setResetIsClicked: React.Dispatch<SetStateAction<boolean>>;
@@ -43,7 +45,7 @@ export const ResetPassword = ({ setResetIsClicked }: ResetProps) => {
   };
 
   return (
-    <AufContainer>
+    <PageWrapper>
       <div className="reset-btn-wrapper">
         <Button size="small" onClick={() => setResetIsClicked(false)}>
           Back
@@ -94,6 +96,6 @@ export const ResetPassword = ({ setResetIsClicked }: ResetProps) => {
           </div>
         </EBSForm>
       </div>
-    </AufContainer>
+    </PageWrapper>
   );
 };

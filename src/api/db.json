@@ -12,53 +12,46 @@
       "id": 4
     },
     {
+      "name": "Adela",
+      "surname": "Rei",
+      "email": "a.riley@randatmail.com",
       "role": "operator",
-      "createdAt": "2022-05-26T16:37:52.077Z",
-      "name": "Edith",
-      "surname": "Johnson",
-      "email": "e.johnson@randatmail.com",
       "gender": "Feminin",
-      "password": "peroiggjir2@M",
-      "confirmedPassword": "peroiggjir2@M",
+      "password": "GxDw@KqOM5A",
+      "confirmedPassword": "GxDw@KqOM5A",
+      "id": 5,
+      "createdAt": "2022-06-01T17:36:16.360Z"
+    },
+    {
+      "role": "operator",
+      "createdAt": "2022-06-06T17:48:59.437Z",
+      "name": "erpogkepok",
+      "surname": "kpoekrgpok",
+      "email": "kpogekpog@mail.ru",
+      "gender": "Feminin",
+      "password": "hjpM$zlcC?s43t",
+      "confirmedPassword": "hjpM$zlcC?s43t",
       "id": 6
     }
   ],
   "posts": [
     {
-      "authorId": 6,
-      "authorName": "Edith Johnson",
-      "date": "2022-05-27T11:35:57.246Z",
-      "title": "pweofkpweokp",
-      "description": "pokwpkgopekrgpoker po pe korproekpok p erkpo",
-      "image_url": "https://images.unsplash.com/photo-1574687263812-a27e1c9e11ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=471&q=80",
+      "authorId": 5,
+      "authorName": "Adela Rei",
+      "date": "2022-06-07T10:59:08.637Z",
+      "title": "wofpweofkpwkegpokpowgekpowepwe",
+      "description": "wefwoefkpowke pokwep k weowkepkew  pwoekpo kowke opkewpokokewp eoeeo pewkfp",
+      "image_url": "https://images.unsplash.com/photo-1491002052546-bf38f186af56?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1208&q=80",
       "id": 1
     },
     {
       "authorId": 6,
-      "authorName": "Edith Johnson",
-      "date": "2022-05-27T11:35:57.246Z",
-      "title": "wpefowpeokpowekof",
-      "description": "pwkpoekfpokwepofew",
-      "image_url": "https://images.unsplash.com/photo-1574687263812-a27e1c9e11ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=471&q=80",
+      "authorName": "erpogkepok kpoekrgpok",
+      "date": "2022-06-07T11:50:38.684Z",
+      "title": "post 2",
+      "description": "The site of the Empire State Building, in Midtown South on the west side of Fifth Avenue between West 33rd and 34th Streets, was developed in 1893 as the Waldorf–Astoria Hotel. In 1929, Empire State Inc. acquired the site and devised plans for a skyscraper there. The design for the Empire State Building was changed fifteen times until it was ensured to be the world's tallest building. Construction started on March 17, 1930, and the building opened thirteen and a half months afterward on May 1, 1931. Despite favorable publicity related to the building's construction, because of the Great Depression and World War II, its owners did not make a profit until the early 1950s.",
+      "image_url": "https://images.unsplash.com/photo-1555109307-f7d9da25c244?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80",
       "id": 2
-    },
-    {
-      "authorId": 6,
-      "authorName": "Edith Johnson",
-      "date": "2022-05-27T11:35:57.246Z",
-      "title": "wepfweopkfowekpkkoewkpfow",
-      "description": "fowfpwkeok okwpeokpowkepo kowke kwpoe",
-      "image_url": "https://images.unsplash.com/photo-1574687263812-a27e1c9e11ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=471&q=80",
-      "id": 4
-    },
-    {
-      "authorId": 6,
-      "authorName": "Edith Johnson",
-      "date": "2022-05-27T11:35:57.246Z",
-      "title": "wepofjpweokpo",
-      "description": "wpokpowkefokpoewkfpokweokfpowe",
-      "image_url": "https://images.unsplash.com/photo-1574687263812-a27e1c9e11ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=471&q=80",
-      "id": 5
     }
   ]
 }

@@ -1,51 +1,37 @@
-import axios from "axios";
+import { axiosApi } from "types/axiosInstance";
 import { Post } from "types/interfaces";
 
 export const postApi = {
-  getPersonalPosts: async (userId: number | string | undefined) => {
-    const result = await axios.get(
-      `http://localhost:4000/posts?authorId=${userId}`
-    );
-    return result;
+  getPersonalPosts: async (userId: string | number | undefined) => {
+    const { data } = await axiosApi.get(`posts?authorId=${userId}`);
+    return data;
   },
 
   getPersonalPostById: async (postId?: string | number) => {
     try {
-      const result = await axios.get(`http://localhost:4000/posts/${postId}`);
+      const result = await axiosApi.get(`posts/${postId}`);
       return result;
     } catch (error) {
       console.log("get post by id error: ", error);
     }
   },
 
-  createPost: async (post: Post) => {
-    try {
-      const result = await axios.post(`http://localhost:4000/posts`, post);
-      return result;
-    } catch (error) {
-      console.log("create post error: ", error);
-    }
-  },
+  createPost: async (post: Post) => await axiosApi.post(`posts`, post),
 
   editPost: async (post: Post) => {
     try {
-      const result = await axios.put(
-        `http://localhost:4000/posts/${post.id}`,
-        post
-      );
+      const result = await axiosApi.put(`posts/${post.id}`, post);
       return result;
     } catch (error) {
       console.log("edit post error: ", error);
     }
   },
 
-  deletePost: async (post: Post) => {
-    const result = await axios.delete(`http://localhost:4000/posts/${post.id}`);
-    return result;
-  },
+  deletePost: async (post: Post) => await axiosApi.delete(`posts/${post.id}`),
 
   getAllPosts: async () => {
-    const result = await axios.get("http://localhost:4000/posts/");
-    return result;
+    console.log("getAllPosts called");
+    const { data } = await axiosApi.get("posts/");
+    return data;
   },
 };

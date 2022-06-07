@@ -18,3 +18,4 @@ export * from "./RegisterFields";
 export * from "./TopBar";
 export * from "./LeftMenu";
 export * from "./MissingText";
+export * from "./Footer";

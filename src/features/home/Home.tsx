@@ -5,17 +5,14 @@ import { useQuery } from "react-query";
 import { userApi } from "api/users";
 import { Layout } from "components";
 import { UserProfileContext } from "types/contexts";
-import { AufContainer } from "features/auf_container/AufContainer";
+import { PageWrapper } from "features/page-wrapper/PageWrapper";
 
 export const Home = () => {
   const navigate = useNavigate();
 
   const { data: profile } = useQuery(
     "logged",
-    async () => {
-      const result = await userApi.getUserById(localStorage.getItem("userId"));
-      return result;
-    },
+    () => userApi.getUserById(localStorage.getItem("userId")),
     {
       enabled: localStorage.getItem("userId") !== null,
       onError: () => {
@@ -31,10 +28,10 @@ export const Home = () => {
   }, [navigate]);
 
   return (
-    <AufContainer>
-      <UserProfileContext.Provider value={profile?.data}>
+    <PageWrapper>
+      <UserProfileContext.Provider value={profile}>
         <Layout />
       </UserProfileContext.Provider>
-    </AufContainer>
+    </PageWrapper>
   );
 };

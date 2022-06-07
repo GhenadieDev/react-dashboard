@@ -1,27 +1,25 @@
 import { useContext } from "react";
+import { useMutation } from "react-query";
+
 import { postApi } from "api/posts";
 import { Button, EBSForm, FormHeader, Input, Textarea } from "components/index";
-import { useForm } from "ebs-design";
 
 import { UserProfileContext } from "types/contexts";
 import { dateTime } from "types/date";
 import { Post } from "types/interfaces";
-import { useMutation } from "react-query";
 
+import { useForm } from "ebs-design";
 import "styles/CreatePost.scss";
 
 export const CreatePost = () => {
   const currentUser = useContext(UserProfileContext);
   const [form] = useForm();
 
-  const mutation = useMutation(
-    async (post: Post) => await postApi.createPost(post),
-    {
-      onSuccess: () => {
-        form.resetFields();
-      },
-    }
-  );
+  const mutation = useMutation((post: Post) => postApi.createPost(post), {
+    onSuccess: () => {
+      form.resetFields();
+    },
+  });
 
   const submitHandler = (values: Post) => {
     const post: Post = {

@@ -3,13 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { EBSForm, FormHeader, Button, Input } from "components/index";
 import { User } from "types/interfaces";
 import { userApi } from "api/users";
-import { AufContainer } from "features/auf_container/AufContainer";
+import { PageWrapper } from "features/page-wrapper/PageWrapper";
 import { useMutation } from "react-query";
 
 import { useForm } from "ebs-design";
 
-import "styles/LoginPage.scss";
 import { ResetPassword } from "features/users/pages/ResetPassword";
+import "styles/LoginPage.scss";
 
 const formObject = {
   submitBtnText: "Log In",
@@ -39,21 +39,21 @@ export const Login = () => {
       setLogError("");
       window.localStorage.setItem(
         "userId",
-        JSON.stringify(mutation.data.data[0].id)
+        JSON.stringify(mutation.data[0].id)
       );
       form.resetFields();
       navigate("/home/dashboard");
     }
   }, [mutation.data, mutation.isSuccess, form, navigate]);
 
-  const submitHandler = async (values: User) => {
+  const submitHandler = (values: User) => {
     if (!values?.password?.includes(" ")) {
-      await mutation.mutateAsync(values);
+      mutation.mutate(values);
     }
   };
 
   return (
-    <AufContainer>
+    <PageWrapper>
       {resetIsClicked ? (
         <ResetPassword setResetIsClicked={setResetIsClicked} />
       ) : null}
@@ -83,7 +83,7 @@ export const Login = () => {
               <Input type="password" placeholder="Password" isClearable />
             </EBSForm.Field>
             <Button
-              loading={mutation.isLoading ? true : false}
+              loading={mutation.isLoading}
               submit
               type="primary"
               disabled={formObject.disabledBtn}
@@ -102,6 +102,6 @@ export const Login = () => {
           </p>
         ) : null}
       </div>
-    </AufContainer>
+    </PageWrapper>
   );
 };

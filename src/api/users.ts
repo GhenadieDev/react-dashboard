@@ -1,60 +1,42 @@
-import axios from "axios";
+import { axiosApi } from "types/axiosInstance";
 import { User } from "types/interfaces";
+import queryString from "query-string";
 
 export const userApi = {
   createUser: async (user: User | null) => {
-    const result = await axios.post("http://localhost:4000/users", user);
-    return result;
+    await axiosApi.post("users", user);
   },
 
   logUser: async (user: User) => {
-    const result = await axios.get(
-      `http://localhost:4000/users?email=${user.email}&password=${user.password}`
-    );
-    return result;
+    const { data } = await axiosApi.get(`users?${queryString.stringify(user)}`);
+    return data;
   },
 
   getUserById: async (userId: number | string | null) => {
     if (userId) {
-      try {
-        const result = await axios.get<User | null | undefined>(
-          `http://localhost:4000/users/${userId}`
-        );
-        return result;
-      } catch (error: any) {
-        throw new Error(error?.message);
-      }
+      const { data } = await axiosApi.get(`users/${userId}`);
+      return data;
     }
   },
 
   getAllUsers: async () => {
-    const result = await axios.get("http://localhost:4000/users");
-    return result;
+    const { data } = await axiosApi.get("users");
+    return data;
   },
 
   deleteUser: async (userId: number | string | undefined) => {
-    const result = await axios.delete(`http://localhost:4000/users/${userId}`);
-    return result;
+    await axiosApi.delete(`users/${userId}`);
   },
 
   editUser: async (user: User) => {
-    const result = await axios.put(
-      `http://localhost:4000/users/${user.id}`,
-      user
-    );
-    return result;
+    await axiosApi.put(`users/${user.id}`, user);
   },
 
   editUserPassword: async (user: User) => {
     if (user.email) {
-      const result = await axios.get(
-        `http://localhost:4000/users?email=${user.email}`
-      );
+      const result = await axiosApi.get(`users?email=${user.email}`);
       if (result.data.length > 0) {
-        await axios.patch(
-          `http://localhost:4000/users/${result.data[0].id}`,
-          user
-        );
+        await axiosApi.patch(`users/${result.data[0].id}`, user);
       } else {
         throw new Error("User with this email not found. Try again");
       }

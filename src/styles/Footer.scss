@@ -1,0 +1,15 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  background-color: #8080ff;
+  height: 50px;
+  width: 100%;
+
+  &:hover {
+    background-color: #5d5dc3;
+    transition: 0.3s ease-out;
+    cursor: pointer;
+  }
+}

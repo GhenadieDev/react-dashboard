@@ -9,7 +9,7 @@ import { dateTime } from "types/date";
 import { EBSForm, RegisterFields, Button, FormHeader } from "components/index";
 
 import { userApi } from "api/users";
-import { AufContainer } from "features/auf_container/AufContainer";
+import { PageWrapper } from "features/page-wrapper/PageWrapper";
 
 import "styles/RegisterPage.scss";
 
@@ -29,7 +29,11 @@ export const Register = () => {
   const [submitBtnIsDisabled, setSubmitBtn] = useState(true);
   const [form] = useForm();
 
-  const mutation = useMutation((values: User) => userApi.createUser(values));
+  const mutation = useMutation((values: User) => userApi.createUser(values), {
+    onSuccess: () => {
+      setCheckboxIsChecked(false);
+    },
+  });
 
   useEffect(() => {
     setSubmitBtn(!checkboxIsChecked);
@@ -50,13 +54,13 @@ export const Register = () => {
         confirmedPassword: values.confirmedPassword,
       };
       setSamePasswordError("");
-      await mutation.mutateAsync(newUser);
+      mutation.mutate(newUser);
       form.resetFields();
     }
   };
 
   return (
-    <AufContainer>
+    <PageWrapper>
       <div className="register">
         <div className="form-wrapper">
           <EBSForm
@@ -90,6 +94,6 @@ export const Register = () => {
           ) : null}
         </div>
       </div>
-    </AufContainer>
+    </PageWrapper>
   );
 };

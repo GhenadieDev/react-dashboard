@@ -20,7 +20,7 @@ export const Dashboard = () => {
     data: users,
     isSuccess: isUsers,
     isLoading: usersIsLoading,
-  } = useQuery("allUsers", async () => await userApi.getAllUsers());
+  } = useQuery("allUsers", () => userApi.getAllUsers());
   const {
     data: posts,
     isSuccess: isPosts,
@@ -29,15 +29,15 @@ export const Dashboard = () => {
 
   useEffect(() => {
     if (isUsers) {
-      groupUsersByMonth(users?.data, listOfMonths, setChartUserData);
+      groupUsersByMonth(users, listOfMonths, setChartUserData);
     }
-  }, [users?.data, isUsers]);
+  }, [users, isUsers]);
 
   useEffect(() => {
     if (isPosts) {
-      groupPostsByMonths(posts?.data, listOfMonths, setChartPostData);
+      groupPostsByMonths(posts, listOfMonths, setChartPostData);
     }
-  }, [posts?.data, isPosts]);
+  }, [posts, isPosts]);
 
   return (
     <div className="dashboard">
@@ -52,11 +52,11 @@ export const Dashboard = () => {
           <div className="totals flex">
             <div className="total-users">
               <h5 className="total-users__title">Total Users</h5>
-              <h1 className="total-users__count">{users?.data.length}</h1>
+              <h1 className="total-users__count">{users?.length}</h1>
             </div>
             <div className="total-posts">
               <h5 className="total-posts__title">Total Posts</h5>
-              <h1 className="total-posts__count">{posts?.data.length}</h1>
+              <h1 className="total-posts__count">{posts?.length}</h1>
             </div>
           </div>
           <div className="statistics flex">

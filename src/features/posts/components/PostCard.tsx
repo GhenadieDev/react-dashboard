@@ -1,10 +1,10 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { Post } from "types/interfaces";
 
 import { getDate } from "utils/getDate";
 
 import "styles/PostCard.scss";
-import React from "react";
 
 export const PostCard = (props: React.PropsWithChildren<Post | any>) => {
   return (

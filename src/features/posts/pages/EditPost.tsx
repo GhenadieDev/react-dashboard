@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useForm } from "ebs-design";
 import { useMutation, useQuery } from "react-query";
 
 import { postApi } from "api/posts";
 import { Button, EBSForm, FormHeader, Input, Textarea } from "components/index";
+import { useForm } from "ebs-design";
 
 import { Post } from "types/interfaces";
 

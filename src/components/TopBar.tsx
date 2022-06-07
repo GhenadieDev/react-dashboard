@@ -7,7 +7,7 @@ import logout from "icons/logout.png";
 import "styles/TopBar.scss";
 
 export const TopBar = () => {
-  const profile = useContext<User | null | undefined>(UserProfileContext);
+  const profile = useContext<User | null>(UserProfileContext);
 
   const clickHandler = () => {
     window.localStorage.removeItem("userId");
