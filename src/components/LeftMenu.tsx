@@ -13,19 +13,19 @@ export const LeftMenu = () => {
       <nav className="leftbar">
         <ListGroup className="left-menu">
           <ListGroup.Item className="left-menu-item">
-            <NavLink to="/home/dashboard" className="left-menu-item__link">
+            <NavLink to="dashboard" className="left-menu-item__link">
               Dashboard
             </NavLink>
           </ListGroup.Item>
           {currentUser?.role && currentUser.role === "admin" ? (
             <ListGroup.Item className="left-menu-item">
-              <NavLink to="/home/users" className="left-menu-item__link">
+              <NavLink to="users" className="left-menu-item__link">
                 Users
               </NavLink>
             </ListGroup.Item>
           ) : null}
           <ListGroup.Item className="left-menu-item">
-            <NavLink to="/home/posts" className="left-menu-item__link">
+            <NavLink to="posts" className="left-menu-item__link">
               Posts
             </NavLink>
           </ListGroup.Item>

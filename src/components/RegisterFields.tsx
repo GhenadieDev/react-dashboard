@@ -64,6 +64,7 @@ export const RegisterFields = ({
         <p style={{ color: "red" }}>{samepassword}</p>
       ) : null}
       <EBSForm.Field rules={[{ required: true }]} name="checkedTerms">
+        {/*nu pot pune in loc de name, valuePropName. Se strica inregistrarea*/}
         <Checkbox
           text="I agree with the processing of personal data"
           onClick={() => setCheckboxIsChecked(!checkboxIsChecked)}

@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Outlet, useLocation } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
 import { queryClient } from "index";
 
@@ -20,6 +20,7 @@ export const Posts = () => {
     useState(false);
   const [choosenPost, setChoosenPost] = useState<Post>({});
   const navigate = useNavigate();
+  const location = useLocation();
 
   const deleteMutation = useMutation(
     async (choosenPost: Post) => await postApi.deletePost(choosenPost),
@@ -40,7 +41,7 @@ export const Posts = () => {
       }
     },
     {
-      enabled: currentUser !== undefined,
+      enabled: currentUser !== undefined && location.pathname === "/home/posts",
     }
   );
 
@@ -56,107 +57,115 @@ export const Posts = () => {
   };
 
   return (
-    <Loader fade height="100%" size="regular" fixed loading={isLoading}>
-      <div className="posts">
-        {currentUser?.role && currentUser.role === "operator" ? (
-          <div className="btn-wrapper">
-            <Link to="/home/posts/create">
-              <Button type="primary">Add Post</Button>
-            </Link>
-          </div>
-        ) : null}
-        <Modal
-          title="You're gonna delete this post. Are you sure?"
-          open={isConfirmationModalVisible}
-          mask
-        >
-          <Modal.Footer>
-            <Space>
-              <Button onClick={() => setConfirmationModalVisible(false)}>
-                Cancel
-              </Button>
-              <Button onClick={deletePosts}>Submit</Button>
-            </Space>
-          </Modal.Footer>
-        </Modal>
-        {currentUser?.role && currentUser.role === "operator" ? (
-          posts?.length > 0 ? (
-            <article className="postscards-wrapper">
-              {posts?.map((post: Post) => {
-                return (
-                  <PostCard
-                    key={post.id}
-                    image_url={post.image_url}
-                    title={post.title}
-                    description={post.description}
-                    date={post.date}
-                    id={post.id}
-                  >
-                    <Link to={`/home/posts/${post.id}/edit`}>
-                      <Button>Edit</Button>
-                    </Link>
-                    <Button
-                      type="dark"
-                      onClick={() => showConfirmationModal(post)}
-                    >
-                      Delete
-                    </Button>
-                  </PostCard>
-                );
-              })}
-            </article>
-          ) : (
-            <MissingText title="You have not added any post yet" />
-          )
-        ) : posts?.length > 0 ? (
-          <Table
-            columns={[
-              {
-                dataIndex: "title",
-                title: "Title",
-                onCell: (record: Post) => ({
-                  onClick() {
-                    navigate(`/home/posts/${record.id}`);
-                  },
-                }),
-              },
-              {
-                dataIndex: "image_url",
-                title: "Image URL",
-              },
-              {
-                dataIndex: "date",
-                title: "Created At",
-              },
-              {
-                dataIndex: "authorName",
-                title: "Author",
-              },
-              {
-                title: "Actions",
-                render: (record) => {
-                  return (
-                    <div className="actions-btns-wrapper">
-                      <Link to={`/home/posts/${record.id}/edit`}>
-                        <Button>Edit</Button>
-                      </Link>
-                      <Button
-                        type="dark"
-                        onClick={() => showConfirmationModal(record)}
+    <>
+      {location.pathname
+        .substring(location.pathname.indexOf("posts"), location.pathname.length)
+        .includes("/") ? (
+        <Outlet />
+      ) : (
+        <Loader fade height="100%" size="regular" fixed loading={isLoading}>
+          <div className="posts">
+            {currentUser?.role && currentUser.role === "operator" ? (
+              <div className="btn-wrapper">
+                <Link to="create">
+                  <Button type="primary">Add Post</Button>
+                </Link>
+              </div>
+            ) : null}
+            <Modal
+              title="You're gonna delete this post. Are you sure?"
+              open={isConfirmationModalVisible}
+              mask
+            >
+              <Modal.Footer>
+                <Space>
+                  <Button onClick={() => setConfirmationModalVisible(false)}>
+                    Cancel
+                  </Button>
+                  <Button onClick={deletePosts}>Submit</Button>
+                </Space>
+              </Modal.Footer>
+            </Modal>
+            {currentUser?.role && currentUser.role === "operator" ? (
+              posts?.length > 0 ? (
+                <article className="postscards-wrapper">
+                  {posts?.map((post: Post) => {
+                    return (
+                      <PostCard
+                        key={post.id}
+                        image_url={post.image_url}
+                        title={post.title}
+                        description={post.description}
+                        date={post.date}
+                        id={post.id}
                       >
-                        Delete
-                      </Button>
-                    </div>
-                  );
-                },
-              },
-            ]}
-            data={posts}
-          />
-        ) : (
-          <MissingText title="Posts have not added yet" />
-        )}
-      </div>
-    </Loader>
+                        <Link to={`/home/posts/${post.id}/edit`}>
+                          <Button>Edit</Button>
+                        </Link>
+                        <Button
+                          type="dark"
+                          onClick={() => showConfirmationModal(post)}
+                        >
+                          Delete
+                        </Button>
+                      </PostCard>
+                    );
+                  })}
+                </article>
+              ) : (
+                <MissingText title="You have not added any post yet" />
+              )
+            ) : posts?.length > 0 ? (
+              <Table
+                columns={[
+                  {
+                    dataIndex: "title",
+                    title: "Title",
+                    onCell: (record: Post) => ({
+                      onClick() {
+                        navigate(`${record.id}`);
+                      },
+                    }),
+                  },
+                  {
+                    dataIndex: "image_url",
+                    title: "Image URL",
+                  },
+                  {
+                    dataIndex: "date",
+                    title: "Created At",
+                  },
+                  {
+                    dataIndex: "authorName",
+                    title: "Author",
+                  },
+                  {
+                    title: "Actions",
+                    render: (record) => {
+                      return (
+                        <div className="actions-btns-wrapper">
+                          <Link to={`/home/posts/${record.id}/edit`}>
+                            <Button>Edit</Button>
+                          </Link>
+                          <Button
+                            type="dark"
+                            onClick={() => showConfirmationModal(record)}
+                          >
+                            Delete
+                          </Button>
+                        </div>
+                      );
+                    },
+                  },
+                ]}
+                data={posts}
+              />
+            ) : (
+              <MissingText title="Posts have not added yet" />
+            )}
+          </div>
+        </Loader>
+      )}
+    </>
   );
 };

@@ -30,7 +30,6 @@ export const postApi = {
   deletePost: async (post: Post) => await axiosApi.delete(`posts/${post.id}`),
 
   getAllPosts: async () => {
-    console.log("getAllPosts called");
     const { data } = await axiosApi.get("posts/");
     return data;
   },

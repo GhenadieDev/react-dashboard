@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
-import { AuthRoute } from "./features/auth/AuthRoute";
-import { Register } from "./features/register/Register";
-import { NullPage } from "./features/null/NullPage";
+import { AuthRoute } from "features/auth/AuthRoute";
+import { Register } from "features/register/Register";
+import { NullPage } from "features/null/NullPage";
 import { Login } from "features/login/Login";
 import { Dashboard } from "features/dashboard/Dashboard";
 import { Users } from "features/users/pages/Users";
@@ -26,10 +26,12 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="users" element={<Users />} />
-          <Route path="posts" element={<Posts />} />
-          <Route path="/home/posts/:postID" element={<PostPage />} />
-          <Route path="/home/posts/:postID/edit" element={<EditPost />} />
-          <Route path="/home/posts/create" element={<CreatePost />} />
+          <Route path="posts" element={<Posts />}>
+            <Route path=":postID" element={<PostPage />}>
+              <Route path="edit" element={<EditPost />} />
+            </Route>
+            <Route path="create" element={<CreatePost />} />
+          </Route>
         </Route>
         <Route path="*" element={<NullPage />} />
       </Routes>

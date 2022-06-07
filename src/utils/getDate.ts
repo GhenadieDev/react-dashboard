@@ -4,5 +4,4 @@ export const getDate = (date: typeof dateTime) => {
   return date?.toString().substring(0, date?.toString().indexOf("T"));
 };
 
-//Proper Date utils isn't working
-//if I write console.log(date.getMonth()) I get the error: getMonth() is not a function
+//daca ma folosesc de date.getMonth imi arata luna incorecta.
