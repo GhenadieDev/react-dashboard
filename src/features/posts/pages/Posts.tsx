@@ -1,15 +1,25 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
 import { queryClient } from "index";
 
 import { PostCard } from "../components/PostCard";
-import { Button, Table, Modal, Loader, MissingText } from "components/index";
+import {
+  Button,
+  Table,
+  Modal,
+  Loader,
+  MissingText,
+  Checkbox,
+  Footer,
+} from "components/index";
 
 import { Post, User } from "types/interfaces";
 import { UserProfileContext } from "types/contexts";
 import { postApi } from "api/posts";
 import { Space } from "ebs-design";
+
+import trash24 from "icons/trash24.png";
 
 import "styles/Posts.scss";
 import "styles/common.scss";
@@ -19,6 +29,7 @@ export const Posts = () => {
   const [isConfirmationModalVisible, setConfirmationModalVisible] =
     useState(false);
   const [choosenPost, setChoosenPost] = useState<Post>({});
+  const [selectedPosts, setSelectedPosts] = useState<Post[]>([]);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -45,6 +56,10 @@ export const Posts = () => {
     }
   );
 
+  const [checkedState, setCheckedState] = useState(
+    new Array(posts?.length).fill(false)
+  );
+
   const showConfirmationModal = (post: Post) => {
     setChoosenPost(post);
     setConfirmationModalVisible(true);
@@ -55,6 +70,18 @@ export const Posts = () => {
     setConfirmationModalVisible(false);
     setChoosenPost({});
   };
+
+  const handleChange = (position?: number) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCheckedState(updatedCheckedState);
+  };
+
+  useEffect(() => {
+    console.log(checkedState.length);
+  }, [checkedState, posts]);
 
   return (
     <>
@@ -114,6 +141,16 @@ export const Posts = () => {
             <Table
               columns={[
                 {
+                  render: (value: any, record: Post, index: number) => {
+                    return (
+                      <Checkbox
+                        checked={checkedState[index]}
+                        onChange={() => handleChange(index)}
+                      />
+                    );
+                  },
+                },
+                {
                   dataIndex: "title",
                   title: "Title",
                   onCell: (record: Post) => ({
@@ -138,17 +175,9 @@ export const Posts = () => {
                   title: "Actions",
                   render: (record) => {
                     return (
-                      <div className="actions-btns-wrapper">
-                        <Link to={`/home/posts/${record.id}/edit`}>
-                          <Button>Edit</Button>
-                        </Link>
-                        <Button
-                          type="dark"
-                          onClick={() => showConfirmationModal(record)}
-                        >
-                          Delete
-                        </Button>
-                      </div>
+                      <Link to={`/home/posts/${record.id}/edit`}>
+                        <Button>Edit</Button>
+                      </Link>
                     );
                   },
                 },
@@ -158,6 +187,13 @@ export const Posts = () => {
           ) : (
             <MissingText title="Posts have not added yet" />
           )}
+          {checkedState.find((item) => item === true) !== undefined ? (
+            <Footer
+              onClick={() => console.log("selected posts: ", selectedPosts)}
+            >
+              <img src={trash24} alt="trash" />
+            </Footer>
+          ) : null}
         </div>
       </Loader>
     </>

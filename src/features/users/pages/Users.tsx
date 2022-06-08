@@ -74,7 +74,6 @@ export const Users = () => {
   };
 
   const onCellHandler = (record: User) => {
-    form.setFieldsValue(record);
     setChoosenUser(record);
   };
 

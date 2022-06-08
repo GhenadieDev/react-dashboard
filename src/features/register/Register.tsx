@@ -24,7 +24,6 @@ const initialFieldsValue = {
 };
 
 export const Register = () => {
-  const [samePasswordError, setSamePasswordError] = useState("");
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
   const [submitBtnIsDisabled, setSubmitBtn] = useState(true);
   const [form] = useForm();
@@ -40,23 +39,18 @@ export const Register = () => {
   }, [checkboxIsChecked]);
 
   const submitHandler = async (values: User) => {
-    if (values.password !== values.confirmedPassword) {
-      setSamePasswordError("Please, enter the same password");
-    } else {
-      const newUser: User = {
-        role: "operator",
-        createdAt: dateTime,
-        name: values.name,
-        surname: values.surname,
-        email: values.email,
-        gender: values.gender,
-        password: values.password,
-        confirmedPassword: values.confirmedPassword,
-      };
-      setSamePasswordError("");
-      mutation.mutate(newUser);
-      form.resetFields();
-    }
+    const newUser: User = {
+      role: "operator",
+      createdAt: dateTime,
+      name: values.name,
+      surname: values.surname,
+      email: values.email,
+      gender: values.gender,
+      password: values.password,
+      confirmedPassword: values.confirmedPassword,
+    };
+    mutation.mutate(newUser);
+    form.resetFields();
   };
 
   return (
@@ -73,11 +67,10 @@ export const Register = () => {
             <RegisterFields
               setCheckboxIsChecked={setCheckboxIsChecked}
               checkboxIsChecked={checkboxIsChecked}
-              samepassword={samePasswordError}
             />
             <div className="button-wrapper">
               <Button
-                loading={mutation.isLoading ? true : false}
+                loading={mutation.isLoading}
                 submit
                 type="primary"
                 disabled={submitBtnIsDisabled}
