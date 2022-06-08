@@ -1,7 +1,6 @@
 import { dateTime } from "types/date";
 
 export const getDate = (date: typeof dateTime) => {
-  return date?.toString().substring(0, date?.toString().indexOf("T"));
+  const time = new Date(date);
+  return time.toLocaleString("en-UK");
 };
-
-//daca ma folosesc de date.getMonth imi arata luna incorecta.

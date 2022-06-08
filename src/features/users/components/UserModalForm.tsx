@@ -91,11 +91,11 @@ export const UserModalForm = ({
                 options={[
                   {
                     text: "Admin",
-                    value: "Masculin",
+                    value: "admin",
                   },
                   {
                     text: "Operator",
-                    value: "Feminin",
+                    value: "operator",
                   },
                 ]}
               />

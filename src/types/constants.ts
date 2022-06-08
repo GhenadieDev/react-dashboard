@@ -3,50 +3,50 @@ import { Month } from "./interfaces";
 export const listOfMonths: Month[] = [
   {
     name: "Jan",
-    number: "01",
+    number: 1,
   },
   {
     name: "Feb",
-    number: "02",
+    number: 2,
   },
   {
     name: "Mar",
-    number: "03",
+    number: 3,
   },
   {
     name: "Apr",
-    number: "04",
+    number: 4,
   },
   {
     name: "May",
-    number: "05",
+    number: 5,
   },
   {
     name: "Jun",
-    number: "06",
+    number: 6,
   },
   {
     name: "Jul",
-    number: "07",
+    number: 7,
   },
   {
     name: "Aug",
-    number: "08",
+    number: 8,
   },
   {
     name: "Sep",
-    number: "09",
+    number: 9,
   },
   {
     name: "Oct",
-    number: "10",
+    number: 10,
   },
   {
     name: "Nov",
-    number: "11",
+    number: 11,
   },
   {
     name: "Dec",
-    number: "12",
+    number: 12,
   },
 ];

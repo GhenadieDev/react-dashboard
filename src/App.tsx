@@ -26,7 +26,8 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="users" element={<Users />} />
-          <Route path="posts" element={<Posts />}>
+          <Route path="posts">
+            <Route index element={<Posts />} />
             <Route path=":postID" element={<PostPage />}>
               <Route path="edit" element={<EditPost />} />
             </Route>

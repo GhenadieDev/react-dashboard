@@ -29,7 +29,7 @@ export interface UserRegError {
 
 export interface Month {
   name?: string;
-  number?: string;
+  number?: number;
 }
 
 export interface ChartUserData {

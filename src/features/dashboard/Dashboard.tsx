@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 
 import { userApi } from "api/users";
@@ -16,28 +16,24 @@ export const Dashboard = () => {
   const [chartUserData, setChartUserData] = useState<ChartUserData[]>([]);
   const [chartPostData, setChartPostData] = useState<ChartPostData[]>([]);
 
-  const {
-    data: users,
-    isSuccess: isUsers,
-    isLoading: usersIsLoading,
-  } = useQuery("allUsers", () => userApi.getAllUsers());
-  const {
-    data: posts,
-    isSuccess: isPosts,
-    isLoading: postsIsLoading,
-  } = useQuery("allPosts", async () => await postApi.getAllPosts());
-
-  useEffect(() => {
-    if (isUsers) {
-      groupUsersByMonth(users, listOfMonths, setChartUserData);
+  const { data: users, isLoading: usersIsLoading } = useQuery(
+    "allUsers",
+    () => userApi.getAllUsers(),
+    {
+      onSuccess: (res) => {
+        groupUsersByMonth(res, listOfMonths, chartUserData, setChartUserData);
+      },
     }
-  }, [users, isUsers]);
-
-  useEffect(() => {
-    if (isPosts) {
-      groupPostsByMonths(posts, listOfMonths, setChartPostData);
+  );
+  const { data: posts, isLoading: postsIsLoading } = useQuery(
+    "allPosts",
+    () => postApi.getAllPosts(),
+    {
+      onSuccess: (res) => {
+        groupPostsByMonths(res, listOfMonths, chartPostData, setChartPostData);
+      },
     }
-  }, [posts, isPosts]);
+  );
 
   return (
     <div className="dashboard">

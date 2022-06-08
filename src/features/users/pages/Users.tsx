@@ -33,7 +33,10 @@ export const Users = () => {
         queryClient.invalidateQueries("users");
         setConfirmationModalVisible(false);
         if (localStorage.getItem("userId")) {
-          localStorage.removeItem("userId");
+          const item = JSON.parse(localStorage.getItem("userId") || "");
+          if (item !== currentUser?.id) {
+            localStorage.removeItem("userId");
+          }
         }
       },
     }
