@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
 import { queryClient } from "index";
@@ -28,13 +28,14 @@ export const Posts = () => {
   const currentUser = useContext<User | null>(UserProfileContext);
   const [isConfirmationModalVisible, setConfirmationModalVisible] =
     useState(false);
-  const [choosenPost, setChoosenPost] = useState<Post>({});
-  const [selectedPosts, setSelectedPosts] = useState<Post[]>([]);
+  const [choosenPost, setChoosenPost] = useState<Post>({}); //pentru operator
+  const [selectedPosts, setSelectedPosts] = useState<any[]>([]); //pentru admin
   const navigate = useNavigate();
   const location = useLocation();
 
   const deleteMutation = useMutation(
-    async (choosenPost: Post) => await postApi.deletePost(choosenPost),
+    async (postId: number | string | undefined) =>
+      await postApi.deletePost(postId),
     {
       onSuccess: async () => {
         queryClient.invalidateQueries("posts");
@@ -56,146 +57,144 @@ export const Posts = () => {
     }
   );
 
-  const [checkedState, setCheckedState] = useState(
-    new Array(posts?.length).fill(false)
-  );
-
   const showConfirmationModal = (post: Post) => {
     setChoosenPost(post);
     setConfirmationModalVisible(true);
   };
 
-  const deletePosts = async () => {
-    await deleteMutation.mutateAsync(choosenPost);
-    setConfirmationModalVisible(false);
-    setChoosenPost({});
+  const deletePosts = () => {
+    if (selectedPosts.length > 0) {
+      selectedPosts.forEach((postId) => {
+        deleteMutation.mutate(postId);
+        setConfirmationModalVisible(false);
+        setSelectedPosts([]);
+      });
+    } else {
+      deleteMutation.mutate(choosenPost.id);
+      setConfirmationModalVisible(false);
+      setChoosenPost({});
+    }
   };
 
-  const handleChange = (position?: number) => {
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item
-    );
-
-    setCheckedState(updatedCheckedState);
+  const handleChange = (
+    e: React.MouseEvent<HTMLDivElement>,
+    recordId: number | string | undefined
+  ) => {
+    if ((e.target as HTMLInputElement).checked) {
+      setSelectedPosts((prevState) => [...prevState, recordId]);
+    } else {
+      const copy = selectedPosts.map((item) => item);
+      const filtered = copy.filter((postId) => postId !== recordId);
+      setSelectedPosts(filtered);
+    }
   };
-
-  useEffect(() => {
-    console.log(checkedState.length);
-  }, [checkedState, posts]);
 
   return (
     <>
-      <Loader fade height="100%" size="regular" fixed loading={isLoading}>
-        <div className="posts">
-          {currentUser?.role && currentUser.role === "operator" ? (
-            <div className="btn-wrapper">
-              <Link to="create">
-                <Button type="primary">Add Post</Button>
-              </Link>
-            </div>
-          ) : null}
-          <Modal
-            title="You're gonna delete this post. Are you sure?"
-            open={isConfirmationModalVisible}
-            mask
-          >
-            <Modal.Footer>
-              <Space>
-                <Button onClick={() => setConfirmationModalVisible(false)}>
-                  Cancel
-                </Button>
-                <Button onClick={deletePosts}>Submit</Button>
-              </Space>
-            </Modal.Footer>
-          </Modal>
-          {currentUser?.role && currentUser.role === "operator" ? (
-            posts?.length > 0 ? (
-              <article className="postscards-wrapper">
-                {posts?.map((post: Post) => {
-                  return (
-                    <PostCard
-                      key={post.id}
-                      image_url={post.image_url}
-                      title={post.title}
-                      description={post.description}
-                      date={post.date}
-                      id={post.id}
+      <div className="posts">
+        {currentUser?.role && currentUser.role === "operator" ? (
+          <div className="btn-wrapper">
+            <Link to="create">
+              <Button type="primary">Add Post</Button>
+            </Link>
+          </div>
+        ) : null}
+        <Modal
+          title="You're gonna delete this post. Are you sure?"
+          open={isConfirmationModalVisible}
+          mask
+        >
+          <Modal.Footer>
+            <Space>
+              <Button onClick={() => setConfirmationModalVisible(false)}>
+                Cancel
+              </Button>
+              <Button onClick={deletePosts}>Submit</Button>
+            </Space>
+          </Modal.Footer>
+        </Modal>
+        {currentUser?.role && currentUser.role === "operator" ? (
+          posts?.length > 0 ? (
+            <article className="postscards-wrapper">
+              {posts?.map((post: Post) => {
+                return (
+                  <PostCard
+                    key={post.id}
+                    image_url={post.image_url}
+                    title={post.title}
+                    description={post.description}
+                    date={post.date}
+                    id={post.id}
+                  >
+                    <Link to={`/home/posts/${post.id}/edit`}>
+                      <Button>Edit</Button>
+                    </Link>
+                    <Button
+                      type="dark"
+                      onClick={() => showConfirmationModal(post)}
                     >
-                      <Link to={`/home/posts/${post.id}/edit`}>
-                        <Button>Edit</Button>
-                      </Link>
-                      <Button
-                        type="dark"
-                        onClick={() => showConfirmationModal(post)}
-                      >
-                        Delete
-                      </Button>
-                    </PostCard>
-                  );
-                })}
-              </article>
-            ) : (
-              <MissingText title="You have not added any post yet" />
-            )
-          ) : posts?.length > 0 ? (
-            <Table
-              columns={[
-                {
-                  render: (value: any, record: Post, index: number) => {
-                    return (
-                      <Checkbox
-                        checked={checkedState[index]}
-                        onChange={() => handleChange(index)}
-                      />
-                    );
-                  },
-                },
-                {
-                  dataIndex: "title",
-                  title: "Title",
-                  onCell: (record: Post) => ({
-                    onClick() {
-                      navigate(`${record.id}`);
-                    },
-                  }),
-                },
-                {
-                  dataIndex: "image_url",
-                  title: "Image URL",
-                },
-                {
-                  dataIndex: "date",
-                  title: "Created At",
-                },
-                {
-                  dataIndex: "authorName",
-                  title: "Author",
-                },
-                {
-                  title: "Actions",
-                  render: (record) => {
-                    return (
-                      <Link to={`/home/posts/${record.id}/edit`}>
-                        <Button>Edit</Button>
-                      </Link>
-                    );
-                  },
-                },
-              ]}
-              data={posts}
-            />
+                      Delete
+                    </Button>
+                  </PostCard>
+                );
+              })}
+            </article>
           ) : (
-            <MissingText title="Posts have not added yet" />
-          )}
-          {checkedState.find((item) => item === true) !== undefined ? (
-            <Footer
-              onClick={() => console.log("selected posts: ", selectedPosts)}
-            >
-              <img src={trash24} alt="trash" />
-            </Footer>
-          ) : null}
-        </div>
-      </Loader>
+            <MissingText title="You have not added any post yet" />
+          )
+        ) : posts?.length > 0 ? (
+          <Table
+            columns={[
+              {
+                render: (record: Post) => {
+                  return (
+                    <Checkbox onClick={(e) => handleChange(e, record.id)} />
+                  );
+                },
+              },
+              {
+                dataIndex: "title",
+                title: "Title",
+                onCell: (record: Post) => ({
+                  onClick() {
+                    navigate(`${record.id}`);
+                  },
+                }),
+              },
+              {
+                dataIndex: "image_url",
+                title: "Image URL",
+              },
+              {
+                dataIndex: "date",
+                title: "Created At",
+              },
+              {
+                dataIndex: "authorName",
+                title: "Author",
+              },
+              {
+                title: "Actions",
+                render: (record) => {
+                  return (
+                    <Link to={`/home/posts/${record.id}/edit`}>
+                      <Button>Edit</Button>
+                    </Link>
+                  );
+                },
+              },
+            ]}
+            data={posts}
+          />
+        ) : (
+          <MissingText title="Posts have not added yet" />
+        )}
+        {selectedPosts.length > 0 ? (
+          <Footer onClick={() => setConfirmationModalVisible(true)}>
+            <img src={trash24} alt="trash" />
+          </Footer>
+        ) : null}
+      </div>
     </>
   );
 };

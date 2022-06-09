@@ -36,22 +36,13 @@
   ],
   "posts": [
     {
-      "authorId": 6,
-      "authorName": "Bill Clinton",
-      "date": "2022-06-08T10:16:22.774Z",
-      "title": "some title",
-      "description": "Tehnicile și metodele Wikipediei sunt folosite de unele companii intern la colecționarea și oferirea de informații și documentații propriilor angajați. Conform principiilor Wiki informațiile pot fi plasate pe serverul Wiki chiar de către angajații implicați în diversele procese ale întreprinderii. Acest gen de proiecte interne se numesc în engleză în general Enterprise Wiki sau și Corporate Wiki (Wiki de întreprindere). Fiind vorba de informații interne, ele sunt de obicei puse la dispoziție numai angajaților, în cadrul unui intranet al companiei. La nevoie se poate permite un acces (limitat) și unor persoane din afara companiei, în cadrul unui extranet protejat.",
-      "image_url": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1244&q=80",
-      "id": 1
-    },
-    {
       "authorId": 5,
       "authorName": "pweokfpweokp pkpwkepf",
-      "date": "2022-06-08T11:35:31.299Z",
-      "title": "wepofpwekpf wkpwokpo ",
-      "description": "Titanic was under the command of Captain Edward Smith, who went down with the ship. The ocean liner carried some of the wealthiest people in the world, as well as hundreds of emigrants from Great Britain and Ireland, Scandinavia and elsewhere throughout Europe, who were seeking a new life in the United States and Canada. ",
-      "image_url": "https://images.unsplash.com/photo-1558431571-4a9f128e135f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dGl0YW5pY3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60",
-      "id": 2
+      "date": "2022-06-09T12:01:00.776Z",
+      "title": "wepofkwpekfpowef",
+      "description": "Tehnicile și metodele Wikipediei sunt folosite de unele companii intern la colecționarea și oferirea de informații și documentații propriilor angajați. Conform principiilor Wiki informațiile pot fi plasate pe serverul Wiki chiar de către angajații implicați în diversele procese ale întreprinderii. Acest gen de proiecte interne se numesc în engleză în general Enterprise Wiki sau și Corporate Wiki (Wiki de întreprindere). Fiind vorba de informații interne, ele sunt de obicei puse la dispoziție numai angajaților, în cadrul unui intranet al companiei. La nevoie se poate permite un acces (limitat) și unor persoane din afara companiei, în cadrul unui extranet protejat. ",
+      "image_url": "https://images.unsplash.com/photo-1494145904049-0dca59b4bbad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YnVpbGRpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60",
+      "id": 1
     }
   ]
 }

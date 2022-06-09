@@ -22,7 +22,7 @@ export const PostPage = () => {
   );
 
   const deleteMutation = useMutation(
-    async (post: Post) => await postApi.deletePost(post),
+    async (post: number | string | undefined) => await postApi.deletePost(post),
     {
       onSuccess: () => {
         navigate("/home/posts");
@@ -31,7 +31,7 @@ export const PostPage = () => {
   );
 
   const deleteHandler = () => {
-    deleteMutation.mutate(currentPost?.data);
+    deleteMutation.mutate(postID);
   };
 
   return (

@@ -27,7 +27,8 @@ export const postApi = {
     }
   },
 
-  deletePost: async (post: Post) => await axiosApi.delete(`posts/${post.id}`),
+  deletePost: async (post: number | string | undefined) =>
+    await axiosApi.delete(`posts/${post}`),
 
   getAllPosts: async () => {
     const { data } = await axiosApi.get("posts/");
