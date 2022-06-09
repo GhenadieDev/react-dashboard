@@ -34,15 +34,5 @@
       "id": 6
     }
   ],
-  "posts": [
-    {
-      "authorId": 5,
-      "authorName": "pweokfpweokp pkpwkepf",
-      "date": "2022-06-09T12:01:00.776Z",
-      "title": "wepofkwpekfpowef",
-      "description": "Tehnicile și metodele Wikipediei sunt folosite de unele companii intern la colecționarea și oferirea de informații și documentații propriilor angajați. Conform principiilor Wiki informațiile pot fi plasate pe serverul Wiki chiar de către angajații implicați în diversele procese ale întreprinderii. Acest gen de proiecte interne se numesc în engleză în general Enterprise Wiki sau și Corporate Wiki (Wiki de întreprindere). Fiind vorba de informații interne, ele sunt de obicei puse la dispoziție numai angajaților, în cadrul unui intranet al companiei. La nevoie se poate permite un acces (limitat) și unor persoane din afara companiei, în cadrul unui extranet protejat. ",
-      "image_url": "https://images.unsplash.com/photo-1494145904049-0dca59b4bbad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YnVpbGRpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60",
-      "id": 1
-    }
-  ]
+  "posts": []
 }

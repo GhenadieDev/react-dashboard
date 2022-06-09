@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
 import { queryClient } from "index";
@@ -8,7 +8,6 @@ import {
   Button,
   Table,
   Modal,
-  Loader,
   MissingText,
   Checkbox,
   Footer,
@@ -30,6 +29,7 @@ export const Posts = () => {
     useState(false);
   const [choosenPost, setChoosenPost] = useState<Post>({}); //pentru operator
   const [selectedPosts, setSelectedPosts] = useState<any[]>([]); //pentru admin
+  const [selectAllIsChecked, setSelectAllIsChecked] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -43,7 +43,7 @@ export const Posts = () => {
     }
   );
 
-  const { data: posts, isLoading } = useQuery(
+  const { data: posts } = useQuery(
     "posts",
     () => {
       if (currentUser?.role === "operator") {
@@ -63,6 +63,13 @@ export const Posts = () => {
   };
 
   const deletePosts = () => {
+    if (selectAllIsChecked) {
+      posts.forEach((post: Post) => {
+        deleteMutation.mutate(post.id);
+        setConfirmationModalVisible(false);
+      });
+    }
+
     if (selectedPosts.length > 0) {
       selectedPosts.forEach((postId) => {
         deleteMutation.mutate(postId);
@@ -146,9 +153,17 @@ export const Posts = () => {
           <Table
             columns={[
               {
+                title: (
+                  <Checkbox
+                    onClick={() => setSelectAllIsChecked(!selectAllIsChecked)}
+                  />
+                ),
                 render: (record: Post) => {
                   return (
-                    <Checkbox onClick={(e) => handleChange(e, record.id)} />
+                    <Checkbox
+                      checked={selectAllIsChecked ? true : false}
+                      onClick={(e) => handleChange(e, record.id)}
+                    />
                   );
                 },
               },
@@ -189,7 +204,7 @@ export const Posts = () => {
         ) : (
           <MissingText title="Posts have not added yet" />
         )}
-        {selectedPosts.length > 0 ? (
+        {selectedPosts.length > 0 || selectAllIsChecked ? (
           <Footer onClick={() => setConfirmationModalVisible(true)}>
             <img src={trash24} alt="trash" />
           </Footer>
