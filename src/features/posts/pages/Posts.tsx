@@ -29,7 +29,6 @@ export const Posts = () => {
     useState(false);
   const [choosenPost, setChoosenPost] = useState<Post>({}); //pentru operator
   const [selectedPosts, setSelectedPosts] = useState<any[]>([]); //pentru admin
-  const [selectAllIsChecked, setSelectAllIsChecked] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -63,13 +62,6 @@ export const Posts = () => {
   };
 
   const deletePosts = () => {
-    if (selectAllIsChecked) {
-      posts.forEach((post: Post) => {
-        deleteMutation.mutate(post.id);
-        setConfirmationModalVisible(false);
-      });
-    }
-
     if (selectedPosts.length > 0) {
       selectedPosts.forEach((postId) => {
         deleteMutation.mutate(postId);
@@ -83,16 +75,25 @@ export const Posts = () => {
     }
   };
 
-  const handleChange = (
-    e: React.MouseEvent<HTMLDivElement>,
-    recordId: number | string | undefined
-  ) => {
-    if ((e.target as HTMLInputElement).checked) {
-      setSelectedPosts((prevState) => [...prevState, recordId]);
+  const handleChange = (e: React.MouseEvent<HTMLInputElement>) => {
+    const postId = parseInt((e.target as HTMLInputElement).value);
+
+    if (!selectedPosts.includes(postId)) {
+      setSelectedPosts([...selectedPosts, postId]);
     } else {
-      const copy = selectedPosts.map((item) => item);
-      const filtered = copy.filter((postId) => postId !== recordId);
-      setSelectedPosts(filtered);
+      setSelectedPosts(
+        selectedPosts.filter((selectedPostId) => {
+          return selectedPostId !== postId;
+        })
+      );
+    }
+  };
+
+  const handleChangeAll = () => {
+    if (selectedPosts.length < posts.length) {
+      setSelectedPosts(posts.map((post: Post) => post.id));
+    } else {
+      setSelectedPosts([]);
     }
   };
 
@@ -155,14 +156,16 @@ export const Posts = () => {
               {
                 title: (
                   <Checkbox
-                    onClick={() => setSelectAllIsChecked(!selectAllIsChecked)}
+                    checked={selectedPosts.length === posts.length}
+                    onClick={handleChangeAll}
                   />
                 ),
                 render: (record: Post) => {
                   return (
                     <Checkbox
-                      checked={selectAllIsChecked ? true : false}
-                      onClick={(e) => handleChange(e, record.id)}
+                      value={record.id}
+                      checked={selectedPosts.includes(record.id)}
+                      onClick={handleChange}
                     />
                   );
                 },
@@ -204,7 +207,7 @@ export const Posts = () => {
         ) : (
           <MissingText title="Posts have not added yet" />
         )}
-        {selectedPosts.length > 0 || selectAllIsChecked ? (
+        {selectedPosts.length > 0 ? (
           <Footer onClick={() => setConfirmationModalVisible(true)}>
             <img src={trash24} alt="trash" />
           </Footer>
