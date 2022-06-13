@@ -59,22 +59,10 @@ export const Users = () => {
 
   const [form] = useForm();
 
-  const clickHandlerDelete = async () => {
+  const clickHandlerDelete = () => {
     if (choosenUser !== null) {
       deleteMutation.mutate(choosenUser.id);
     }
-  };
-
-  const addUsers = (obj: User) => {
-    addMutation.mutate(obj);
-  };
-
-  const editUsers = async (obj: User) => {
-    editMutation.mutate(obj);
-  };
-
-  const onCellHandler = (record: User) => {
-    setChoosenUser(record);
   };
 
   return (
@@ -118,7 +106,11 @@ export const Users = () => {
         open={isModalVisible}
         onClose={setIsModalVisible}
         setUserData={setChoosenUser}
-        callback={Object.keys(choosenUser).length > 0 ? editUsers : addUsers}
+        callback={
+          Object.keys(choosenUser).length > 0
+            ? (obj: User) => editMutation.mutate(obj)
+            : (obj: User) => addMutation.mutate(obj)
+        }
       />
       <Table
         columns={[
@@ -156,7 +148,7 @@ export const Users = () => {
             },
             onCell: (record) => ({
               onClick() {
-                onCellHandler(record);
+                setChoosenUser(record);
               },
             }),
           },

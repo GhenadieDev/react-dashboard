@@ -7,14 +7,6 @@ import { dateTime } from "types/date";
 
 import "styles/common.scss";
 
-const initialFieldsValues = {
-  name: "",
-  surname: "",
-  email: "",
-  gender: "",
-  role: "",
-};
-
 interface UserModalFormProps {
   formInstance?: any;
   userData?: User;
@@ -52,7 +44,6 @@ export const UserModalForm = ({
 
   const handleClose = () => {
     setUserData({});
-    formInstance.resetFields();
     onClose(false);
   };
 
@@ -68,7 +59,7 @@ export const UserModalForm = ({
             type="vertical"
             form={formInstance}
             onFinish={submitHandler}
-            initialValues={initialFieldsValues}
+            initialValues={userData}
           >
             <EBSForm.Field rules={[{ required: true }]} name="name">
               <Input placeholder="Name" isClearable />
