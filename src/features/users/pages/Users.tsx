@@ -54,6 +54,7 @@ export const Users = () => {
       queryClient.invalidateQueries("users");
       setChoosenUser({});
       setIsModalVisible(false);
+      form.resetFields();
     },
   });
 
@@ -148,6 +149,7 @@ export const Users = () => {
             },
             onCell: (record) => ({
               onClick() {
+                form.setFieldsValue(record);
                 setChoosenUser(record);
               },
             }),

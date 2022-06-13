@@ -17,6 +17,14 @@ interface UserModalFormProps {
   callback: (obj: User) => void;
 }
 
+const initialFieldsValues = {
+  name: "",
+  surname: "",
+  email: "",
+  gender: "",
+  role: "",
+};
+
 export const UserModalForm = ({
   formInstance,
   userData,
@@ -44,6 +52,7 @@ export const UserModalForm = ({
 
   const handleClose = () => {
     setUserData({});
+    formInstance.resetFields();
     onClose(false);
   };
 
@@ -59,7 +68,7 @@ export const UserModalForm = ({
             type="vertical"
             form={formInstance}
             onFinish={submitHandler}
-            initialValues={userData}
+            initialValues={initialFieldsValues}
           >
             <EBSForm.Field rules={[{ required: true }]} name="name">
               <Input placeholder="Name" isClearable />

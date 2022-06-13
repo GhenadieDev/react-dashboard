@@ -12,7 +12,7 @@
       "id": 4
     },
     {
-      "name": "Grigore",
+      "name": "Igor",
       "surname": "pkpwkepf",
       "email": "pokpeo@mail.ru",
       "role": "operator",
@@ -20,27 +20,27 @@
       "password": "UhvSlQsH$zKd",
       "confirmedPassword": "UhvSlQsH$zKd",
       "id": 5,
-      "createdAt": "2022-06-10T15:40:47.601Z"
+      "createdAt": "2022-06-13T14:18:58.869Z"
     },
     {
-      "role": "operator",
-      "createdAt": "2022-06-08T13:50:39.201Z",
-      "name": "wepokwepokf",
+      "name": "random",
       "surname": "pkwpogkrpo",
       "email": "kpokrpkwpoe@mail.ru",
+      "role": "operator",
       "gender": "Feminin",
       "password": "NG#CyA7tn3efZZ",
       "confirmedPassword": "NG#CyA7tn3efZZ",
-      "id": 6
+      "id": 6,
+      "createdAt": "2022-06-13T13:49:25.711Z"
     },
     {
-      "name": "pedro",
+      "name": "pedroman",
       "surname": "gerpogkeprokgpo",
       "email": "gpergkpoe@gmail.com",
       "role": "operator",
       "gender": "Feminin",
       "id": 7,
-      "createdAt": "2022-06-10T16:15:54.910Z"
+      "createdAt": "2022-06-13T14:15:41.301Z"
     }
   ],
   "posts": [
