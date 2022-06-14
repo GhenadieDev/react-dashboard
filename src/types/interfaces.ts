@@ -1,5 +1,3 @@
-import { dateTime } from "./date";
-
 export interface User {
   name?: string;
   surname?: string;
@@ -9,14 +7,14 @@ export interface User {
   confirmedPassword?: string;
   role?: string;
   id?: string | number;
-  createdAt?: typeof dateTime;
+  createdAt?: Date;
 }
 
 export interface Post {
   title?: string;
   description?: string;
   image_url?: string;
-  date?: typeof dateTime;
+  date?: Date;
   authorId?: string | number;
   authorName?: string;
   id?: number | string;
@@ -40,10 +38,4 @@ export interface ChartUserData {
 export interface ChartPostData {
   name?: string;
   posts?: number;
-}
-
-export interface AddUserError {
-  nameField?: string | null;
-  surnameField?: string | null;
-  email?: RegExpMatchArray | null | undefined;
 }

@@ -5,7 +5,6 @@ import { useMutation, useQuery } from "react-query";
 import { postApi } from "api/posts";
 import { Button, Loader, Modal } from "components/index";
 
-import { Post } from "types/interfaces";
 import { Space } from "ebs-design";
 
 import "styles/Post.scss";
@@ -30,10 +29,6 @@ export const PostPage = () => {
     }
   );
 
-  const deleteHandler = () => {
-    deleteMutation.mutate(postID);
-  };
-
   return (
     <>
       {location.pathname
@@ -55,7 +50,9 @@ export const PostPage = () => {
                 <Button onClick={() => setConfirmationModal(false)}>
                   Cancel
                 </Button>
-                <Button onClick={deleteHandler}>Submit</Button>
+                <Button onClick={() => deleteMutation.mutate(postID)}>
+                  Submit
+                </Button>
               </Space>
             </Modal.Footer>
           </Modal>

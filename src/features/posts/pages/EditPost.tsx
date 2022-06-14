@@ -11,6 +11,12 @@ import { Post } from "types/interfaces";
 import "styles/EditPost.scss";
 import "styles/common.scss";
 
+const initialFieldsValues = {
+  title: "",
+  description: "",
+  image_url: "",
+};
+
 export const EditPost = () => {
   const { postID } = useParams();
   const [form] = useForm();
@@ -38,7 +44,11 @@ export const EditPost = () => {
   return (
     <div className="edit-post">
       <div className="form-wrapper">
-        <EBSForm form={form} onFinish={submitHandler}>
+        <EBSForm
+          form={form}
+          onFinish={submitHandler}
+          initialValues={initialFieldsValues}
+        >
           <div className="header-container flex">
             <FormHeader title="Edit Post" />
           </div>

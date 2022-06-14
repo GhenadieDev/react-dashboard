@@ -3,7 +3,6 @@ import { Button, EBSForm, Input, Modal, Select } from "components/index";
 import { User } from "types/interfaces";
 
 import { Space } from "ebs-design";
-import { dateTime } from "types/date";
 
 import "styles/common.scss";
 
@@ -45,7 +44,7 @@ export const UserModalForm = ({
       password: userData?.password,
       confirmedPassword: userData?.confirmedPassword,
       id: userData?.id,
-      createdAt: dateTime,
+      createdAt: new Date(),
     };
     callback(user);
   };

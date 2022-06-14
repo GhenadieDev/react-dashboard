@@ -4,7 +4,6 @@ import { Input, Select, EBSForm, Checkbox } from "components/index";
 import { passwordPattern } from "types/regex";
 
 import "styles/RegisterFields.scss";
-import { format } from "path";
 
 interface Props {
   setCheckboxIsChecked: Dispatch<SetStateAction<boolean>>;

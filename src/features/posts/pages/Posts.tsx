@@ -28,7 +28,7 @@ export const Posts = () => {
   const [isConfirmationModalVisible, setConfirmationModalVisible] =
     useState(false);
   const [choosenPost, setChoosenPost] = useState<Post>({}); //pentru operator
-  const [selectedPosts, setSelectedPosts] = useState<any[]>([]); //pentru admin
+  const [selectedPosts, setSelectedPosts] = useState<any[]>([]); //pentru admin. lista de id-uri
   const navigate = useNavigate();
   const location = useLocation();
 

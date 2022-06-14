@@ -4,7 +4,6 @@ import { useMutation } from "react-query";
 import { useForm } from "ebs-design";
 
 import { User } from "types/interfaces";
-import { dateTime } from "types/date";
 
 import { EBSForm, RegisterFields, Button, FormHeader } from "components/index";
 
@@ -41,7 +40,7 @@ export const Register = () => {
   const submitHandler = async (values: User) => {
     const newUser: User = {
       role: "operator",
-      createdAt: dateTime,
+      createdAt: new Date(),
       name: values.name,
       surname: values.surname,
       email: values.email,

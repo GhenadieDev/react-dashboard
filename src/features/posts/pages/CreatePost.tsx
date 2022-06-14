@@ -5,7 +5,6 @@ import { postApi } from "api/posts";
 import { Button, EBSForm, FormHeader, Input, Textarea } from "components/index";
 
 import { UserProfileContext } from "types/contexts";
-import { dateTime } from "types/date";
 import { Post } from "types/interfaces";
 
 import { useForm } from "ebs-design";
@@ -25,7 +24,7 @@ export const CreatePost = () => {
     const post: Post = {
       authorId: currentUser?.id,
       authorName: currentUser?.name + " " + currentUser?.surname,
-      date: dateTime,
+      date: new Date(),
       title: values.title,
       description: values.description,
       image_url: values.image_url,

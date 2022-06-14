@@ -25,6 +25,7 @@ export const Dashboard = () => {
       },
     }
   );
+
   const { data: posts, isLoading: postsIsLoading } = useQuery(
     "allPosts",
     () => postApi.getAllPosts(),
