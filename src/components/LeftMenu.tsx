@@ -11,21 +11,21 @@ export const LeftMenu = () => {
   return (
     <aside className="leftbar">
       <nav className="leftbar">
-        <ListGroup className="left-menu">
-          <ListGroup.Item className="left-menu-item">
-            <NavLink to="dashboard" className="left-menu-item__link">
+        <ListGroup>
+          <ListGroup.Item>
+            <NavLink to="dashboard" className="link">
               Dashboard
             </NavLink>
           </ListGroup.Item>
           {currentUser?.role && currentUser.role === "admin" ? (
-            <ListGroup.Item className="left-menu-item">
-              <NavLink to="users" className="left-menu-item__link">
+            <ListGroup.Item>
+              <NavLink to="users" className="link">
                 Users
               </NavLink>
             </ListGroup.Item>
           ) : null}
-          <ListGroup.Item className="left-menu-item">
-            <NavLink to="posts" className="left-menu-item__link">
+          <ListGroup.Item>
+            <NavLink to="posts" className="link">
               Posts
             </NavLink>
           </ListGroup.Item>

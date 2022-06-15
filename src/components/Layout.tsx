@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 
 import { Layout as EBSLayout, Sidebar } from "ebs-design";
 import { TopBar, LeftMenu } from "./index";
+import "styles/Layout.scss";
 
 export const Layout = () => {
   return (

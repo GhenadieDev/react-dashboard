@@ -1,26 +1,46 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { UserProfileContext } from "types/contexts";
 import { User } from "types/interfaces";
-import logout from "icons/logout.png";
 
+import user from "icons/user.png";
 import "styles/TopBar.scss";
 
 export const TopBar = () => {
   const profile = useContext<User | null>(UserProfileContext);
+  const [menuIsVisible, setMenuIsVisible] = useState(false);
 
   const clickHandler = () => {
     window.localStorage.removeItem("userId");
+    setMenuIsVisible(false);
     window.location.assign("/");
   };
 
   return (
     <header className="topbar">
-      <p className="topbar__user">{profile?.name + " " + profile?.surname}</p>
-      <div className="btn-wrapper">
-        <div className="log-out" onClick={clickHandler}>
-          <img className="log-out__img" src={logout} alt="logout" />
+      <div className="profile">
+        <div className="profile-info">
+          <p className="profile-info__name">
+            {profile?.name + " " + profile?.surname}
+          </p>
+          <picture
+            className="profile-info__image"
+            onMouseOver={() => setMenuIsVisible(true)}
+          >
+            <img src={user} alt="user-icon" />
+          </picture>
         </div>
+        <>
+          {menuIsVisible && (
+            <p
+              className="profile__menu"
+              onMouseOut={() => setMenuIsVisible(false)}
+              onClick={clickHandler}
+            >
+              log out
+            </p>
+          )}
+        </>
       </div>
     </header>
   );
