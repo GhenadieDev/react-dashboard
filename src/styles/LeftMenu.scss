@@ -1,0 +1,32 @@
+.leftbar {
+  height: 100%;
+
+  .ebs-list-group {
+    border: none;
+
+    &__item {
+      padding: 0;
+      border-radius: 7px;
+      &:hover {
+        background-color: rgba(98, 59, 255, 0.3);
+        transition: 0.2s ease-out;
+        border-left: 4px solid blue;
+      }
+      .link {
+        text-decoration: none;
+        color: black;
+        width: 100%;
+        display: block;
+        font-size: 20px;
+        padding: 15px;
+
+        &.active {
+          border-left: 2px solid blue;
+          background-color: #613bff;
+          border-radius: 7px;
+          color: white;
+        }
+      }
+    }
+  }
+}

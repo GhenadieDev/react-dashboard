@@ -1,0 +1,14 @@
+.nullpage {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(255, 153, 51);
+
+  &__title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 500;
+    font-size: 5em;
+  }
+}

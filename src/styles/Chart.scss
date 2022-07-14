@@ -1,0 +1,79 @@
+$back-color: white;
+$box-style: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+/*global class*/
+.flex {
+  display: flex;
+}
+
+/*specific classes*/
+.chart {
+  width: 100%;
+  padding: 20px 20px 0 20px;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.totals {
+  width: 100%;
+  column-gap: 20px;
+}
+
+.total-users {
+  padding: 20px;
+  flex-grow: 1;
+  background-color: $back-color;
+  box-shadow: $box-style;
+
+  &__title {
+    font-weight: 500;
+    font-size: 1.25rem;
+  }
+
+  &__count {
+    font-size: 2.5rem;
+    font-weight: 500;
+  }
+}
+
+.total-posts {
+  padding: 20px;
+  flex-grow: 1;
+  background-color: $back-color;
+  box-shadow: $box-style;
+
+  &__title {
+    font-weight: 500;
+    font-size: 1.25rem;
+  }
+  
+  &__count {
+    font-size: 2.5rem;
+    font-weight: 500;
+  }
+
+}
+
+.statistics {
+  margin-top: 50px;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+@media(max-width: 700px) {
+  .totals {
+    flex-direction: column;
+    row-gap: 20px;
+
+    .total-posts, .total-users {
+      width: 100%;
+    }
+  }
+}
+
+@media(max-width: 956px) {
+  .statistics {
+    flex-direction: column;
+  }
+}
